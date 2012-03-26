@@ -1,0 +1,18 @@
+TM_PATH = "/Users/Dru/.rbenv/bin:$PATH"
+TM_GIT = "/usr/local/bin/git"
+TM_RUBY = "/Users/Dru/.rbenv/shims/ruby"
+
+softTabs = true
+windowTitle = "$TM_DISPLAYNAME – $TM_DIRECTORY"
+#excludeInFileChooser = "{$exclude,**/*/vendor/bundle/**/*}"
+
+[ attr.file.unknown-type ]
+fileType = "text.plain"
+
+[ *.{html,erb} ]
+tabSize = 2
+
+[ .git/COMMIT_EDITMSG ]
+softWrap         = true
+spellChecking    = true
+spellingLanguage = 'en'
