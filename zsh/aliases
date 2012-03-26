@@ -9,7 +9,3 @@ alias b='bundle exec'
 
 # Flush dns cache
 alias flushdns='dscacheutil -flushcache'
-
-# Find SafeBrowsing.db for when safari doesn't 
-# update the safe browsing service (open safari first)
-alias safe_browsingdb="lsof / | grep Safari |grep db"
