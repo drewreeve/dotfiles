@@ -6,6 +6,7 @@ alias reload='source ~/.zshrc'
 alias rbh="rbenv rehash"
 
 alias b='bundle exec'
+alias biv='bundle install --path vendor/bundle'
 
 # Flush dns cache
 alias flushdns='dscacheutil -flushcache'
