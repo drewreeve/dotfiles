@@ -31,9 +31,6 @@ syntax on
 
 filetype plugin indent on
 
-set background=dark
-colorscheme solarized
-
 " use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
 
