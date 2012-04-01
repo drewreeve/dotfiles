@@ -24,6 +24,11 @@ set showcmd
 
 " enable syntax highlighting
 syntax on
+" Colors
+:set t_Co=256 " 256 colors
+:set background=dark
+:color solarized
+
 filetype plugin indent on
 
 set background=dark
