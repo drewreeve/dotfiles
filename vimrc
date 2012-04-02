@@ -1,3 +1,6 @@
+" Based on Gary Bernhardt's vimrc (https://github.com/garybernhardt/dotfiles)
+" but slimmed down a bit
+
 " enable pathogen
 call pathogen#infect()
 
@@ -22,17 +25,20 @@ set winwidth=82
 " display incomplete commands
 set showcmd
 
-" enable syntax highlighting
+" Colors and syntax highlighting
 syntax on
-" Colors
-:set t_Co=256 " 256 colors
-:set background=dark
-:color solarized
+set background=dark
+colorscheme solarized
 
 filetype plugin indent on
 
-" use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
+
+" make tab completion for files/buffers act like bash
+set wildmenu
+
+" ignore vendor/bundle directory in bundler projects
+set wildignore+=vendor/bundle/**
 
 "for ruby, autoindent with two spaces, always expand tabs
 autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
