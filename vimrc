@@ -88,3 +88,16 @@ function! RenameFile()
     endif
 endfunction
 map <leader>n :call RenameFile()<cr>
+
+" Smart tab key (borrowed from gary bernhardt)
+" inserts tabs at the beginning of lines, otherwise does completion
+function! InsertTabWrapper()
+    let col = col('.') - 1
+        if !col || getline('.')[col - 1] !~ '\k'
+            return "\<tab>"
+        else
+            return "\<c-p>"
+        endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
