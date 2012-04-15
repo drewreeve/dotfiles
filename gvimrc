@@ -1,5 +1,5 @@
 if has("macunix")
-  set guifont=Inconsolata:h16\,Menlo:h14\,Monaco:h14
+  set guifont=Inconsolata-dz:h14,Inconsolata:h16\,Menlo:h14\,Monaco:h14
 elseif has("win32")
   set guifont=Consolas:h12
 else
