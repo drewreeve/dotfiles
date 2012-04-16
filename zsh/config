@@ -78,3 +78,5 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]]; then
 
   chpwd
 fi
+
+# vim: set syntax=sh:
