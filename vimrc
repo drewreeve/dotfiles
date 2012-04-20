@@ -19,7 +19,7 @@ set hlsearch
 set ignorecase
 " highlight current line
 set cursorline
-set cmdheight=2
+"set cmdheight=2
 set numberwidth=5
 set winwidth=82
 " display incomplete commands
