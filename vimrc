@@ -53,6 +53,9 @@ augroup vimrcEx
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
   autocmd FileType python set sw=4 sts=4 et
+
+  " treat Guardfile(s) as ruby
+  autocmd BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
 augroup END
 
 let mapleader=","
