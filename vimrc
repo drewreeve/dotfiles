@@ -101,3 +101,6 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
+
+" remove git branch from vim powerline
+call Pl#Theme#RemoveSegment('fugitive:branch')
