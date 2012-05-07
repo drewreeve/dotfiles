@@ -21,7 +21,7 @@ set ignorecase
 set cursorline
 "set cmdheight=2
 set numberwidth=5
-set winwidth=82
+set winwidth=79
 " display incomplete commands
 set showcmd
 
