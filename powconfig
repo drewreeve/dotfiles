@@ -1,0 +1,2 @@
+export PATH="/Users/Dru/.rbenv/shims:/Users/Dru/.rbenv/bin:$PATH"
+export POW_TIMEOUT=180
