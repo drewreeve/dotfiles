@@ -58,6 +58,13 @@ augroup vimrcEx
   autocmd BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
 augroup END
 
+" autoflush command-t
+augroup CommandTExtension
+  autocmd!
+  autocmd FocusGained * CommandTFlush
+  autocmd BufWritePost * CommandTFlush
+augroup END
+
 let mapleader=","
 
 " Store temporary files in a central spot
