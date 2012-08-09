@@ -42,7 +42,7 @@ bindkey "^[[3~" delete-char
 
 ## PATHS
 
-export PATH=/usr/local/bin:~/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+export PATH=/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/bin:~/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 export NODE_PATH=/usr/local/lib/node
 
 hash mvim &>/dev/null
