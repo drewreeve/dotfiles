@@ -114,3 +114,8 @@ inoremap <s-tab> <c-n>
 
 " remove git branch from vim powerline
 call Pl#Theme#RemoveSegment('fugitive:branch')
+
+" Local config
+if filereadable(".vimrc.local")
+  source .vimrc.local
+endif
