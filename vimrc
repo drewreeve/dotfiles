@@ -21,9 +21,10 @@ set ignorecase
 set cursorline
 "set cmdheight=2
 set numberwidth=5
-set winwidth=79
 " display incomplete commands
 set showcmd
+set backspace=indent,eol,start
+set shiftround
 
 " Colors and syntax highlighting
 syntax on
@@ -116,6 +117,6 @@ inoremap <s-tab> <c-n>
 call Pl#Theme#RemoveSegment('fugitive:branch')
 
 " Local config
-if filereadable(".vimrc.local")
-  source .vimrc.local
+if filereadable($HOME . "/.vimrc.local")
+  source $HOME/.vimrc.local
 endif
