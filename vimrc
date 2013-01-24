@@ -1,29 +1,26 @@
-" Based on Gary Bernhardt's vimrc (https://github.com/garybernhardt/dotfiles)
-" but slimmed down a bit
-
 " enable pathogen
 call pathogen#infect()
 
 set nocompatible
-set ruler
+
+set ruler " always show cursor position
 set number
-set expandtab
-set tabstop=2
-set shiftwidth=2
 set history=10000
 set autoindent
 set laststatus=2
 set showmatch
 set incsearch
 set hlsearch
-set ignorecase
-" highlight current line
-set cursorline
-"set cmdheight=2
-set numberwidth=5
-" display incomplete commands
-set showcmd
+set smartcase
+set cursorline " highlight current line
+set showcmd " display incomplete commands
 set backspace=indent,eol,start
+set scrolloff=3
+
+" use softtabs (2 of course)
+set tabstop=2
+set shiftwidth=2
+set expandtab
 set shiftround
 
 " Colors and syntax highlighting
@@ -41,10 +38,14 @@ set wildmenu
 " ignore vendor/bundle directory in bundler projects
 set wildignore+=vendor/bundle/**
 
+let mapleader=","
+
 augroup vimrcEx
   " clear all autocmds in group
   autocmd!
+
   autocmd FileType text setlocal textwidth=78
+
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -66,15 +67,16 @@ augroup CommandTExtension
   autocmd BufWritePost * CommandTFlush
 augroup END
 
-let mapleader=","
+" Switch between last 2 files
+nnoremap <leader><leader> <c-^>
 
 " Store temporary files in a central spot
-set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupdir=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
+set directory=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
 
 " status line
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
 :hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " Clear the search buffer when hitting return
@@ -88,7 +90,8 @@ map <Right> :echo "no!"<cr>
 map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
 
-" rename current file
+" rename current file (taken from Gary Bernhardt)
+" https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
