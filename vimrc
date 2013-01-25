@@ -36,7 +36,7 @@ set wildmode=longest,list
 set wildmenu
 
 " ignore vendor/bundle directory in bundler projects
-set wildignore+=vendor/bundle/**
+set wildignore+=*.png,*.PNG,*.JPG,*.jpg,*.GIF,*.gif,vendor/bundle/**,tmp/**
 
 let mapleader=","
 
