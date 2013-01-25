@@ -1,9 +1,13 @@
 # Taken from oh-my-zsh
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/bundler/bundler.plugin.zsh
 
+alias be="bundle exec"
+alias bi="bundle install"
+alias bl="bundle list"
+
 # The following is based on https://github.com/gma/bundler-exec
 
-bundled_commands=(annotate cap capify cucumber ey foreman guard heroku middleman nanoc rackup rainbows rails rake rspec ruby shotgun spec spork thin thor unicorn unicorn_rails)
+bundled_commands=(annotate cap capify cucumber foreman guard middleman nanoc rackup rainbows rake rspec ruby shotgun spec spork thin thor unicorn unicorn_rails puma zeus)
 
 ## Functions
 
@@ -30,6 +34,7 @@ _run-with-bundler() {
 
 ## Main program
 for cmd in $bundled_commands; do
+  eval "function unbundled_$cmd () { $cmd \$@ }"
   eval "function bundled_$cmd () { _run-with-bundler $cmd \$@}"
   alias $cmd=bundled_$cmd
 

@@ -1,3 +1,0 @@
-. ~/.dotfiles/zsh/config
-. ~/.dotfiles/zsh/aliases
-. ~/.dotfiles/zsh/bundler.plugin.zsh
