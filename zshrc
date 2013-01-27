@@ -54,12 +54,14 @@ bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 bindkey "\e[3~" delete-char
 
-## PATHS
-export PATH=/usr/local/bin:~/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
-export NODE_PATH=/usr/local/lib/node
-
 # Use vim as editor
 export EDITOR=vim
+
+## PATHS
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
+
+# Add npm bin dir to path (per homebrews recommendation)
+export PATH="/usr/local/share/npm/bin:$PATH"
 
 ## rbenv  https://github.com/sstephenson/rbenv
 if [ -d $HOME/.rbenv/bin ] ; then
