@@ -2,7 +2,8 @@
 call pathogen#infect()
 
 set nocompatible
-
+" allow unsaved background buffers and remember marks/undo for them
+set hidden
 set ruler " always show cursor position
 set number
 set history=10000
