@@ -23,3 +23,6 @@
 [submodule "vim/bundle/vim-rake"]
 	path = vim/bundle/vim-rake
 	url = git://github.com/tpope/vim-rake.git
+[submodule "vim/bundle/haml"]
+	path = vim/bundle/haml
+	url = git://github.com/tpope/vim-haml
