@@ -13,11 +13,11 @@ Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-rails'
 Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
 
 filetype on
 
@@ -110,7 +110,9 @@ set backupdir=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
 set directory=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
 
 " status line
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+" :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+let g:airline_left_sep = ' '
+let g:airline_right_sep = ' '
 
 :hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
@@ -152,7 +154,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
 " remove git branch from vim powerline
-call Pl#Theme#RemoveSegment('fugitive:branch')
+" call Pl#Theme#RemoveSegment('fugitive:branch')
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
