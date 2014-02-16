@@ -1,7 +1,26 @@
-" enable pathogen
-call pathogen#infect()
-
 set nocompatible
+
+filetype off " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" Define bundles
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'tpope/vim-surround'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-rails'
+Bundle 'kien/ctrlp.vim'
+
+filetype on
+
 " allow unsaved background buffers and remember marks/undo for them
 set hidden
 set ruler " always show cursor position
