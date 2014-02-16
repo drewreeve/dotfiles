@@ -18,6 +18,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-rails'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
+Bundle 'scrooloose/syntastic'
 
 filetype on
 
