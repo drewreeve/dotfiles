@@ -58,7 +58,7 @@ bindkey "\e[3~" delete-char
 export EDITOR=vim
 
 ## PATHS
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.bin:$PATH
 
 # Add npm bin dir to path (per homebrews recommendation)
 export PATH="/usr/local/share/npm/bin:$PATH"
@@ -83,6 +83,6 @@ PROMPT='
 %~
 ${lastcmdstatus} %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%}$(~/bin/git-cwd-info)%{$reset_color%}'
+RPROMPT='%{$fg[white]%}$(git-cwd-info)%{$reset_color%}'
 
 # vim: set syntax=sh:
