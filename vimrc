@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " Define bundles
@@ -79,14 +79,15 @@ augroup vimrcEx
 
   " treat Guardfile(s) as ruby
   autocmd BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
+
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+  " Enable spellchecking for Markdown
+  autocmd FileType markdown setlocal spell
 augroup END
 
-" autoflush command-t
-"augroup CommandTExtension
-"  autocmd!
-"  autocmd FocusGained * CommandTFlush
-"  autocmd BufWritePost * CommandTFlush
-"augroup END
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
 
 " Use leader-t to invoke ctrlp
 nnoremap <leader>t :CtrlP<CR>
