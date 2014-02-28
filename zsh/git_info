@@ -1,0 +1,13 @@
+git_info() {
+  
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  
+  if [[ -n $ref ]]; then
+    
+    git_commit=`git rev-parse --short HEAD 2>/dev/null`
+    git_dirty=`[[ -n "$(git status -s 2> /dev/null)" ]] && echo " ✗"`
+
+    echo "%{$fg[blue]%}${ref#refs/heads/} %{$fg[yellow]%}${git_commit}%{$fg_bold[red]%}${git_dirty}%{$reset_color%}"
+  fi
+  
+}

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Borrowed from the thoughtbot dotfiles
+# http://github.com/thoughtbot/dotfiles
+
+for name in *; do
+  target="$HOME/.$name"
+  if [ -e "$target" ]; then
+    if [ ! -L "$target" ]; then
+      echo "WARNING: $target exists but is not a symlink."
+    fi
+  else
+    if [ "$name" != 'install.sh' ] && [ "$name" != 'README.markdown' ]; then
+      echo "Creating $target"
+      ln -s "$PWD/$name" "$target"
+    fi
+  fi
+done
+
+if [ ! -e ~/.vim-tmp ]; then
+	echo "Creating ~/.vim-tmp folder"
+	mkdir ~/.vim-tmp
+fi
+
+if [ ! -e ~/.vim/bundle/vundle ]; then
+  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+fi
+
+vim -u ~/.vimrc.bundles +BundleInstall +qa

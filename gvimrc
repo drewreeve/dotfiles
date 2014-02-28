@@ -1,3 +1,4 @@
+" Disable toolbar
 set go-=T
 
 " Local config

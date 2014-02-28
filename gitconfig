@@ -1,0 +1,17 @@
+[alias]
+	co = checkout
+	aa = add --all
+    ca = commit --amend
+[core]
+	excludesfile = ~/.gitignore
+	autocrlf = input
+[include]
+    path = .gitconfig.local
+[color]
+	status = auto
+	branch = auto
+	ui = auto
+[help]
+	autocorrect = 0
+[push]
+	default = tracking

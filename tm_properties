@@ -1,6 +1,6 @@
-TM_PATH = "/Users/Dru/.rbenv/bin:$PATH"
+TM_PATH = "$HOME/.rbenv/bin:$PATH"
 TM_GIT = "/usr/local/bin/git"
-TM_RUBY = "/Users/Dru/.rbenv/shims/ruby"
+TM_RUBY = "$HOME/.rbenv/shims/ruby"
 
 softTabs = true
 windowTitle = "$TM_DISPLAYNAME – $TM_DIRECTORY"

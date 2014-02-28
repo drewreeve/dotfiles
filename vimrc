@@ -1,26 +1,10 @@
 set nocompatible
 
-filetype off " required!
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-
-" Define bundles
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-surround'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-rails'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/syntastic'
-
-filetype on
+filetype plugin indent on
 
 " allow unsaved background buffers and remember marks/undo for them
 set hidden
@@ -48,8 +32,6 @@ set shiftround
 syntax on
 set background=dark
 colorscheme solarized
-
-filetype plugin indent on
 
 set wildmode=longest,list
 
@@ -154,9 +136,6 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
-
-" remove git branch from vim powerline
-" call Pl#Theme#RemoveSegment('fugitive:branch')
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
