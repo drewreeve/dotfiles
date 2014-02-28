@@ -1,5 +1,3 @@
-set background=dark
-colorscheme solarized
 set go-=T
 
 " Local config
