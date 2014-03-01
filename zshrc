@@ -43,9 +43,7 @@ export GREP_OPTIONS="--color"
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 
 # Add Paths
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.bin:$PATH
-# Add npm bin dir to path (per homebrews recommendation)
-export PATH="/usr/local/share/npm/bin:$PATH"
+export PATH=$HOME/.bin:$PATH
 
 ## rbenv  https://github.com/sstephenson/rbenv
 if [ -d $HOME/.rbenv/bin ] ; then
