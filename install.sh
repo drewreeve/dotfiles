@@ -18,8 +18,8 @@ for name in *; do
 done
 
 if [ ! -e ~/.vim-tmp ]; then
-	echo "Creating ~/.vim-tmp folder"
-	mkdir ~/.vim-tmp
+  echo "Creating ~/.vim-tmp folder"
+  mkdir ~/.vim-tmp
 fi
 
 if [ ! -e ~/.vim/bundle/vundle ]; then
