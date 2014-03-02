@@ -1,8 +1,11 @@
 .DS_Store
 .svn
 *~
-.*.swp
+*.sw[nop]
 .bundle
 vendor/bundle
+.env
+rerun.txt
 log/*.log
 tmp/**/*
+tags

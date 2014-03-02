@@ -137,6 +137,8 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
+let g:html_indent_tags = 'li\|p'
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source $HOME/.vimrc.local
