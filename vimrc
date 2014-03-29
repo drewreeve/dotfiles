@@ -22,6 +22,10 @@ set showcmd " display incomplete commands
 set backspace=indent,eol,start
 set scrolloff=3
 
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
 " use softtabs (2 of course)
 set tabstop=2
 set shiftwidth=2
@@ -51,7 +55,7 @@ augroup vimrcEx
 
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
 
@@ -70,9 +74,6 @@ augroup END
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
-
-" Use leader-t to invoke ctrlp
-nnoremap <leader>t :CtrlP<CR>
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -138,6 +139,12 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
 let g:html_indent_tags = 'li\|p'
+
+" Close buffer without closing window/split
+nnoremap <silent> <leader>bd :bp\|bd #<cr>
+
+" Check syntax on open
+let g:syntastic_check_on_open=1
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
