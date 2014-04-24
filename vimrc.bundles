@@ -1,4 +1,6 @@
-set nocompatible
+if &compatible
+  set nocompatible
+end
 
 filetype off " required!
 
@@ -16,9 +18,10 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-rails'
-Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-endwise'
+Bundle 'slim-template/vim-slim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
