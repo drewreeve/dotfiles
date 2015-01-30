@@ -8,4 +8,7 @@ alias biv='bundle install --path vendor/bundle'
 # Flush dns cache
 alias flushdns='dscacheutil -flushcache'
 
+# Load custom aliases
+[[ -f ~/.aliases.local ]] && source ~/.aliases.local
+
 # vim: set syntax=sh:
