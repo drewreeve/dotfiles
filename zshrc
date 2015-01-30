@@ -48,12 +48,6 @@ colors
 export GREP_OPTIONS="--color"
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 
-# Add Paths
-export PATH=$HOME/.bin:$PATH
-
-## rbenv  https://github.com/sstephenson/rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # Setup prompt
 setopt prompt_subst
 local lastcmdstatus="%(?,%{$fg[green]%}→%{$reset_color%},%{$fg[red]%}→%{$reset_color%})"
