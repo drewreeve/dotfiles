@@ -146,6 +146,12 @@ nnoremap <silent> <leader>bd :bp\|bd #<cr>
 " Check syntax on open
 let g:syntastic_check_on_open=1
 
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source $HOME/.vimrc.local
