@@ -33,9 +33,6 @@ setopt share_history
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
-# Use vim as editor
-export EDITOR=vim
-
 # Make the delete key (or Fn + Delete on the Mac) work instead of outputting a ~
 bindkey '^?' backward-delete-char
 bindkey "^[[3~" delete-char
