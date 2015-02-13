@@ -42,8 +42,8 @@ bindkey "\e[3~" delete-char
 # Add colors to grep/ls
 autoload -U colors
 colors
+export CLICOLOR=1
 export GREP_OPTIONS="--color"
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 
 # Setup prompt
 setopt prompt_subst
