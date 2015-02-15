@@ -17,7 +17,6 @@ set showmatch
 set incsearch
 set hlsearch
 set smartcase
-set cursorline " highlight current line
 set showcmd " display incomplete commands
 set backspace=indent,eol,start
 set scrolloff=3
