@@ -1,0 +1,9 @@
+# Updates current working directory for osx Terminal.app
+function terminal_cwd_fix {
+  if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
+    local PWD_URL="file://$HOSTNAME${PWD// /%20}"
+    printf '\e]7;%s\a' "$PWD_URL"
+  fi
+}
+
+precmd_functions+=(terminal_cwd_fix)
