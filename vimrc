@@ -50,25 +50,26 @@ augroup vimrcEx
   " clear all autocmds in group
   autocmd!
 
-  autocmd FileType text setlocal textwidth=78
-
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
 
-  "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python set sw=4 sts=4 et
-
-  " treat Guardfile(s) as ruby
+  " Set syntax for certain file types
   autocmd BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
-
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+
+  " Wrap at 72 characters and spell check git commits
+  autocmd FileType gitcommit setlocal textwidth=72
+  autocmd FileType gitcommit setlocal spell
+
+  " Allow stylesheets to autocomplete hyphenated words
+  autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
 
 " Display extra whitespace
