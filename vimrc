@@ -10,7 +10,7 @@ filetype plugin indent on
 set hidden
 set ruler " always show cursor position
 set number
-set history=10000
+set history=1000
 set autoindent
 set laststatus=2
 set showmatch
