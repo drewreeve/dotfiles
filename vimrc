@@ -94,12 +94,8 @@ nnoremap <leader><leader> <c-^>
 set backupdir=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
 set directory=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
 
-" status line
-" :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-let g:airline_left_sep = ' '
-let g:airline_right_sep = ' '
-
-:hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
+" Status line
+set statusline=%<%f\ %m%r%w\ %y%=L:\%l\/%L\ C:%c
 
 " Clear the search buffer when hitting return
 :nnoremap <CR> :nohlsearch<cr>
