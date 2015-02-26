@@ -47,15 +47,30 @@ colors
 export CLICOLOR=1
 export GREP_OPTIONS="--color"
 
-# Setup prompt
+# Prompt
 setopt prompt_subst
-local lastcmdstatus="%(?,%{$fg[green]%}→%{$reset_color%},%{$fg[red]%}→%{$reset_color%})"
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
 
-PROMPT='
-%~
-${lastcmdstatus} %{$reset_color%}'
+add-zsh-hook precmd vcs_info
 
-RPROMPT='%{$fg[white]%}$(git_info)%{$reset_color%}'
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' get-revision true
+zstyle ':vcs_info:*' formats '%F{green}%b%f:%.8i%f%c%u'
+zstyle ':vcs_info:git*' formats '%F{green}%b%f%c%u'
+zstyle ':vcs_info:*' actionformats '%F{green}%b%f|%F{red}%a%f:%.8i%f%c%u'
+zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
+zstyle ':vcs_info:git+set-message:*' hooks git-untracked
+
+PROMPT=$'\n''%F{blue}%~%f $vcs_info_msg_0_'$'\n''%(?.$fg[green].$fg[red])$%f '
+
+function +vi-git-untracked() {
+  if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
+    hook_com[unstaged]+="%F{red}?%f"
+  fi
+}
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
