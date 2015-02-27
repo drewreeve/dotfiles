@@ -64,7 +64,7 @@ zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
 zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked
 
-PROMPT=$'\n''%F{blue}%~%f $vcs_info_msg_0_'$'\n''%(?.$fg[green].$fg[red])$%f '
+PROMPT=$'\n''%F{blue}%~%f $vcs_info_msg_0_'$'\n''%(?.%F{green}.%F{red})$%f '
 
 function +vi-git-untracked() {
   if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
