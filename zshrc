@@ -3,20 +3,18 @@ for config in ~/.zsh/*; do
   source $config
 done
 
+# Completions
 autoload -U compinit
 compinit
 
-# Completions
 setopt always_to_end
 setopt complete_in_word
 
-## Case insensitive
+# Case insensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-## Use arrows to navigate completion options
 zstyle ':completion:*:*:*:*:*' menu select
-
-# Corrections
-setopt correct
+# Complete binstubs
+zstyle -e ':completion:*' command-path '[[ -d $PWD/.git/safe/../../bin ]] && reply=($PWD/bin $PATH)'
 
 # History settings
 HISTFILE=~/.zsh_history
