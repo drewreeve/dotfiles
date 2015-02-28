@@ -33,7 +33,7 @@ set shiftround
 
 " Colors and syntax highlighting
 syntax on
-set background=dark
+set background=light
 colorscheme solarized
 
 set wildmode=longest,list
