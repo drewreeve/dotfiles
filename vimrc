@@ -9,7 +9,7 @@ filetype plugin indent on
 " allow unsaved background buffers and remember marks/undo for them
 set hidden
 set ruler " always show cursor position
-set number
+set number relativenumber
 set history=1000
 set autoindent
 set laststatus=2
