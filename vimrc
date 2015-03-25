@@ -20,10 +20,15 @@ set smartcase
 set showcmd " display incomplete commands
 set backspace=indent,eol,start
 set scrolloff=3
+set autoread
 
 " Open new split panes to right and bottom
 set splitbelow
 set splitright
+
+" Highlight where 80 characters is
+set textwidth=80
+set colorcolumn=+1
 
 " use softtabs (2 of course)
 set tabstop=2
