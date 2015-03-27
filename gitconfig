@@ -2,6 +2,7 @@
   co = checkout
   aa = add --all
   ca = commit --amend
+  trust = "!mkdir -p .git/safe"
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
