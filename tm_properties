@@ -1,6 +1,5 @@
-TM_PATH = "$HOME/.rbenv/bin:$PATH"
 TM_GIT = "/usr/local/bin/git"
-TM_RUBY = "$HOME/.rbenv/shims/ruby"
+TM_RUBY = "$HOME/.bin/chruby-wrapper"
 
 softTabs = true
 windowTitle = "$TM_DISPLAYNAME – $TM_DIRECTORY"

@@ -3,14 +3,34 @@ export EDITOR=vim
 # Load dotfiles .bin directory first
 export PATH="$HOME/.bin:/usr/local/sbin:$PATH"
 
-# load rbenv if available
-if which rbenv &>/dev/null ; then
-  eval "$(rbenv init - zsh --no-rehash)"
+if command -v chruby-exec >/dev/null; then
+  if command -v brew >/dev/null; then
+    source /usr/local/opt/chruby/share/chruby/chruby.sh
+    source /usr/local/opt/chruby/share/chruby/auto.sh
+  else
+    source /usr/local/share/chruby/chruby.sh
+    source /usr/local/share/chruby/auto.sh
+  fi
 fi
 
-# Use Tim Pope's trick for adding binstubs to your $PATH
-# mkdir .git/safe in the root of trusted repos
-export PATH=".git/safe/../../bin:$PATH"
+# http://raygrasso.com/posts/2015/02/making-chruby-and-binstubs-play-nice.html
+function set_local_bin_path() {
+  # Replace any existing local bin paths with our new one
+  export PATH="${1:-""}`echo "$PATH"|sed -e 's,[^:]*\.git/[^:]*bin:,,g'`"
+}
+
+function add_trusted_local_bin_to_path() {
+  if [[ -d "$PWD/.git/safe" ]]; then
+    # We're in a trusted project directory so update our local bin path
+    set_local_bin_path ".git/safe/../../bin:"
+  fi
+}
+
+if [[ -n "$ZSH_VERSION" ]]; then
+  if [[ ! "$preexec_functions" == *add_trusted_local_bin_to_path* ]]; then
+    preexec_functions+=("add_trusted_local_bin_to_path")
+  fi
+fi
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
