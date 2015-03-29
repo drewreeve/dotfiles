@@ -11,6 +11,13 @@ if command -v chruby-exec >/dev/null; then
     source /usr/local/share/chruby/chruby.sh
     source /usr/local/share/chruby/auto.sh
   fi
+
+  # Call chruby_auto explicitly on osx to put chruby paths at the front.
+  # (On osx path_helper gets invoked for non-interactive shells and it
+  # reorders the path which sometimes breaks things)
+  if [ -x /usr/libexec/path_helper ]; then
+    chruby_auto
+  fi
 fi
 
 # http://raygrasso.com/posts/2015/02/making-chruby-and-binstubs-play-nice.html
