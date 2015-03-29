@@ -4,12 +4,9 @@ export EDITOR=vim
 export PATH="$HOME/.bin:/usr/local/sbin:$PATH"
 
 if command -v chruby-exec >/dev/null; then
-  if command -v brew >/dev/null; then
-    source /usr/local/opt/chruby/share/chruby/chruby.sh
-    source /usr/local/opt/chruby/share/chruby/auto.sh
-  else
-    source /usr/local/share/chruby/chruby.sh
-    source /usr/local/share/chruby/auto.sh
+  if (( $+commands[chruby-exec] )); then
+    source "${commands[chruby-exec]:h:h}/share/chruby/chruby.sh"
+    source "${commands[chruby-exec]:h:h}/share/chruby/auto.sh"
   fi
 
   # Call chruby_auto explicitly on osx to put chruby paths at the front.
