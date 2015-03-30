@@ -7,12 +7,6 @@ if command -v chruby-exec >/dev/null; then
   if (( $+commands[chruby-exec] )); then
     source "${commands[chruby-exec]:h:h}/share/chruby/chruby.sh"
     source "${commands[chruby-exec]:h:h}/share/chruby/auto.sh"
-  fi
-
-  # Call chruby_auto explicitly on osx to put chruby paths at the front.
-  # (On osx path_helper gets invoked for non-interactive shells and it
-  # reorders the path which sometimes breaks things)
-  if [ -x /usr/libexec/path_helper ]; then
     chruby_auto
   fi
 fi
@@ -33,8 +27,12 @@ function add_trusted_local_bin_to_path() {
 if [[ -n "$ZSH_VERSION" ]]; then
   if [[ ! "$preexec_functions" == *add_trusted_local_bin_to_path* ]]; then
     preexec_functions+=("add_trusted_local_bin_to_path")
+    add_trusted_local_bin_to_path
   fi
 fi
+
+# Remove duplicate paths
+typeset -U PATH
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
