@@ -1,8 +1,8 @@
 export EDITOR=vim
 
-# Load dotfiles .bin directory first
+# Load dotfiles bin directory first
 path=(
-  $HOME/.bin
+  $HOME/bin
   /usr/local/sbin
   $path
 )

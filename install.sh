@@ -1,19 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-# Borrowed from the thoughtbot dotfiles
-# http://github.com/thoughtbot/dotfiles
+set -e
 
-for name in *; do
-  target="$HOME/.$name"
-  if [ -e "$target" ]; then
-    if [ ! -L "$target" ]; then
-      echo "WARNING: $target exists but is not a symlink."
-    fi
+dotfiles_dir="$(cd "${0%/*}"; pwd)"
+skip=("README.markdown" "install.sh")
+
+for file in "$dotfiles_dir"/*; do
+  name="$(basename "$file")"
+  [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
+
+  if (($skip[(Ie)$name])); then
+    echo "Skipping: $name"
+    continue
   else
-    if [ "$name" != 'install.sh' ] && [ "$name" != 'README.markdown' ]; then
-      echo "Creating $target"
-      ln -s "$PWD/$name" "$target"
-    fi
+    ln -sfnv ${file} "${HOME}/${dotname}"
   fi
 done
 
