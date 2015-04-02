@@ -15,21 +15,9 @@ if command -v chruby-exec >/dev/null; then
   fi
 fi
 
-autoload -Uz add-zsh-hook
-
-function add_trusted_bin_to_path() {
-  if [[ -n TRUSTED_BIN_DIR ]]; then
-    path=(${path:#$TRUSTED_BIN_DIR})
-    unset TRUSTED_BIN_DIR
-  fi
-  if [[ -d "${PWD}/.git/safe" ]]; then
-    TRUSTED_BIN_DIR="${PWD}/bin"
-    path=($TRUSTED_BIN_DIR $path)
-  fi
-}
-
-add-zsh-hook preexec add_trusted_bin_to_path
-add_trusted_bin_to_path
+# Source trusted_bin_dir now that chruby is loaded so that our trusted path
+# gets appended in front of chrubys
+source $HOME/.zsh/trusted_bin_dir.zsh
 
 # Remove duplicate paths
 typeset -U path
