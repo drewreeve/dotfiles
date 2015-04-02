@@ -5,7 +5,7 @@ done
 
 # Completions
 autoload -U compinit
-compinit
+compinit -i
 
 setopt always_to_end
 setopt complete_in_word
