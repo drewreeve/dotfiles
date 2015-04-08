@@ -26,4 +26,4 @@ if [ ! -e ~/.vim/bundle/vundle ]; then
   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 fi
 
-vim -u ~/.vimrc.bundles +BundleInstall +qa
+vim -u ~/.vimrc.bundles +PluginInstall +PluginClean! +qa
