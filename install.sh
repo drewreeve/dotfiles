@@ -22,8 +22,9 @@ if [ ! -e ~/.vim-tmp ]; then
   mkdir ~/.vim-tmp
 fi
 
-if [ ! -e ~/.vim/bundle/vundle ]; then
-  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
+  curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-vim -u ~/.vimrc.bundles +PluginInstall +PluginClean! +qa
+vim -u ~/.vimrc.bundles +PlugInstall +PlugClean! +qa

@@ -2,34 +2,26 @@ if &compatible
   set nocompatible
 end
 
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-
-" let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+call plug#begin('~/.vim/bundle')
 
 " Define bundles
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-fugitive'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-rails'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-endwise'
-Plugin 'slim-template/vim-slim'
-Plugin 'pbrisbin/vim-mkdir'
-Plugin 'tpope/vim-eunuch'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'croaky/vim-colors-github'
-Plugin 'ajh17/Spacegray.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-fugitive'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-rails'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-endwise'
+Plug 'slim-template/vim-slim'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'tpope/vim-eunuch'
+Plug 'thoughtbot/vim-rspec'
+Plug 'croaky/vim-colors-github'
+Plug 'ajh17/Spacegray.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
 
-call vundle#end()
-
-filetype on
+call plug#end()
