@@ -17,9 +17,9 @@ for file in "$dotfiles_dir"/*; do
   fi
 done
 
-if [ ! -e ~/.vim-tmp ]; then
-  echo "Creating ~/.vim-tmp folder"
-  mkdir ~/.vim-tmp
+if [ ! -e $HOME/.vim/tmp ]; then
+  echo "Creating ~/.vim/tmp folder"
+  mkdir -p $HOME/.vim/tmp
 fi
 
 if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
@@ -27,4 +27,4 @@ if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-vim -u ~/.vimrc.bundles +PlugInstall +PlugClean! +qa
+vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa

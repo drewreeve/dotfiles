@@ -96,8 +96,8 @@ endif
 nnoremap <leader><leader> <c-^>
 
 " Store temporary files in a central spot
-set backupdir=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
-set directory=~/.vim-tmp//,~/.tmp//,~/tmp//,/tmp
+set backupdir=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
+set directory=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
 
 " Status line
 set statusline=%<%f\ %m%r%w\ %y%=L:\%l\/%L\ C:%c
