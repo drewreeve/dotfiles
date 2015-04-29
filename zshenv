@@ -4,6 +4,7 @@ export EDITOR=vim
 path=(
   $HOME/bin
   /usr/local/sbin
+  .git/safe/../../node_modules/.bin
   $path
 )
 
