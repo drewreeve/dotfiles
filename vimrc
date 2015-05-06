@@ -16,7 +16,8 @@ set laststatus=2
 set showmatch
 set incsearch
 set hlsearch
-set smartcase
+" make searches case-sensitive only if they contain upper-case characters
+set ignorecase smartcase
 set showcmd " display incomplete commands
 set backspace=indent,eol,start
 set scrolloff=3
