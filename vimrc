@@ -135,6 +135,7 @@ let g:html_indent_tags = 'li\|p'
 
 " Close buffer without closing window/split
 nnoremap <silent> <leader>bd :bp\|bd #<cr>
+command Bd bp\|bd \#
 
 " Check syntax on open
 let g:syntastic_check_on_open=1
