@@ -118,19 +118,6 @@ map <Right> :echo "no!"<cr>
 map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
 
-" rename current file (taken from Gary Bernhardt)
-" https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <leader>n :call RenameFile()<cr>
-
 " Smart tab key (borrowed from gary bernhardt)
 " inserts tabs at the beginning of lines, otherwise does completion
 function! InsertTabWrapper()
