@@ -52,6 +52,10 @@ set wildignore+=*.png,*.PNG,*.JPG,*.jpg,*.GIF,*.gif,vendor/bundle/**,tmp/**
 
 let mapleader=","
 
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
 augroup vimrcEx
   " clear all autocmds in group
   autocmd!
