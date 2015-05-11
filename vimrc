@@ -147,6 +147,12 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
+" Dispatch settings
+let g:dispatch_compilers = {
+      \ 'bundle exec': '',
+      \ 'clear;': '',
+      \ 'zeus': ''}
+
 " Autocomplete dictionary words if spell check is on
 set complete+=kspell
 
