@@ -3,6 +3,7 @@ export EDITOR=vim
 # Load dotfiles bin directory first
 path=(
   $HOME/bin
+  $HOME/.rbenv/bin
   /usr/local/sbin
   .git/safe/../../bin
   .git/safe/../../node_modules/.bin
