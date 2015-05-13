@@ -19,6 +19,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'thoughtbot/vim-rspec'
 Plug 'croaky/vim-colors-github'
 Plug 'ajh17/Spacegray.vim'
+Plug 'tpope/vim-dispatch'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
