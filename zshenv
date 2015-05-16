@@ -14,7 +14,7 @@ path=($^path(N))
 
 # load rbenv if available
 if which rbenv &>/dev/null ; then
-  eval "$(rbenv init - zsh --no-rehash)"
+  eval "$(rbenv init - --no-rehash)"
 fi
 
 # Prepend node and bundler binstubs to path in trusted repositories
