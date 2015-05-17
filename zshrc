@@ -55,6 +55,7 @@ if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
   source $HOME/.zsh/terminal_app_cwd_fix.zsh
 fi
 source $HOME/.zsh/title.zsh
+source $HOME/.zsh/functions.zsh
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
