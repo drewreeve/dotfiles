@@ -4,6 +4,11 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
+" Load builtin matchit.vim unless there's a newer version
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
 filetype plugin indent on
 
 " allow unsaved background buffers and remember marks/undo for them
