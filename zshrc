@@ -46,6 +46,7 @@ bindkey "^K" kill-line
 export CLICOLOR=1
 
 # Load additional files from ~/.zsh
+source $HOME/.zsh/path.zsh
 source $HOME/.zsh/alias.zsh
 source $HOME/.zsh/brew.zsh
 source $HOME/.zsh/prompt.zsh
