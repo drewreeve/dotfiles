@@ -146,11 +146,12 @@ command Bd bp\|bd \#
 " Check syntax on open
 let g:syntastic_check_on_open=1
 
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" Vim-test mappings
+map <Leader>t :TestFile<CR>
+map <Leader>s :TestNearest<CR>
+map <Leader>l :TestLast<CR>
+map <Leader>a :TestSuite<CR>
+let test#strategy = "dispatch"
 
 " Dispatch settings
 let g:dispatch_compilers = {
