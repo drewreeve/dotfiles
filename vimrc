@@ -118,6 +118,9 @@ set statusline=%<%f\ %m%r%w\ %y%=L:\%l\/%L\ C:%c
 " insert hashrocket with <c-l>
 imap <c-l> <space>=><space>
 
+" Escape insert mode with jk
+inoremap jk <Esc>
+
 " Arrow keys are unacceptable
 map <Left> :echo "no!"<cr>
 map <Right> :echo "no!"<cr>
