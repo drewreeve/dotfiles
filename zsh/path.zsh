@@ -15,6 +15,11 @@ if which rbenv &>/dev/null ; then
   eval "$(rbenv init - --no-rehash)"
 fi
 
+# load nvm if available
+if [ -d $HOME/.nvm ]; then
+  source $HOME/.nvm/nvm.sh
+fi
+
 # Prepend node and bundler binstubs to path in trusted repositories
 # Use git trust or mkdir .git/safe to mark a repository as trusted
 path[1,0]=.git/safe/../../node_modules/.bin
