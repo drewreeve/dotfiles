@@ -28,6 +28,7 @@ set backspace=indent,eol,start
 set scrolloff=3
 set autoread
 set nofoldenable
+set ttyfast
 
 " Open new split panes to right and bottom
 set splitbelow
