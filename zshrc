@@ -56,5 +56,12 @@ fi
 source $HOME/.zsh/title.zsh
 source $HOME/.zsh/functions.zsh
 
+# Set EDITOR depending on presence of nvim
+if (( $+commands[nvim] )); then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
+
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

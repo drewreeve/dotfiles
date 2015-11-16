@@ -17,6 +17,10 @@ for file in "$dotfiles_dir"/*; do
   fi
 done
 
+# Allow nvim to use vim files/folder
+ln -sfnv $HOME/.vim $HOME/.config/nvim
+ln -sfnv $HOME/.vimrc $HOME/.config/nvim/init.vim
+
 if [ ! -e $HOME/.vim/tmp ]; then
   echo "Creating ~/.vim/tmp folder"
   mkdir -p $HOME/.vim/tmp
