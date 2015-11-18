@@ -35,5 +35,8 @@ else
   fi
 fi
 
+# List ten most used commands
+alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
 # Load machine specific aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local

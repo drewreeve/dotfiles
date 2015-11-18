@@ -1,67 +1,40 @@
-# Completions
-autoload -U compinit
-compinit -i
+# Source files from specified directory
+# Checks for pre & post directories and loads them in the correct order
 
-setopt always_to_end
-setopt complete_in_word
+# Borrowed from the excellent thoughtbot dotfiles
+# http://github.com/thoughtbot/dotfiles
+_load_settings() {
+  _dir="$1"
 
-# Case insensitive
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*:*:*:*:*' menu select
+  if [ -d "$_dir" ]; then
+    if [ -d "$_dir/pre" ]; then
+      # Restrict to regular files/symlinks. Expands to empty list if no match
+      for config in "$_dir"/pre/**/*(N-.); do
+        . $config
+      done
+    fi
 
-# Complete trusted binstubs
-zstyle -e ':completion:*' command-path '[[ -d $PWD/.git/safe/../../bin ]] && reply=($PWD/bin $PATH)'
+    for config in "$_dir"/**/*(N-.); do
+      if [[ "$config" =~ "^$_dir?\/(pre|post)" ]]; then
+        continue
+      elif [ -f $config ]; then
+        . $config
+      fi
+    done
 
-# History
-HISTFILE=~/.zsh_history # Path to history file
-SAVEHIST=10000          # Maximum number of commands to save in history file
-HISTSIZE=10000          # Maximum number of commands to save in internal history
-
-# Write history file in ':start:elapsed;command' format
-setopt EXTENDED_HISTORY
-# Add commands as they're entered, not on shell exit
-setopt INC_APPEND_HISTORY
-# Do not enter command into history if it duplicates previous command
-setopt HIST_IGNORE_DUPS
-# If new command duplicates an older one, remove the older one
-setopt HIST_IGNORE_ALL_DUPS
-# When writing out history file, omit duplicate commands
-setopt HIST_SAVE_NO_DUPS
-# Do not execute immediately upon history expansion
-setopt HIST_VERIFY
-# Share history between all sessions
-setopt SHARE_HISTORY
-
-# Quote pasted URLs
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
-
-# Keybindings
-bindkey -e
-# Make the delete key (or Fn + Delete on the Mac) work instead of outputting a ~
-bindkey "^[[3~" delete-char
-bindkey "^K" kill-line
-
-# Add colors to ls
-export CLICOLOR=1
+    if [ -d "$_dir/post" ]; then
+      for config in "$_dir"/post/**/*(N-.); do
+        . $config
+      done
+    fi
+  fi
+}
 
 # Load additional files from ~/.zsh
-source $HOME/.zsh/path.zsh
-source $HOME/.zsh/alias.zsh
-source $HOME/.zsh/brew.zsh
-source $HOME/.zsh/prompt.zsh
-if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
-  source $HOME/.zsh/terminal_app_cwd_fix.zsh
-fi
-source $HOME/.zsh/title.zsh
-source $HOME/.zsh/functions.zsh
+_load_settings $HOME/.zsh
 
-# Set EDITOR depending on presence of nvim
-if (( $+commands[nvim] )); then
-  export EDITOR=nvim
-else
-  export EDITOR=vim
-fi
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
