@@ -1,14 +1,39 @@
-ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
-alias ll='ls -lG'
+#
+# Aliases
+#
 
-alias rbh="rbenv rehash"
+# ls
+if (($+commands[dircolors])); then
+  alias ls='ls --color=auto'
+else
+  alias ls='ls -G'
+fi
 
+alias ll='ls -lh'
+alias la='ll -A'
+
+# Ruby
+alias rbh='rbenv rehash'
 alias biv='bundle install --path vendor/bundle'
 
-# Flush dns cache
-alias flushdns='dscacheutil -flushcache'
+# Pretty print path
+alias ppath='echo $PATH | tr -s ":" "\n"'
 
-# Load custom aliases
+# Grep
+alias grep='grep --color=auto'
+
+# Resource use
+if (( $+commands[htop] )); then
+  alias top=htop
+else
+  if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
+    alias topc='top -o cpu'
+    alias topm='top -o vsize'
+  else
+    alias topc='top -o %CPU'
+    alias topm='top -o %MEM'
+  fi
+fi
+
+# Load machine specific aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
-
-# vim: set syntax=sh:
