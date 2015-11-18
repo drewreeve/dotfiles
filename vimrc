@@ -76,6 +76,7 @@ augroup vimrcEx
   " Set syntax for certain file types
   autocmd BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile zprofile set filetype=zsh
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
