@@ -32,4 +32,4 @@ else
 fi
 
 # Local config
-[[ -f ~/.profile.local ]] && source ~/.zprofile.local
+[[ -f ~/.zprofile.local ]] && source ~/.zprofile.local
