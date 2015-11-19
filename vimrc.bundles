@@ -11,7 +11,6 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-rails'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-endwise'
 Plug 'slim-template/vim-slim'
 Plug 'pbrisbin/vim-mkdir'
@@ -20,6 +19,7 @@ Plug 'janko-m/vim-test'
 Plug 'croaky/vim-colors-github'
 Plug 'ajh17/Spacegray.vim'
 Plug 'tpope/vim-dispatch'
+Plug 'benekastah/neomake'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

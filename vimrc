@@ -88,6 +88,9 @@ augroup vimrcEx
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
+
+ " Run neomake when buffer is saved
+  autocmd BufWritePost * Neomake
 augroup END
 
 " Display extra whitespace
@@ -155,9 +158,6 @@ let g:html_indent_tags = 'li\|p'
 " Close buffer without closing window/split
 nnoremap <silent> <leader>bd :bp\|bd #<cr>
 command Bd bp\|bd \#
-
-" Check syntax on open
-let g:syntastic_check_on_open=1
 
 " Vim-test mappings
 map <Leader>t :TestFile<CR>
