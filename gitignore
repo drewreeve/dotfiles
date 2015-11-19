@@ -6,7 +6,10 @@
 vendor/bundle
 .env
 rerun.txt
-log/*.log
+*.log
 tmp/**/*
 tags
 !tags/
+node_modules
+bower_components
+.npm
