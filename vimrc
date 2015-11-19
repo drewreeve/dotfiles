@@ -113,7 +113,15 @@ set backupdir=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
 set directory=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
 
 " Status line
-set statusline=%<%f\ %m%r%w\ %y%=L:\%l\/%L\ C:%c
+set statusline=
+set statusline+=%<         " truncate point
+set statusline+=%f         " relative path to file
+set statusline+=\ %m       " modified flag [+], [-] etc.
+set statusline+=%r         " readonly flag [RO]
+set statusline+=\ %y       " filetype [ruby]
+set statusline+=%=         " switch to right side
+set statusline+=L:%l\/%L   " current line/total lines
+set statusline+=\ C:%c     " current column number
 
 " Clear the search buffer when hitting return
 :nnoremap <CR> :nohlsearch<cr>
