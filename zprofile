@@ -13,7 +13,6 @@ path=(
   $HOME/bin
   $HOME/.rbenv/bin
   /usr/local/{bin,sbin}
-  $HOME/zbin
   $path
 )
 
