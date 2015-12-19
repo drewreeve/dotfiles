@@ -21,6 +21,7 @@ Plug 'ajh17/Spacegray.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'benekastah/neomake'
 Plug 'vim-ruby/vim-ruby'
+Plug 'elixir-lang/vim-elixir'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
