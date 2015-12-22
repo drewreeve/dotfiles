@@ -78,17 +78,6 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile zprofile set filetype=zsh
 
-  " Enable spellchecking for Markdown
-  autocmd FileType markdown setlocal spell
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
-
-  " Wrap at 72 characters and spell check git commits
-  autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType gitcommit setlocal spell
-
-  " Allow stylesheets to autocomplete hyphenated words
-  autocmd FileType css,scss,sass setlocal iskeyword+=-
-
  " Run neomake when buffer is saved
   autocmd BufWritePost * Neomake
 augroup END
