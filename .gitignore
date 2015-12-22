@@ -1,3 +1,5 @@
 bin/mate
-vim/*
-!vim/ftplugin
+vim/autoload
+vim/bundle
+vim/init.vim
+vim/tmp
