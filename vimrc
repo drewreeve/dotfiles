@@ -29,6 +29,7 @@ set scrolloff=3
 set autoread
 set nofoldenable
 set ttyfast
+set lazyredraw " helps with performance on my aging iMac
 
 " Open new split panes to right and bottom
 set splitbelow
