@@ -3,7 +3,7 @@
 set -e
 
 dotfiles_dir="$(cd "${0%/*}"; pwd)"
-skip=("README.markdown" "install.sh")
+skip=("README.markdown" "install.sh" "termsupport")
 
 for file in "$dotfiles_dir"/*; do
   name="$(basename "$file")"

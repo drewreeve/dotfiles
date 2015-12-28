@@ -47,8 +47,8 @@ set shiftround
 
 " Colors and syntax highlighting
 syntax on
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme gruvbox
 
 set wildmode=longest,list
 

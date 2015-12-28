@@ -22,6 +22,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'benekastah/neomake'
 Plug 'vim-ruby/vim-ruby'
 Plug 'elixir-lang/vim-elixir'
+Plug 'morhetz/gruvbox'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
