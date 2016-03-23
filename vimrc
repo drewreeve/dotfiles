@@ -150,10 +150,12 @@ nnoremap <silent> <leader>bd :bp\|bd #<cr>
 command Bd bp\|bd \#
 
 " Vim-test mappings
-map <Leader>t :TestFile<CR>
-map <Leader>s :TestNearest<CR>
-map <Leader>l :TestLast<CR>
-map <Leader>a :TestSuite<CR>
+nnoremap <silent> <Leader>t :TestFile<CR>
+nnoremap <silent> <Leader>s :TestNearest<CR>
+nnoremap <silent> <Leader>l :TestLast<CR>
+nnoremap <silent> <Leader>a :TestSuite<CR>
+nnoremap <silent> <leader>gt :TestVisit<CR>
+
 let test#strategy = "dispatch"
 
 " Dispatch settings
