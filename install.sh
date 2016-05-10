@@ -47,10 +47,9 @@ while true; do
   read "?Does this machine support truecolor in terminal? " yn
   case $yn in
     [Yy]* ) _append_truecolor_config; break;;
-    [Nn]* ) exit;;
+    [Nn]* ) break;;
     * ) echo "Please answer yes or no.";;
   esac
 done
-
 
 vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa
