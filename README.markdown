@@ -8,5 +8,5 @@ Set zsh as your login shell:
 Installation
 ------------
 
-    git clone git://github.com/flux/dotfiles.git ~/.dotfiles
+    git clone git://github.com/drewreeve/dotfiles.git ~/.dotfiles
     ~/.dotfiles/install.sh
