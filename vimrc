@@ -167,6 +167,11 @@ let g:dispatch_compilers = {
 " Autocomplete dictionary words if spell check is on
 set complete+=kspell
 
+" Use different cursor in insert mode in neovim
+if has("nvim")
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source $HOME/.vimrc.local
