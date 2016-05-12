@@ -3,6 +3,8 @@
   aa = add --all
   ca = commit --amend
   trust = "!mkdir -p .git/safe"
+  st = status -sb
+  lg = log --graph --oneline --decorate
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
