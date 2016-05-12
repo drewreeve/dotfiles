@@ -1,3 +1,6 @@
+[user]
+  name = Drew Reeve
+  email = dru.reeve@gmail.com
 [alias]
   co = checkout
   aa = add --all
@@ -9,12 +12,12 @@
   excludesfile = ~/.gitignore
   autocrlf = input
 [include]
-  path = .gitconfig.local
+  path = ~/.gitconfig.local
 [color]
   status = auto
   branch = auto
   ui = auto
 [help]
   autocorrect = 0
-[push]
-  default = tracking
+[rebase]
+  autosquash = true
