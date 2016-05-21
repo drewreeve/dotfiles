@@ -41,6 +41,9 @@ _append_truecolor_config() {
 
   # Enable truecolor in tmux 2.2+
   echo 'set-option -ga terminal-overrides ",xterm-256color:Tc"' >> $HOME/.tmux.conf.local
+
+  # Enable truecolor in vim and newer versions of neovim
+  echo 'set termguicolors' >> $HOME/.vimrc.local
 }
 
 while true; do
