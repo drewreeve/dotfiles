@@ -81,6 +81,9 @@ augroup vimrcEx
 
  " Run neomake when buffer is saved
   autocmd BufWritePost * Neomake
+
+  " Unset paste on InsertLeave
+  au InsertLeave * silent! set nopaste
 augroup END
 
 " Display extra whitespace
