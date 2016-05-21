@@ -34,11 +34,6 @@ fi
 
 # Does this machine support truecolor?
 _append_truecolor_config() {
-  # Enable true color for neovim
-  echo 'if hash("nvim")' >> $HOME/.vimrc.local
-  echo '  let $NVIM_TUI_ENABLE_TRUE_COLOR=1' >> $HOME/.vimrc.local
-  echo 'endif' >> $HOME/.vimrc.local
-
   # Enable truecolor in tmux 2.2+
   echo 'set-option -ga terminal-overrides ",xterm-256color:Tc"' >> $HOME/.tmux.conf.local
 
