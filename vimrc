@@ -101,6 +101,7 @@ endif
 
 " Replicate default behaviour of ctrlp
 nnoremap <silent> <c-p> :Files<cr>
+nnoremap <silent> <Leader>ag :Ag<cr>
 
 " Switch between last 2 files
 nnoremap <leader><leader> <c-^>
