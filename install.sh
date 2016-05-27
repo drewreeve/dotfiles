@@ -50,4 +50,4 @@ while true; do
   esac
 done
 
-vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa
+vim +PlugInstall +PlugClean! +qa
