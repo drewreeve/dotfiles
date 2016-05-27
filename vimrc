@@ -1,15 +1,26 @@
-set nocompatible
-
+" ----------------------------------------------------------------------------
+"  Load Plugins
+" ----------------------------------------------------------------------------
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
+" ----------------------------------------------------------------------------
 " Load builtin matchit.vim unless there's a newer version
+" ----------------------------------------------------------------------------
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-filetype plugin indent on
+" ----------------------------------------------------------------------------
+"  Basic Settings
+" ----------------------------------------------------------------------------
+
+let mapleader=","
+
+if has('autocmd')
+  filetype plugin indent on
+endif
 
 " allow unsaved background buffers and remember marks/undo for them
 set hidden
@@ -30,6 +41,15 @@ set autoread
 set nofoldenable
 set ttyfast
 set lazyredraw " helps with performance on my aging iMac
+set wildmode=longest,list
+set wildmenu " make tab completion for files/buffers act like bash
+
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
+
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j " Delete comment character when joining commented lines
+endif
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -45,27 +65,28 @@ set shiftwidth=2
 set expandtab
 set shiftround
 
+" Store temporary files in a central spot
+set backupdir=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
+set directory=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
+
+" Autocomplete dictionary words if spell check is on
+set complete+=kspell
+
+let g:html_indent_tags = 'li\|p'
+
+" ----------------------------------------------------------------------------
 " Colors and syntax highlighting
-syntax on
+" ----------------------------------------------------------------------------
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
 set background=dark
 colorscheme gruvbox
 
-set wildmode=longest,list
-
-" make tab completion for files/buffers act like bash
-set wildmenu
-
-" ignore vendor/bundle directory in bundler projects
-set wildignore+=*.png,*.PNG,*.JPG,*.jpg,*.GIF,*.gif,vendor/bundle/**,tmp/**
-
-let mapleader=","
-
-if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j " Delete comment character when joining commented lines
-endif
-
+" ----------------------------------------------------------------------------
+"  AutoCMD's
+" ----------------------------------------------------------------------------
 augroup vimrcEx
-  " clear all autocmds in group
   autocmd!
 
   " Jump to last cursor position unless it's invalid or in an event handler
@@ -83,28 +104,19 @@ augroup vimrcEx
   autocmd BufWritePost * Neomake
 
   " Unset paste on InsertLeave
-  au InsertLeave * silent! set nopaste
+  autocmd InsertLeave * silent! set nopaste
 
   " Automatic rename of tmux window
   " borrowed from http://github.com/junegunn/dotfiles
   if exists('$TMUX') && !exists('$NORENAME')
-    au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-    au VimLeave * call system('tmux set-window automatic-rename on')
+    autocmd BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+    autocmd VimLeave * call system('tmux set-window automatic-rename on')
   endif
 augroup END
 
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
-
+" ----------------------------------------------------------------------------
 " Searching & fzf
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-endif
-
+" ----------------------------------------------------------------------------
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
@@ -113,14 +125,16 @@ endif
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <Leader>ag :Ag<cr>
 
-" Switch between last 2 files
-nnoremap <leader><leader> <c-^>
+" Use The Silver Searcher  https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
 
-" Store temporary files in a central spot
-set backupdir=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
-set directory=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
+  let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+endif
 
+" ----------------------------------------------------------------------------
 " Status line
+" ----------------------------------------------------------------------------
 set statusline=
 set statusline+=%<         " truncate point
 set statusline+=%f         " relative path to file
@@ -131,22 +145,10 @@ set statusline+=%=         " switch to right side
 set statusline+=L:%l\/%L   " current line/total lines
 set statusline+=\ C:%c     " current column number
 
-" Clear the search buffer when hitting return
-:nnoremap <CR> :nohlsearch<cr>
-" insert hashrocket with <c-l>
-imap <c-l> <space>=><space>
-
-" Escape insert mode with jk
-inoremap jk <Esc>
-
-" Arrow keys are unacceptable
-map <Left> :echo "no!"<cr>
-map <Right> :echo "no!"<cr>
-map <Up> :echo "no!"<cr>
-map <Down> :echo "no!"<cr>
-
+" ----------------------------------------------------------------------------
 " Smart tab key (borrowed from gary bernhardt)
 " inserts tabs at the beginning of lines, otherwise does completion
+" ----------------------------------------------------------------------------
 function! InsertTabWrapper()
     let col = col('.') - 1
         if !col || getline('.')[col - 1] !~ '\k'
@@ -158,13 +160,17 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-let g:html_indent_tags = 'li\|p'
+" ----------------------------------------------------------------------------
+" Dispatch settings
+" ----------------------------------------------------------------------------
+let g:dispatch_compilers = {
+      \ 'bundle exec': '',
+      \ 'clear;': '',
+      \ 'zeus': ''}
 
-" Close buffer without closing window/split
-nnoremap <silent> <leader>bd :bp\|bd #<cr>
-command Bd bp\|bd \#
-
-" Vim-test mappings
+" ----------------------------------------------------------------------------
+" Vim-test
+" ----------------------------------------------------------------------------
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
 nnoremap <silent> <Leader>l :TestLast<CR>
@@ -173,17 +179,31 @@ nnoremap <silent> <leader>gt :TestVisit<CR>
 
 let test#strategy = "dispatch"
 
-" Dispatch settings
-let g:dispatch_compilers = {
-      \ 'bundle exec': '',
-      \ 'clear;': '',
-      \ 'zeus': ''}
+" ----------------------------------------------------------------------------
+" Mappings
+" ----------------------------------------------------------------------------
 
-" Autocomplete dictionary words if spell check is on
-set complete+=kspell
+" Close buffer without closing window/split
+command Bd bp\|bd \#
+nnoremap <silent> <leader>bd :Bd<cr>
 
-" Use different cursor in insert mode in neovim
+" Clear the search buffer when hitting return
+nnoremap <CR> :nohlsearch<cr>
+
+" insert hashrocket with <c-l>
+imap <c-l> <space>=><space>
+
+" Escape insert mode with jk
+inoremap jk <Esc>
+
+" Switch between last 2 files
+nnoremap <leader><leader> <c-^>
+
+" ----------------------------------------------------------------------------
+" Additional Nvim Settings
+" ----------------------------------------------------------------------------
 if has("nvim")
+  " Use different cursor in insert mode
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
