@@ -66,8 +66,8 @@ set expandtab
 set shiftround
 
 " Store temporary files in a central spot
-set backupdir=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
-set directory=~/.vim/tmp//,~/.tmp//,~/tmp//,/tmp//
+set backupdir=~/.vim/tmp//,~/tmp//,/tmp//
+set directory=~/.vim/tmp//,~/tmp//,/tmp//
 
 " Autocomplete dictionary words if spell check is on
 set complete+=kspell
