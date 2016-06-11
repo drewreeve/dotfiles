@@ -29,6 +29,7 @@ set number relativenumber
 set history=1000
 set autoindent
 set laststatus=2
+set nojoinspaces
 set showmatch
 set incsearch
 set hlsearch
