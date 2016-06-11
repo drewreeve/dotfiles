@@ -122,14 +122,13 @@ if has('nvim')
 endif
 
 " Replicate default behaviour of ctrlp
-nnoremap <silent> <c-p> :Files<cr>
+nnoremap <silent> <c-p> :GFiles -co --exclude-standard<cr>
+nnoremap <silent> <Leader>f :Files<cr>
 nnoremap <silent> <Leader>ag :Ag<cr>
 
 " Use The Silver Searcher  https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
-
-  let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 endif
 
 " ----------------------------------------------------------------------------
