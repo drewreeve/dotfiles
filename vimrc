@@ -184,8 +184,8 @@ let test#strategy = "dispatch"
 " Mappings
 " ----------------------------------------------------------------------------
 
-" Clear the search buffer when hitting return
-nnoremap <CR> :nohlsearch<cr>
+" Clear highlighted searches
+nnoremap <silent> <leader>c :nohlsearch<CR>
 
 " insert hashrocket with <c-l>
 imap <c-l> <space>=><space>
