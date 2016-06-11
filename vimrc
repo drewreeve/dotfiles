@@ -135,14 +135,14 @@ endif
 " Status line
 " ----------------------------------------------------------------------------
 set statusline=
-set statusline+=%<         " truncate point
-set statusline+=%f         " relative path to file
-set statusline+=\ %m       " modified flag [+], [-] etc.
-set statusline+=%r         " readonly flag [RO]
-set statusline+=\ %y       " filetype [ruby]
-set statusline+=%=         " switch to right side
-set statusline+=L:%l\/%L   " current line/total lines
-set statusline+=\ C:%c     " current column number
+set statusline+=%<                   " truncate point
+set statusline+=%f                   " relative path to file
+set statusline+=\ %m                 " modified flag [+], [-] etc.
+set statusline+=%r                   " readonly flag [RO]
+set statusline+=\ (%{&ft})           " filetype (ruby)
+set statusline+=%=                   " switch to right side
+set statusline+=%-14.(%3l,%02c%03V%) " current line, column/virtual column
+set statusline+=\ %P                 " percentage through file
 
 " ----------------------------------------------------------------------------
 " Smart tab key (borrowed from gary bernhardt)
