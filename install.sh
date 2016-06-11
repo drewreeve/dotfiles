@@ -7,7 +7,7 @@ skip=("README.markdown" "install.sh" "termsupport")
 
 for file in "$dotfiles_dir"/*; do
   name="$(basename "$file")"
-  dotname=".${name}"
+  [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
 
   if (($skip[(Ie)$name])); then
     echo "Skipping: $name"

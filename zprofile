@@ -10,7 +10,7 @@ typeset -gU cdpath fpath mailpath path
 # Setup path. Also add rbenv bin dir in case it was cloned instead of
 # using a package manager. It'll get removed next if it doesn't exist.
 path=(
-  $HOME/.bin
+  $HOME/bin
   $HOME/.rbenv/bin
   /usr/local/{bin,sbin}
   $path
