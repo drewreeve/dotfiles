@@ -182,10 +182,6 @@ let test#strategy = "dispatch"
 " Mappings
 " ----------------------------------------------------------------------------
 
-" Close buffer without closing window/split
-command Bd bp\|bd \#
-nnoremap <silent> <leader>bd :Bd<cr>
-
 " Clear the search buffer when hitting return
 nnoremap <CR> :nohlsearch<cr>
 
