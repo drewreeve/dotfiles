@@ -2,8 +2,10 @@
   name = Drew Reeve
   email = dru.reeve@gmail.com
 [alias]
+  ci = commit --verbose
   co = checkout
   aa = add --all
+  ap = add --patch
   ca = commit --amend
   trust = "!mkdir -p .git/safe"
   st = status -sb
