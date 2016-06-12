@@ -202,6 +202,9 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" grep word under cursor
+nnoremap K :set nois<CR> :Ag <C-R><C-W><CR>
+
 " ----------------------------------------------------------------------------
 " Additional Nvim Settings
 " ----------------------------------------------------------------------------
