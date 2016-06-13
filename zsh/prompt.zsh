@@ -19,8 +19,15 @@ zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
 zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked
 
-PROMPT=$'\n''%F{blue}%~%f $vcs_info_msg_0_'$'\n''%(?.%F{green}.%F{red})$%f '
+# Build prompt
+PROMPT=$'\n%F{blue}%~%f $vcs_info_msg_0_%f'  # current path and git info
 
+# show username@host if logged in via ssh
+[[ "$SSH_CONNECTION" != '' ]] && PROMPT+=' %F{242}%n@%m%f'
+
+PROMPT+=$'\n%(?.%F{green}.%F{red})$%f ' # red prompt if non zero exit code
+
+# Append ? to vcs info if there are untracked files
 function +vi-git-untracked() {
   if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
     hook_com[unstaged]+="%F{red}?%f"
