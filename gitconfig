@@ -19,7 +19,20 @@
   status = auto
   branch = auto
   ui = auto
+[color "diff"]
+  commit = green
+  meta = yellow
+  frag = cyan
+  old = red
+  new = green
+  whitespace = red reverse
 [help]
   autocorrect = 0
 [rebase]
   autosquash = true
+[pager]
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
+[interactive]
+  diffFilter = diff-highlight

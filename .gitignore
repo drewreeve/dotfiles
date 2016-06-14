@@ -1,4 +1,5 @@
 bin/mate
+bin/diff-highlight
 vim/autoload
 vim/bundle
 vim/init.vim
