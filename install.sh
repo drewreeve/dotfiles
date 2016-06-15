@@ -35,22 +35,4 @@ fi
 # Download diff-highlight script
 curl https://raw.githubusercontent.com/git/git/master/contrib/diff-highlight/diff-highlight > $HOME/bin/diff-highlight && chmod +x $HOME/bin/diff-highlight
 
-# Does this machine support truecolor?
-_append_truecolor_config() {
-  # Enable truecolor in tmux 2.2+
-  echo 'set-option -ga terminal-overrides ",xterm-256color:Tc"' >> $HOME/.tmux.conf.local
-
-  # Enable truecolor in vim and newer versions of neovim
-  echo 'set termguicolors' >> $HOME/.vimrc.local
-}
-
-while true; do
-  read "?Does this machine support truecolor in terminal? " yn
-  case $yn in
-    [Yy]* ) _append_truecolor_config; break;;
-    [Nn]* ) break;;
-    * ) echo "Please answer yes or no.";;
-  esac
-done
-
 vim +PlugInstall +PlugClean! +qa

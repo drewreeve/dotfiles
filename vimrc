@@ -213,6 +213,29 @@ if has("nvim")
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
+" ----------------------------------------------------------------------------
+" True Color stuff
+" ----------------------------------------------------------------------------
+if filereadable($HOME . "/.true_color")
+  " In nvim just set termguicolors and we're good to go
+  if has("nvim")
+    if has('termguicolors')
+      set termguicolors
+    endif
+  else
+    if has('termguicolors')
+      set termguicolors
+
+      " Vim sets these automatically in xterm* but tmux $TERM is now set to
+      " screen* as recommended by the author. Thus we have to fix that here.
+      if &term =~# 'screen-256color'
+        let &t_8f="\e[38;2;%ld;%ld;%ldm"
+        let &t_8b="\e[48;2;%ld;%ld;%ldm"
+      endif
+    endif
+  endif
+endif
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source $HOME/.vimrc.local
