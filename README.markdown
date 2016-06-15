@@ -14,7 +14,8 @@ Installation
 Notes
 -----
 
-**True color**
+##### TrueColor
+
 Rather than trying to detect if tmux, neovim, vim etc support true color I opted
 to have a file in my `$HOME` directory called `.true_color`. If that is present
 then it's assumed your environment supports true color and all the relevant
