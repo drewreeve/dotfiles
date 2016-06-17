@@ -35,3 +35,6 @@ _load_settings $HOME/.zsh
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# Load and run compinit
+autoload -Uz compinit && compinit -i

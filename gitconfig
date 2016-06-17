@@ -10,6 +10,8 @@
   trust = "!mkdir -p .git/safe"
   st = status -sb
   lg = log --graph --oneline --decorate
+  newbranch = "!f(){ git co -B ${1} && git push -u origin ${1}; };f"
+  rmbranch = "!f(){ git branch -d ${1} && git push origin --delete ${1}; };f"
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input

@@ -8,8 +8,6 @@ fpath=("/usr/local/share/zsh-completions" $fpath)
 # Remove paths that don't exist
 fpath=($^fpath(N))
 
-autoload -Uz compinit && compinit -i
-
 #
 # Options
 #
