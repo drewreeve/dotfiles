@@ -126,11 +126,15 @@ endif
 nnoremap <silent> <c-p> :GFiles -co --exclude-standard<cr>
 nnoremap <silent> <Leader>f :Files<cr>
 nnoremap <silent> <Leader>ag :Ag<cr>
+nnoremap <silent> <Leader>b  :Buffers<CR>
 
 " Use The Silver Searcher  https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
+
+" grep word under cursor
+nnoremap K :set nois<CR> :Ag <C-R><C-W><CR>
 
 " ----------------------------------------------------------------------------
 " Status line
@@ -201,9 +205,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-
-" grep word under cursor
-nnoremap K :set nois<CR> :Ag <C-R><C-W><CR>
 
 " ----------------------------------------------------------------------------
 " Additional Nvim Settings
