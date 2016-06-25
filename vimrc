@@ -122,8 +122,13 @@ if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
 
-" Replicate default behaviour of ctrlp
-nnoremap <silent> <c-p> :GFiles -co --exclude-standard<cr>
+if executable('ag')
+  let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  nnoremap <silent> <c-p> :Files<cr>
+else
+  nnoremap <silent> <c-p> :GFiles -co --exclude-standard<cr>
+endif
+
 nnoremap <silent> <Leader>f :Files<cr>
 nnoremap <silent> <Leader>ag :Ag<cr>
 nnoremap <silent> <Leader>b  :Buffers<CR>
