@@ -1,3 +1,8 @@
+# load custom functions
+for function in ~/.zsh/functions/*; do
+  source $function
+done
+
 # Source files from specified directory
 # Checks for pre & post directories and loads them in the correct order
 
@@ -31,7 +36,7 @@ _load_settings() {
 }
 
 # Load additional files from ~/.zsh
-_load_settings $HOME/.zsh
+_load_settings $HOME/.zsh/configs
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
