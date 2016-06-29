@@ -42,7 +42,7 @@ set autoread
 set nofoldenable
 set ttyfast
 set lazyredraw " helps with performance on my aging iMac
-set wildmode=longest,list
+set wildmode=list:longest,list:full
 set wildmenu " make tab completion for files/buffers act like bash
 
 " Display extra whitespace
