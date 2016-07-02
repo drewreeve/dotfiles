@@ -11,7 +11,6 @@ typeset -gU cdpath fpath mailpath path
 # using a package manager. It'll get removed next if it doesn't exist.
 path=(
   $HOME/bin
-  $HOME/.rbenv/bin
   /usr/local/{bin,sbin}
   $path
 )
