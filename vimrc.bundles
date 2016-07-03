@@ -24,7 +24,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'morhetz/gruvbox'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc' }
 Plug 'junegunn/fzf.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
