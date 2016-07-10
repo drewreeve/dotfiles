@@ -9,15 +9,30 @@ autoload -Uz vcs_info
 
 add-zsh-hook precmd vcs_info
 
+# vcs_info:
+# %a => current action (rebase/merge etc)
+# %b => current branch
+# %c => string from `stagedstr` if there are staged changes
+# %i => current revision number/identifier
+# %u => string from `unstagedstr` if there are unstaged changes
+
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' get-revision true
-zstyle ':vcs_info:*' formats '%F{green}%b%f:%.8i%f%c%u'
-zstyle ':vcs_info:git*' formats '%F{green}%b%f%c%u'
-zstyle ':vcs_info:*' actionformats '%F{green}%b%f|%F{red}%a%f:%.8i%f%c%u'
+zstyle ':vcs_info:*' formats '%F{green}%b%f:%.8i%f %c%u'
+zstyle ':vcs_info:git*' formats '%F{green}%b%f %c%u'
+zstyle ':vcs_info:*' actionformats '%F{green}%b%f|%F{red}%a%f:%.8i%f %c%u'
 zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
 zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked
+
+# prompt:
+# %F => color dict
+# %f => reset color
+# %m => shortname host
+# %n => username
+# %~ => current path
+# %(?..) => prompt conditional - %(condition.true.false)
 
 # Build prompt
 PROMPT=$'\n''%F{blue}%~%f ${vcs_info_msg_0_}%f'  # current path and git info
