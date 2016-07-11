@@ -2,6 +2,8 @@ log
 tags
 tmp
 .git/
+.svn/
+.hg/
 vendor
 bower_components
 node_modules

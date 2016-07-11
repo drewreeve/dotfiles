@@ -1,13 +1,24 @@
+# osx specific
 .DS_Store
-.svn
+
+# vim swap files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+
+# session
+Session.vim
+
+# vim temp files
+.netrwhist
 *~
-*.sw[nop]
+
 .bundle
 vendor/bundle
 .env
 rerun.txt
 *.log
 tmp/**/*
+!tmp/cache/.keep
 tags
 !tags/
 node_modules
