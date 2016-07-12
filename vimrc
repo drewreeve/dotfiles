@@ -106,13 +106,6 @@ augroup vimrcEx
 
   " Unset paste on InsertLeave
   autocmd InsertLeave * silent! set nopaste
-
-  " Automatic rename of tmux window
-  " borrowed from http://github.com/junegunn/dotfiles
-  if exists('$TMUX') && !exists('$NORENAME')
-    autocmd BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-    autocmd VimLeave * call system('tmux set-window automatic-rename on')
-  endif
 augroup END
 
 " ----------------------------------------------------------------------------
