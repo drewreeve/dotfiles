@@ -18,7 +18,8 @@ linting is pretty nice.
 * **git**. Obvious one :) I haven't had to use mercurial or svn in a long time
 so this is the only vcs I customize.
 * **rbenv/chruby**. I use ruby a lot so I have things set up such that rbenv or
-chruby get set up automatically if they're detected in `$PATH`.
+chruby get set up automatically if they're detected in `$PATH`. _Currently if
+both are installed rbenv is favoured._
 
 ## Requirements
 
