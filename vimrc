@@ -87,26 +87,28 @@ colorscheme gruvbox
 " ----------------------------------------------------------------------------
 "  AutoCMD's
 " ----------------------------------------------------------------------------
-augroup vimrcEx
-  autocmd!
+if has("autocmd")
+  augroup vimrcEx
+    autocmd!
 
-  " Jump to last cursor position unless it's invalid or in an event handler
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+    " Jump to last cursor position unless it's invalid or in an event handler
+    autocmd BufReadPost *
+      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
 
-  " Set syntax for certain file types
-  autocmd BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile zprofile set filetype=zsh
+    " Set syntax for certain file types
+    autocmd BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
+    autocmd BufRead,BufNewFile *.md set filetype=markdown
+    autocmd BufRead,BufNewFile zprofile set filetype=zsh
 
- " Run neomake when buffer is saved
-  autocmd BufWritePost * Neomake
+  " Run neomake when buffer is saved
+    autocmd BufWritePost * Neomake
 
-  " Unset paste on InsertLeave
-  autocmd InsertLeave * silent! set nopaste
-augroup END
+    " Unset paste on InsertLeave
+    autocmd InsertLeave * silent! set nopaste
+  augroup END
+endif
 
 " ----------------------------------------------------------------------------
 " Searching & fzf
