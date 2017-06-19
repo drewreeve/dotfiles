@@ -45,6 +45,9 @@ set lazyredraw " helps with performance on my aging iMac
 set wildmode=list:longest,list:full
 set wildmenu " make tab completion for files/buffers act like bash
 
+set ttimeout " time out for key codes
+set ttimeoutlen=250 " wait up to 250ms after Esc for special key
+
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 
