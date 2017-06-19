@@ -215,6 +215,8 @@ nnoremap <c-l> <c-w>l
 if has("nvim")
   " Use different cursor in insert mode
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+  set inccommand=nosplit " Show effects of commands incrementally
 endif
 
 " ----------------------------------------------------------------------------
