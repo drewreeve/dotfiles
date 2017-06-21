@@ -87,6 +87,10 @@ endif
 set background=dark
 colorscheme gruvbox
 
+" Highlight ALE errors/warnings
+hi link ALEErrorSign GruvboxRedSign
+hi link ALEWarningSign GruvboxYellowSign
+
 " ----------------------------------------------------------------------------
 "  AutoCMD's
 " ----------------------------------------------------------------------------
@@ -186,6 +190,13 @@ nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <leader>gt :TestVisit<CR>
 
 let test#strategy = "dispatch"
+
+
+" ----------------------------------------------------------------------------
+" ALE
+" ----------------------------------------------------------------------------
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
 
 " ----------------------------------------------------------------------------
 " Mappings
