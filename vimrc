@@ -1,7 +1,7 @@
 " ----------------------------------------------------------------------------
 "  Load Plugins
 " ----------------------------------------------------------------------------
-if filereadable(expand("~/.vimrc.bundles"))
+if filereadable(expand('~/.vimrc.bundles'))
   source ~/.vimrc.bundles
 endif
 
@@ -16,7 +16,7 @@ endif
 "  Basic Settings
 " ----------------------------------------------------------------------------
 
-let mapleader=","
+let mapleader=','
 
 if has('autocmd')
   filetype plugin indent on
@@ -51,7 +51,7 @@ set ttimeoutlen=250 " wait up to 250ms after Esc for special key
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 
-if v:version > 703 || v:version == 703 && has("patch541")
+if v:version > 703 || v:version == 703 && has('patch541')
   set formatoptions+=j " Delete comment character when joining commented lines
 endif
 
@@ -94,7 +94,7 @@ hi link ALEWarningSign GruvboxYellowSign
 " ----------------------------------------------------------------------------
 "  AutoCMD's
 " ----------------------------------------------------------------------------
-if has("autocmd")
+if has('autocmd')
   augroup vimrcEx
     autocmd!
 
@@ -189,7 +189,7 @@ nnoremap <silent> <Leader>l :TestLast<CR>
 nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <leader>gt :TestVisit<CR>
 
-let test#strategy = "dispatch"
+let g:test#strategy = 'dispatch'
 
 
 " ----------------------------------------------------------------------------
@@ -223,7 +223,7 @@ nnoremap <c-l> <c-w>l
 " ----------------------------------------------------------------------------
 " Additional Nvim Settings
 " ----------------------------------------------------------------------------
-if has("nvim")
+if has('nvim')
   " Use different cursor in insert mode
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
@@ -233,9 +233,9 @@ endif
 " ----------------------------------------------------------------------------
 " True Color stuff
 " ----------------------------------------------------------------------------
-if filereadable($HOME . "/.true_color")
+if filereadable($HOME . '/.true_color')
   " In nvim just set termguicolors and we're good to go
-  if has("nvim")
+  if has('nvim')
     if has('termguicolors')
       set termguicolors
     endif
@@ -254,6 +254,6 @@ if filereadable($HOME . "/.true_color")
 endif
 
 " Local config
-if filereadable($HOME . "/.vimrc.local")
+if filereadable($HOME . '/.vimrc.local')
   source $HOME/.vimrc.local
 endif
