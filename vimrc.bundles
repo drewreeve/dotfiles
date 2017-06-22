@@ -11,7 +11,6 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
-Plug 'slim-template/vim-slim'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-eunuch'
 Plug 'janko-m/vim-test'
@@ -25,7 +24,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 
-if filereadable(expand("~/.vimrc.bundles.local"))
+if filereadable(expand('~/.vimrc.bundles.local'))
   source ~/.vimrc.bundles.local
 endif
 
