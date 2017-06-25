@@ -132,8 +132,6 @@ if executable('rg')
   let g:rg_command='rg --column -F --no-heading --hidden -S --color=always '
   command! -bang -nargs=* Rg call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
-  nnoremap <silent> <Leader>rg :Rg<cr>
-
   set grepprg=rg\ --vimgrep
   set grepformat^=%f:%l:%c:%m
 
@@ -145,7 +143,6 @@ if executable('rg')
 elseif executable('ag')
   let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
   nnoremap <silent> <c-p> :Files<cr>
-  nnoremap <silent> <Leader>ag :Ag<cr>
 
   set grepprg=ag\ --nogroup\ --nocolor
 
