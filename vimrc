@@ -126,7 +126,6 @@ endif
 
 " ripgrep https://github.com/BurntSushi/ripgrep
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND='rg --files --hidden'
   nnoremap <silent> <c-p> :Files<cr>
 
   let g:rg_command='rg --column -F --no-heading --hidden -S --color=always '
@@ -141,7 +140,6 @@ if executable('rg')
 
 " The Silver Searcher  https://github.com/ggreer/the_silver_searcher
 elseif executable('ag')
-  let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
   nnoremap <silent> <c-p> :Files<cr>
 
   set grepprg=ag\ --nogroup\ --nocolor
