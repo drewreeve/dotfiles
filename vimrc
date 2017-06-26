@@ -126,13 +126,11 @@ endif
 
 " ripgrep https://github.com/BurntSushi/ripgrep
 if executable('rg')
-  nnoremap <silent> <c-p> :Files<cr>
-
   let g:rg_command='rg --column -F --no-heading --hidden -S --color=always '
   command! -bang -nargs=* Rg call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
-  set grepprg=rg\ --vimgrep
-  set grepformat^=%f:%l:%c:%m
+  set grepprg=rg\ -H\ --no-heading\ --vimgrep
+  set grepformat=%f:%l:%c:%m
 
   " grep word under cursor
   nnoremap K :set nois<CR> :Rg <C-R><C-W><CR>
@@ -140,9 +138,8 @@ if executable('rg')
 
 " The Silver Searcher  https://github.com/ggreer/the_silver_searcher
 elseif executable('ag')
-  nnoremap <silent> <c-p> :Files<cr>
-
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 
   " grep word under cursor
   nnoremap K :set nois<CR> :Ag <C-R><C-W><CR>
@@ -153,7 +150,9 @@ else
   nnoremap <silent> <c-p> :GFiles -co --exclude-standard<cr>
 endif
 
-nnoremap <silent> <Leader>f :Files<cr>
+" fuzzy search by filename
+nnoremap <silent> <c-p> :Files<cr>
+" fuzzy search buffers
 nnoremap <silent> <Leader>b :Buffers<CR>
 
 " ----------------------------------------------------------------------------
