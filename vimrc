@@ -1,9 +1,25 @@
 " ----------------------------------------------------------------------------
 "  Load Plugins
 " ----------------------------------------------------------------------------
-if filereadable(expand('~/.vimrc.bundles'))
-  source ~/.vimrc.bundles
-endif
+
+" Borrowed from Chris Toomey
+" https://github.com/christoomey/dotfiles/blob/master/vim/vimrc
+function! s:SourceConfigFilesIn(directory)
+  let directory_splat = '~/.vim/' . a:directory . '/*'
+  for config_file in split(glob(directory_splat), '\n')
+    if filereadable(config_file)
+      execute 'source' config_file
+    endif
+  endfor
+endfunction
+
+call plug#begin('~/.vim/bundle')
+  call s:SourceConfigFilesIn('rcplugins')
+
+  if filereadable(expand('~/.vimrc.bundles'))
+    source ~/.vimrc.bundles
+  endif
+call plug#end()
 
 " ----------------------------------------------------------------------------
 " Load builtin matchit.vim unless there's a newer version

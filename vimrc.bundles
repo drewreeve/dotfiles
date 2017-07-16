@@ -1,9 +1,3 @@
-if &compatible
-  set nocompatible
-end
-
-call plug#begin('~/.vim/bundle')
-
 " Define bundles
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
@@ -27,5 +21,3 @@ Plug 'w0rp/ale'
 if filereadable(expand('~/.vimrc.bundles.local'))
   source ~/.vimrc.bundles.local
 endif
-
-call plug#end()
