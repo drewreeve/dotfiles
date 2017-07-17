@@ -16,8 +16,8 @@ endfunction
 call plug#begin('~/.vim/bundle')
   call s:SourceConfigFilesIn('rcplugins')
 
-  if filereadable(expand('~/.vimrc.bundles'))
-    source ~/.vimrc.bundles
+  if filereadable(expand('~/.vimrc.bundles.local'))
+    source ~/.vimrc.bundles.local
   endif
 call plug#end()
 

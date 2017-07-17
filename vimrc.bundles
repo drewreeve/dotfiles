@@ -1,5 +1,0 @@
-" Define bundles
-
-if filereadable(expand('~/.vimrc.bundles.local'))
-  source ~/.vimrc.bundles.local
-endif
