@@ -133,43 +133,6 @@ if has('autocmd')
   augroup END
 endif
 
-" ----------------------------------------------------------------------------
-" Searching & fzf
-" ----------------------------------------------------------------------------
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
-endif
-
-" ripgrep https://github.com/BurntSushi/ripgrep
-if executable('rg')
-  let g:rg_command='rg --column -F --no-heading --hidden -S --color=always '
-  command! -bang -nargs=* Rg call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
-
-  set grepprg=rg\ -H\ --no-heading\ --vimgrep
-  set grepformat=%f:%l:%c:%m
-
-  " grep word under cursor
-  nnoremap K :set nois<CR> :Rg <C-R><C-W><CR>
-
-
-" The Silver Searcher  https://github.com/ggreer/the_silver_searcher
-elseif executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
-
-  " grep word under cursor
-  nnoremap K :set nois<CR> :Ag <C-R><C-W><CR>
-
-
-" Fallback to git ls-files for filename search if nothing else is available
-else
-  nnoremap <silent> <c-p> :GFiles -co --exclude-standard<cr>
-endif
-
-" fuzzy search by filename
-nnoremap <silent> <c-p> :Files<cr>
-" fuzzy search buffers
-nnoremap <silent> <Leader>b :Buffers<CR>
 
 " ----------------------------------------------------------------------------
 " Status line
@@ -200,31 +163,6 @@ endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
 
-" ----------------------------------------------------------------------------
-" Dispatch settings
-" ----------------------------------------------------------------------------
-let g:dispatch_compilers = {
-      \ 'bundle exec': '',
-      \ 'clear;': '',
-      \ 'zeus': ''}
-
-" ----------------------------------------------------------------------------
-" Vim-test
-" ----------------------------------------------------------------------------
-nnoremap <silent> <Leader>t :TestFile<CR>
-nnoremap <silent> <Leader>s :TestNearest<CR>
-nnoremap <silent> <Leader>l :TestLast<CR>
-nnoremap <silent> <Leader>a :TestSuite<CR>
-nnoremap <silent> <leader>gt :TestVisit<CR>
-
-let g:test#strategy = 'dispatch'
-
-
-" ----------------------------------------------------------------------------
-" ALE
-" ----------------------------------------------------------------------------
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
 
 " ----------------------------------------------------------------------------
 " Mappings

@@ -1,0 +1,13 @@
+" Test - Run your tests at the speed of thought
+
+Plug 'janko-m/vim-test'
+
+nnoremap <silent> <Leader>t :TestFile<CR>
+nnoremap <silent> <Leader>s :TestNearest<CR>
+nnoremap <silent> <Leader>l :TestLast<CR>
+nnoremap <silent> <Leader>a :TestSuite<CR>
+nnoremap <silent> <leader>gt :TestVisit<CR>
+
+let g:test#strategy = 'dispatch'
+
+" vim:ft=vim

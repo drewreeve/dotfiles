@@ -1,0 +1,5 @@
+" Mkdir - Automatically create intermediate directories if needed
+
+Plug 'pbrisbin/vim-mkdir'
+
+" vim:ft=vim

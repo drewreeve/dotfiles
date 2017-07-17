@@ -1,0 +1,5 @@
+" Eunuch - Helpers for UNIX
+
+Plug 'tpope/vim-eunuch'
+
+" vim:ft=vim

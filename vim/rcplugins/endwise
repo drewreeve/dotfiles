@@ -1,0 +1,5 @@
+" Endwise - wisely 'end' if/do/def structures
+
+Plug 'tpope/vim-endwise'
+
+" vim:ft=vim

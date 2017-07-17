@@ -1,0 +1,10 @@
+" Dispatch - asynchronous build and test dispatcher
+
+Plug 'tpope/vim-dispatch'
+
+let g:dispatch_compilers = {
+      \ 'bundle exec': '',
+      \ 'clear;': '',
+      \ 'zeus': ''}
+
+" vim:ft=vim

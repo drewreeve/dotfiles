@@ -1,0 +1,5 @@
+" Javascript - JS syntax and indent settings
+
+Plug 'pangloss/vim-javascript'
+
+" vim:ft=vim
