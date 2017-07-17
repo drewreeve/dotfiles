@@ -125,9 +125,6 @@ if has('autocmd')
     autocmd BufRead,BufNewFile *.md set filetype=markdown
     autocmd BufRead,BufNewFile zprofile set filetype=zsh
 
-  " Run ale when buffer is saved
-    autocmd BufWritePost * call ale#Lint()
-
     " Unset paste on InsertLeave
     autocmd InsertLeave * silent! set nopaste
   augroup END
