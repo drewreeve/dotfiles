@@ -2,11 +2,8 @@
 # Set completion options
 #
 
-# Add zsh-completions from homebrew to path
-fpath=("/usr/local/share/zsh-completions" $fpath)
-
-# Remove paths that don't exist
-fpath=($^fpath(N))
+# Add zsh-completions from homebrew to fpath if available
+fpath=(/usr/local/share/zsh-completions(N) $fpath)
 
 #
 # Options
@@ -14,6 +11,9 @@ fpath=($^fpath(N))
 
 setopt ALWAYS_TO_END # Move cursor to end of completed word
 setopt COMPLETE_IN_WORD # Complete a word from either end
+
+# Load and run compinit
+autoload -Uz compinit && compinit -i
 
 # Cache completions
 zstyle ':completion::complete:*' use-cache on
