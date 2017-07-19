@@ -4,3 +4,5 @@ vim/autoload
 vim/bundle
 vim/init.vim
 vim/tmp
+vim/swap
+vim/undo

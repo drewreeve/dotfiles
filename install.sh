@@ -22,11 +22,6 @@ mkdir -p $HOME/.config
 ln -sfnv $HOME/.vim $HOME/.config/nvim
 ln -sfnv $HOME/.vimrc $HOME/.config/nvim/init.vim
 
-if [ ! -e $HOME/.vim/tmp ]; then
-  echo "Creating ~/.vim/tmp folder"
-  mkdir -p $HOME/.vim/tmp
-fi
-
 if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
   curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -86,8 +86,11 @@ set expandtab
 set shiftround
 
 " Store temporary files in a central spot
-set backupdir=~/.vim/tmp//,~/tmp//,/tmp//
-set directory=~/.vim/tmp//,~/tmp//,/tmp//
+let s:dir = '~/.vim'
+let &directory = expand(s:dir, 1).'/swap//,'.&directory
+if has('persistent_undo')
+  let &undodir = expand(s:dir, 1).'/undo//,'.&undodir
+endif
 
 " Autocomplete dictionary words if spell check is on
 set complete+=kspell
