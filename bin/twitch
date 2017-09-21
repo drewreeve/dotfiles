@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+# Just a wrapper around mpv to open twitch streams
+# Usage: twitch USERNAME
+
+mpv --really-quiet "https://twitch.tv/$@" &!
