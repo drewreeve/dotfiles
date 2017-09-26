@@ -1,8 +1,8 @@
 bin/mate
 bin/diff-highlight
-vim/autoload
-vim/bundle
-vim/init.vim
-vim/tmp
-vim/swap
-vim/undo
+vim/.vim/autoload
+vim/.vim/bundle
+vim/.vim/init.vim
+vim/.vim/tmp
+vim/.vim/swap
+vim/.vim/undo
