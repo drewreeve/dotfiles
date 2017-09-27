@@ -1,6 +1,7 @@
 # List of folders that won't be stowed
 EXCLUDE=termsupport/ bin/
 PACKAGES=$(filter-out $(EXCLUDE),$(sort $(dir $(wildcard */))))
+ASDF_DIR=~/.asdf
 
 default: install
 
@@ -31,5 +32,15 @@ vim_plugins:
 	@vim +PlugInstall +PlugClean! +qa
 	@echo "Vim plugins installed..."
 
-install: dependencies symlink link_bin vim_plugins
+# Set up asdf version manager
+# https://github.com/asdf-vm/asdf
+asdf: | $(ASDF_DIR)
+
+$(ASDF_DIR):
+	@git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+	@git -C ~/.asdf checkout `git -C ~/.asdf tag | sort -V | tail -1`
+	@~/.asdf/bin/asdf plugin-add ruby
+	@~/.asdf/bin/asdf plugin-add nodejs
+
+install: dependencies symlink link_bin vim_plugins asdf
 	@echo "Dotfiles installed!"
