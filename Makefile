@@ -44,3 +44,11 @@ $(ASDF_DIR):
 
 install: dependencies symlink link_bin vim_plugins asdf
 	@echo "Dotfiles installed!"
+
+# Maintenance
+
+print-dead:
+	find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
+
+clean-dead:
+	find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -delete
