@@ -5,22 +5,6 @@ things a lot so I tend to update them pretty frequently.
 
 ![screenshot](http://imgh.us/dotfiles.png)
 
-## Features
-
-* **Zsh**. I use zshell but without any frameworks like prezto or ohmyzsh
-(although I've certainly borrowed snippets from both at some point). I also
-have my prompt setup to display useful git information (current branch,
-unstaged files etc).
-* **vim/neovim**. My editor of choice. I used textmate for a long time before I
-made the switch but now I wouldn't be without it. I'm currently favouring neovim 
-as my aging iMac seems to handle running it a bit better. That and the async
-linting is pretty nice.
-* **git**. Obvious one :) I haven't had to use mercurial or svn in a long time
-so this is the only vcs I customize.
-* **rbenv/chruby**. I use ruby a lot so I have things set up such that rbenv or
-chruby get set up automatically if they're detected in `$PATH`. _Currently if
-both are installed rbenv is favoured._
-
 ## Requirements
 
 Set zsh as your login shell:
@@ -29,14 +13,16 @@ Set zsh as your login shell:
 
 ## Installation
 
-The install script overwrites any pre-existing dotfiles with symlinks as needed
-so be sure to make copies first. That or rename them to `~/.filename.local` as
-most of the files look for a `.local` variant for machine specific overrides.
-As well as symlinking the files it also fires up vim and installs all of the
-plugins in [vimrc.bundles](https://github.com/drewreeve/dotfiles/blob/master/vimrc.bundles)
+    git clone https://github.com/drewreeve/dotfiles.git ~/.dotfiles
+    cd ~/.dotfiles
+    make
 
-    git clone git://github.com/drewreeve/dotfiles.git ~/.dotfiles
-    ~/.dotfiles/install.sh
+The makefile by default will do the following:
+
+* Install [Stow](https://www.gnu.org/software/stow/) via brew/apt/pacman
+* Stow (symlink) everything into **~/** (it won't replace existing files)
+* Install [vim-plug](https://github.com/junegunn/vim-plug) and a [selection of plugins](https://github.com/drewreeve/dotfiles/tree/master/vim/.vim/rcplugins)
+* Install [asdf](https://github.com/asdf-vm/asdf) along with the ruby and nodejs plugins
 
 ## Notes
 
