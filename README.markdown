@@ -13,7 +13,7 @@ Set zsh as your login shell:
 
 ## Installation
 
-    git clone https://github.com/drewreeve/dotfiles.git ~/.dotfiles
+    git clone --recursive https://github.com/drewreeve/dotfiles.git ~/.dotfiles
     cd ~/.dotfiles
     make
 
