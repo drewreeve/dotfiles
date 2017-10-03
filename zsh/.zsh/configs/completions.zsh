@@ -1,5 +1,8 @@
 #
 # Set completion options
+# Lots of stuff here is borrowed from
+# ohmyzsh - https://github.com/robbyrussell/oh-my-zsh
+# and prezto - https://github.com/sorin-ionescu/prezto
 #
 
 # Add zsh-completions from homebrew to fpath if available
