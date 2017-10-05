@@ -41,6 +41,8 @@ $(ASDF_DIR):
 	@git -C ~/.asdf checkout `git -C ~/.asdf tag | sort -V | tail -1`
 	@~/.asdf/bin/asdf plugin-add ruby
 	@~/.asdf/bin/asdf plugin-add nodejs
+	@~/.asdf/bin/asdf plugin-add erlang
+	@~/.asdf/bin/asdf plugin-add elixir
 
 install: dependencies symlink link_bin vim_plugins asdf
 	@echo "Dotfiles installed!"
