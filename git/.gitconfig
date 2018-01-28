@@ -25,3 +25,5 @@
   autocorrect = 0
 [rebase]
   autosquash = true
+[diff]
+  colorMoved = zebra
