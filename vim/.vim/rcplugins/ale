@@ -1,8 +1,0 @@
-" Ale - Asynchronous Lint Engine
-
-Plug 'w0rp/ale'
-
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-
-" vim:ft=vim

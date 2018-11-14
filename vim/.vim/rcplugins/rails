@@ -1,5 +1,0 @@
-" Rails - Ruby on Rails power tools
-
-Plug 'tpope/vim-rails'
-
-" vim:ft=vim

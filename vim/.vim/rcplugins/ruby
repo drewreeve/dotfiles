@@ -1,5 +1,0 @@
-" Ruby - More up to date highlighting/settings for ruby filetypes
-
-Plug 'vim-ruby/vim-ruby'
-
-" vim:ft=vim

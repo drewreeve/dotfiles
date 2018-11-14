@@ -1,5 +1,0 @@
-" Elixir - Elixir language support for vim
-
-Plug 'elixir-lang/vim-elixir'
-
-" vim:ft=vim
