@@ -16,10 +16,12 @@ setopt ALWAYS_TO_END # Move cursor to end of completed word
 setopt COMPLETE_IN_WORD # Complete a word from either end
 
 # Load and run compinit
-autoload -Uz compinit && compinit -i
-
-# Cache completions
-zstyle ':completion::complete:*' use-cache on
+autoload -Uz compinit
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
+  compinit -d $HOME/.zcompdump;
+else
+  compinit -C;
+fi;
 
 # Case insensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
