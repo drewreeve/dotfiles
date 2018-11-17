@@ -230,6 +230,22 @@ colorscheme gruvbox
 " }}}
 
 " ============================================================================
+" Nvim settings {{{
+" ============================================================================
+
+if has('nvim')
+  " Use different cursor in insert mode
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+  " Show effects of commands incrementally
+  set inccommand=nosplit
+
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+endif
+
+" }}}
+
+" ============================================================================
 " Local config
 " ============================================================================
 
