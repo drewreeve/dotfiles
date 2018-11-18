@@ -1,6 +1,29 @@
 " vim: foldmethod=marker foldlevel=1
 
 " ============================================================================
+" Plugin Block  {{{
+" ============================================================================
+
+call plug#begin('~/.vim/bundle')
+  Plug 'w0rp/ale'
+  Plug 'tpope/vim-dispatch'
+  Plug 'elixir-lang/vim-elixir'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-fugitive'
+  Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
+  Plug 'junegunn/fzf.vim'
+  Plug 'morhetz/gruvbox'
+  Plug 'pangloss/vim-javascript'
+  Plug 'pbrisbin/vim-mkdir'
+  Plug 'tpope/vim-rails'
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'tpope/vim-surround'
+  Plug 'janko-m/vim-test'
+call plug#end()
+" }}}
+
+" ============================================================================
 " General vim settings {{{
 " ============================================================================
 
@@ -117,11 +140,12 @@ if has('autocmd')
   augroup vimrcEx
     autocmd!
 
-    " Jump to last cursor position unless it's invalid or in an event handler
+    " Jump to last cursor position unless it's invalid, in an event handler
+    " or for commit messages (taken from $VIMRUNTIME/defaults.vim)
     autocmd BufReadPost *
-      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+      \ |   exe "normal! g`\""
+      \ | endif
 
     " Set syntax for certain file types
     autocmd BufRead,BufNewFile zprofile set filetype=zsh
@@ -130,29 +154,6 @@ if has('autocmd')
     autocmd InsertLeave * silent! set nopaste
   augroup END
 endif
-" }}}
-
-" ============================================================================
-" Plugins {{{
-" ============================================================================
-
-call plug#begin('~/.vim/bundle')
-  Plug 'w0rp/ale'
-  Plug 'tpope/vim-dispatch'
-  Plug 'elixir-lang/vim-elixir'
-  Plug 'tpope/vim-endwise'
-  Plug 'tpope/vim-eunuch'
-  Plug 'tpope/vim-fugitive'
-  Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
-  Plug 'junegunn/fzf.vim'
-  Plug 'morhetz/gruvbox'
-  Plug 'pangloss/vim-javascript'
-  Plug 'pbrisbin/vim-mkdir'
-  Plug 'tpope/vim-rails'
-  Plug 'vim-ruby/vim-ruby'
-  Plug 'tpope/vim-surround'
-  Plug 'janko-m/vim-test'
-call plug#end()
 " }}}
 
 " ============================================================================
