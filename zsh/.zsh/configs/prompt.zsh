@@ -22,11 +22,13 @@ zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*' formats '%F{green}%b%f:%.8i%f %c%u'
 zstyle ':vcs_info:git*' formats '%F{green}%b%f %c%u'
 zstyle ':vcs_info:*' actionformats '%F{green}%b%f|%F{red}%a%f:%.8i%f %c%u'
-zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
-zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
+zstyle ':vcs_info:*' stagedstr '%B%F{yellow}+%f%b'
+zstyle ':vcs_info:*' unstagedstr '%B%F{red}!%f%b'
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked
 
 # prompt:
+# %B => bold
+# %b => unbold
 # %F => color dict
 # %f => reset color
 # %m => shortname host
@@ -45,6 +47,6 @@ PROMPT+=$'\n'"%(?.%f.%F{red})%#%f " # red prompt if non zero exit code
 # Append ? to vcs info if there are untracked files
 function +vi-git-untracked() {
   if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
-    hook_com[unstaged]+="%F{red}?%f"
+    hook_com[unstaged]+="%B%F{red}?%f%b"
   fi
 }
