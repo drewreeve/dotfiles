@@ -20,6 +20,11 @@ call plug#begin('~/.vim/bundle')
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-surround'
   Plug 'janko-m/vim-test'
+
+  " Local config
+  if filereadable(expand('~/.vim.plugins.local'))
+    source ~/.vim.plugins.local
+  endif
 call plug#end()
 " }}}
 
