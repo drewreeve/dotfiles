@@ -1,6 +1,9 @@
 #!/bin/sh
 
-if [ "${TERM%%-*}" = "screen" ]; then
+# Don't bother overriding any colors if truecolor is supported
+if [ "$COLORTERM" = truecolor ] || [ "$COLORTERM" = 24bit ]; then
+  return
+elif [ "${TERM%%-*}" = "screen" ]; then
   if [ -n "$TMUX" ]; then
     printf "\033Ptmux;\033\033]4;236;rgb:32/30/2f\007\033\\"
     printf "\033Ptmux;\033\033]4;234;rgb:1d/20/21\007\033\\"
@@ -81,7 +84,6 @@ elif [ "$TERM" != "linux" ] && [ "$TERM" != "vt100" ] && [ "$TERM" != "vt220" ];
 
   printf "\033]4;236;rgb:32/30/2f\033\\"
   printf "\033]4;234;rgb:1d/20/21\033\\"
-
   printf "\033]4;235;rgb:28/28/28\033\\"
   printf "\033]4;237;rgb:3c/38/36\033\\"
   printf "\033]4;239;rgb:50/49/45\033\\"
