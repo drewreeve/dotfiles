@@ -20,11 +20,18 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*' formats '%F{green}%b%f:%.8i%f %c%u'
-zstyle ':vcs_info:git*' formats '%F{green}%b%f %c%u'
+zstyle ':vcs_info:git*' formats '%F{magenta}%b%f %c%u'
 zstyle ':vcs_info:*' actionformats '%F{green}%b%f|%F{red}%a%f:%.8i%f %c%u'
-zstyle ':vcs_info:*' stagedstr '%B%F{yellow}+%f%b'
-zstyle ':vcs_info:*' unstagedstr '%B%F{red}!%f%b'
+zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked
+
+# Append ? to vcs info if there are untracked files
+function +vi-git-untracked() {
+  if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
+    hook_com[unstaged]+="%F{red}?%f"
+  fi
+}
 
 # prompt:
 # %B => bold
@@ -36,17 +43,17 @@ zstyle ':vcs_info:git+set-message:*' hooks git-untracked
 # %~ => current path
 # %(?..) => prompt conditional - %(condition.true.false)
 
-# Build prompt
-PROMPT=$'\n''%F{blue}%~%f ${vcs_info_msg_0_}%f'  # current path and git info
+prompt_simples_setup() {
+  prompt=$'\n''%B'
 
-# show username@host if logged in via ssh
-[[ "$SSH_CONNECTION" != '' ]] && PROMPT+=" %F{242}%n@%m%f"
-
-PROMPT+=$'\n'"%(?.%f.%F{red})%#%f " # red prompt if non zero exit code
-
-# Append ? to vcs info if there are untracked files
-function +vi-git-untracked() {
-  if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
-    hook_com[unstaged]+="%B%F{red}?%f%b"
+  # If this is an ssh connection show user@hostname
+  if [[ -n $SSH_CONNECTION ]]; then
+    prompt+='%F{yellow}%n%f@%F{green}%m%f: '
   fi
+
+  prompt+='%F{cyan}%~%f '
+  prompt+='${vcs_info_msg_0_}'          # git info
+  prompt+=$'\n'"%(?.%f.%F{red})%#%f%b " # red prompt if non zero exit code
 }
+
+prompt_simples_setup "$@"
