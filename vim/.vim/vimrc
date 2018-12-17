@@ -238,7 +238,7 @@ if ($COLORTERM ==? '24bit') || ($COLORTERM ==? 'truecolor')
  " automatically when $TERM is xterm but tmux sets it to screen-256color so
  " we need to do it manually.
   if !has('nvim')
-    if &term =~# 'screen-256color'
+    if &term =~# 'tmux-256color'
       let &t_8f="\<ESC>[38;2;%lu;%lu;%lum"
       let &t_8b="\<ESC>[48;2;%lu;%lu;%lum"
     endif

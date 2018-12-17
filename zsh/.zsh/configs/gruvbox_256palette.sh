@@ -3,7 +3,7 @@
 # Don't bother overriding any colors if truecolor is supported
 if [ "$COLORTERM" = truecolor ] || [ "$COLORTERM" = 24bit ]; then
   return
-elif [ "${TERM%%-*}" = "screen" ]; then
+elif [ "${TERM%%-*}" = "screen" ]  || [ "${TERM%%-*}" = "tmux" ]; then
   if [ -n "$TMUX" ]; then
     printf "\033Ptmux;\033\033]4;236;rgb:32/30/2f\007\033\\"
     printf "\033Ptmux;\033\033]4;234;rgb:1d/20/21\007\033\\"
