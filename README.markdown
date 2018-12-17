@@ -3,7 +3,7 @@
 My collection of dotfiles for all the apps I use. I like to experiment with
 things a lot so I tend to update them pretty frequently.
 
-![screenshot](http://imgh.us/dotfiles.png)
+![screenshot](/screenshot.png?raw=true)
 
 ## Requirements
 
@@ -32,7 +32,13 @@ I use [gruvbox](https://github.com/morhetz/gruvbox) in vim and in my terminal.
 You can find gruvbox colors for most terminals/apps in the [gruvbox-contrib](https://github.com/morhetz/gruvbox-contrib) repo.
 
 #### Font
-I use [Fira Mono](https://github.com/mozilla/Fira) a great open source font from mozilla.
+The font in the screenshot is [Iosevka
+Term](https://github.com/be5invis/Iosevka) which is what I'm using at the
+moment.
+
+Some other good fonts I like are:
+* [Fira Mono](https://github.com/mozilla/Fira)
+* [IBM Plex Mono](https://github.com/IBM/plex)
 
 
 ## Inspiration
