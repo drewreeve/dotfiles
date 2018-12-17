@@ -26,17 +26,6 @@ The makefile by default will do the following:
 
 ## Notes
 
-#### TrueColor
-
-I don't know of a way to check if a terminal app supports true color or not. So
-instead, if your terminal supports truecolor you can create an empty
-`.true_color` file in your home directory:
-
-    touch ~/.true_color
-
-Then all of the relevant options in neovim/vim/tmux are set. You'll need tmux
-2.1+ and neovim or a recent version of vim for full support.
-
 #### Colorscheme
 
 I use [gruvbox](https://github.com/morhetz/gruvbox) in vim and in my terminal.
