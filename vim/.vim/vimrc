@@ -231,17 +231,15 @@ set statusline+=%{LinterStatus()}\    " Errors/warnings from Ale
 
 " Colors
 " -----------
-if ($COLORTERM ==? '24bit') || ($COLORTERM ==? 'truecolor')
-  set termguicolors
+set termguicolors " True color in vim 8 and neovim
 
- " Fix truecolor in vim inside tmux. The following options get set
- " automatically when $TERM is xterm but tmux sets it to screen-256color so
- " we need to do it manually.
-  if !has('nvim')
-    if &term =~# 'tmux-256color'
-      let &t_8f="\<ESC>[38;2;%lu;%lu;%lum"
-      let &t_8b="\<ESC>[48;2;%lu;%lu;%lum"
-    endif
+" Fix truecolor in vim inside tmux. The following options get set
+" automatically when $TERM is xterm but our tmux sets it to tmux-256color so
+" we need to do it manually.
+if !has('nvim')
+  if &term =~# 'tmux-256color'
+    let &t_8f="\<ESC>[38;2;%lu;%lu;%lum"
+    let &t_8b="\<ESC>[48;2;%lu;%lu;%lum"
   endif
 endif
 
