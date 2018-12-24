@@ -36,7 +36,9 @@ _load_settings() {
 }
 
 # Load additional files from ~/.zsh
-_load_settings $HOME/.zsh/configs
+_load_settings "$HOME/.zsh/configs"
 
 # Local config
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+if [[ -s ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
