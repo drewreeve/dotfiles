@@ -5,9 +5,10 @@
 path+=(~/.fzf/bin(N))
 
 if (($+commands[fzf])); then
-  # Use ag for default command if it's available
-  if (($+commands[ag])); then
-    export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  # Use fd for default command if it's available
+  if (($+commands[fd])); then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+    return
   fi
 
   # Use rg for default command if it's available
