@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -eu
+
+[[ -z "$(pgrep i3lock)" ]] || exit
 
 revert() {
   xset dpms 0 0 0
