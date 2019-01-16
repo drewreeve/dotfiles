@@ -1,0 +1,162 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;==========================================================
+
+[colors]
+
+bg = #282828
+bg0 = ${bg}
+bg1 = #3c3836
+bg2 = #504945
+bg3 = #665c54
+bg4 = 7c6f64
+
+fg = #ebdbb2
+fg0 = #fbf1c7
+fg1 = #ebdbb2
+fg2 = #d5c4a1
+fg3 = #bdae93
+fg4 = #a89984
+
+red = #cc241d
+green = #98971a
+yellow = #d79921
+blue = #458588
+purple = #b16286
+aqua = #689d6a
+grey = #a899984
+orange = #d65d0e
+
+brightred = #fb4934
+brightgreen = #b8bb26
+brightyellow = #fabd2f
+brightblue = #83a598
+brightpurple = #d3869b
+brightaqua = #8ec07c
+brightgrey = #928374
+brightorange = #fe8019
+
+[bar/main]
+width  = 100%
+height = 32
+
+padding-right = 1
+
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+font-0 = "SF Mono:pixelsize=12;2"
+font-1 = "SF Mono:style=Bold:pixelsize=12;2"
+font-2 = "Material Icons:size=12;4"
+
+module-margin-left = 1
+module-margin-right = 2
+modules-left = i3
+modules-right = eth alsa date powermenu
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = ${colors.fg}
+label-mode-background = ${colors.grey}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.blue}
+label-focused-underline = ${colors.fg}
+label-focused-padding = 2
+label-focused-font = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+label-unfocused-foreground = ${colors.fg4}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.brightred}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+[module/eth]
+type = internal/network
+interface = enp2s0
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.fg4}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/alsa]
+type = internal/alsa
+
+format-volume-prefix-foreground = ${colors.fg4}
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-volume-foreground = ${colors.fg}
+
+format-muted-prefix = ""
+format-muted-foreground = ${colors.fg4}
+label-muted = sound muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix = 
+format-prefix-foreground = ${colors.fg4}
+format-underline = #0a6cf5
+
+label = %date% %time%
+
+; vim:ft=dosini
