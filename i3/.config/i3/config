@@ -182,5 +182,6 @@ for_window [class="^.*"] border pixel 2
 # Autostart
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wallhaven-589843.jpg
+exec --no-startup-id compton -b
 exec --no-startup-id xss-lock -- $HOME/.config/i3lock/lock.sh &
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
