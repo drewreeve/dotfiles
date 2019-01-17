@@ -33,8 +33,15 @@ fi
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-setxkbmap -option ctrl:nocaps
-xmodmap -e 'clear lock'
-xmodmap -e 'keycode 66 = Hyper_L'
+# Makes caps lock an additional ctrl key
+setxkbmap -option 'caps:ctrl_modifier'
+
+# Map tab to Hyper_L and any keycode to tab so that xcape still works
+xmodmap -e 'keycode 23 = Hyper_L'
+xmodmap -e 'keycode any = Tab'
+
+# Tapping caps lock key acts like Escape key, holding acts like ctrl
+# Tapping tab acts like tab, holding acts like Hyper_L (mod4)
+xcape -t 1000 -e 'Caps_Lock=Escape;Hyper_L=Tab'
 
 exec i3
