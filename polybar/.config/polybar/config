@@ -59,9 +59,9 @@ padding-right = 1
 background = ${colors.bg}
 foreground = ${colors.fg}
 
-font-0 = "SF Mono:pixelsize=12;2"
-font-1 = "SF Mono:style=Bold:pixelsize=12;2"
-font-2 = "Material Icons:size=12;4"
+font-0 = "SF Mono:size=13;3"
+font-1 = "SF Mono:style=Bold:size=13;3"
+font-2 = "Material Icons:size=13;5"
 
 module-margin-left = 1
 module-margin-right = 2
