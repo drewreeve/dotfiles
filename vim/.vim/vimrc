@@ -51,7 +51,6 @@ set incsearch                  " Incremental search
 set hlsearch                   " Highlight matches from previous search
 set ruler                      " Always show cursor position
 set number relativenumber      " Show line numbers relative to cursor
-set numberwidth=5
 set laststatus=2               " Always show statusline
 set nojoinspaces               " Use one space after punctuation
 set history=1000               " Remember more commands/search history
