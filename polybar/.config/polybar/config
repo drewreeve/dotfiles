@@ -54,17 +54,17 @@ brightorange = #fe8019
 width  = 100%
 height = 32
 
-padding-right = 1
+padding-right = 3
 
 background = ${colors.bg}
 foreground = ${colors.fg}
 
-font-0 = "SF Mono:size=13;3"
-font-1 = "SF Mono:style=Bold:size=13;3"
+font-0 = "Roboto:style=Medium:size=13;3"
+font-1 = "Roboto:style=Bold:size=13;3"
 font-2 = "Material Icons:size=13;5"
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 6
 modules-left = i3
 modules-right = eth alsa date powermenu
 
@@ -77,7 +77,7 @@ wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 4
 label-mode-foreground = ${colors.fg}
 label-mode-background = ${colors.grey}
 
@@ -85,12 +85,12 @@ label-mode-background = ${colors.grey}
 label-focused = %index%
 label-focused-background = ${colors.blue}
 label-focused-underline = ${colors.fg}
-label-focused-padding = 2
+label-focused-padding = 4
 label-focused-font = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
-label-unfocused-padding = 2
+label-unfocused-padding = 4
 label-unfocused-foreground = ${colors.fg4}
 
 ; visible = Active workspace on unfocused monitor
