@@ -2,6 +2,8 @@
 # Aliases
 #
 
+alias e=$EDITOR
+
 # ls
 if (($+commands[dircolors])); then
   alias ls='ls --color=auto'
