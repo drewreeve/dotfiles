@@ -1,5 +1,5 @@
 # List of folders that won't be stowed
-EXCLUDE=termsupport/ bin/
+EXCLUDE=termsupport/ bin/ xorg/
 PACKAGES=$(filter-out $(EXCLUDE),$(sort $(dir $(wildcard */))))
 ASDF_DIR=~/.asdf
 
