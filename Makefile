@@ -19,6 +19,7 @@ dependencies:
 symlink:
 	@mkdir -p ~/.vim
 	@mkdir -p ~/.config
+	@mkdir -p ~/.config/gtk-3.0
 	@stow $(PACKAGES)
 
 link_bin:
