@@ -66,7 +66,7 @@ font-2 = "Material Icons:size=13;5"
 module-margin-left = 1
 module-margin-right = 6
 modules-left = i3
-modules-right = eth alsa date powermenu
+modules-right = eth alsa date
 
 [module/i3]
 type = internal/i3
