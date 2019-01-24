@@ -236,7 +236,7 @@ set termguicolors " True color in vim 8 and neovim
 " automatically when $TERM is xterm but our tmux sets it to tmux-256color so
 " we need to do it manually.
 if !has('nvim')
-  if &term =~# 'tmux-256color'
+  if &term ==# 'tmux-256color' || &term ==# 'st-256color'
     let &t_8f="\<ESC>[38;2;%lu;%lu;%lum"
     let &t_8b="\<ESC>[48;2;%lu;%lu;%lum"
   endif
