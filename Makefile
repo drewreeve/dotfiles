@@ -46,3 +46,12 @@ $(ASDF_DIR):
 	@~/.asdf/bin/asdf plugin-add nodejs
 	@~/.asdf/bin/asdf plugin-add erlang
 	@~/.asdf/bin/asdf plugin-add elixir
+
+clean: ## Unstow packages and removes asdf and vim directories
+	@stow -D $(PACKAGES)
+	@echo "Unstowed packages"
+	@rmdir --ignore-fail-on-non-empty ~/.config/gtk-3.0
+	@rm -rf ~/.vim
+	@echo "Removed ~/.vim directory"
+	@rm -rf ~/.asdf
+	@echo "Uninstalled asdf"
