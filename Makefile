@@ -1,41 +1,43 @@
-# List of folders that won't be stowed
-EXCLUDE=termsupport/ bin/ xorg/
+# Things that will never be stowed
+EXCLUDE:=termsupport/ xorg/
 PACKAGES=$(filter-out $(EXCLUDE),$(sort $(dir $(wildcard */))))
 ASDF_DIR=~/.asdf
 
-default: install
+.DEFAULT_GOAL := help
+
+help: ## Self-documented Makefile
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+		| sort \
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+install: stow asdf vim_plugins ## Stow everything and setup asdf and vim
+	@echo "Dotfiles installed!"
+
+stow: install_stow makedirs ## Stow everything
+	@stow $(PACKAGES)
+	@echo "All packages stowed"
+
+# Make these directories to avoid new files in them being added to the git repo
+makedirs:
+	@mkdir -p ~/.vim
+	@mkdir -p ~/.config/gtk-3.0
 
 # Installs stow using whatever package manager is available
-dependencies:
+install_stow:
 	@command -v stow >/dev/null 2>&1 || \
 		brew install stow 2>/dev/null || \
 		sudo apt install -y stow 2>/dev/null || \
 		sudo pacman -S --noconfirm stow >/dev/null || \
 		{ echo >&2 "Please install GNU stow"; exit 1; }
 
-# Places symlinks in ~/
-# Creates ~/.vim and ~/.config folders to avoid new files being added
-# to the dotfiles repo unintentionally
-symlink:
-	@mkdir -p ~/.vim
-	@mkdir -p ~/.config
-	@mkdir -p ~/.config/gtk-3.0
-	@stow $(PACKAGES)
-
-link_bin:
-	@ln -sfnv `pwd`/bin ~/bin
-
-# Installs vim plugins via vim-plug. Downloads vim-plug if unavailable.
-vim_plugins:
+vim_plugins: ## Downloads vim-plug and installs plugins
 	@test -s ~/.vim/autoload/plug.vim || \
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	@vim +PlugInstall +PlugClean! +qa
 	@echo "Vim plugins installed..."
 
-# Set up asdf version manager
-# https://github.com/asdf-vm/asdf
-asdf: | $(ASDF_DIR)
+asdf: | $(ASDF_DIR) ## Install asdf: https://github.com/asdf-vm/asdf
 
 $(ASDF_DIR):
 	@git clone https://github.com/asdf-vm/asdf.git ~/.asdf
@@ -44,14 +46,3 @@ $(ASDF_DIR):
 	@~/.asdf/bin/asdf plugin-add nodejs
 	@~/.asdf/bin/asdf plugin-add erlang
 	@~/.asdf/bin/asdf plugin-add elixir
-
-install: dependencies symlink link_bin vim_plugins asdf
-	@echo "Dotfiles installed!"
-
-# Maintenance
-
-print-dead:
-	find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
-
-clean-dead:
-	find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -delete
