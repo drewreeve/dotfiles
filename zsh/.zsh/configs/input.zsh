@@ -1,12 +1,15 @@
 # Borrowed from zim
 # https://github.com/zimfw/zimfw/blob/master/modules/input/init.zsh
 
+#
+# Editor and input char assignment
+#
+
+
 # Return if requirements are not found.
 if [[ ${TERM} == 'dumb' ]]; then
   return 1
 fi
-
-bindkey -e
 
 # Use human-friendly identifiers.
 zmodload -F zsh/terminfo +b:echoti +p:terminfo
@@ -57,14 +60,43 @@ for key (${(s: :)key_info[ControlRight]}) bindkey ${key} forward-word
 
 [[ -n ${key_info[Insert]} ]] && bindkey ${key_info[Insert]} overwrite-mode
 
+if [[ ${zdouble_dot_expand} == 'true' ]]; then
+  double-dot-expand() {
+    if [[ ${LBUFFER} == *.. ]]; then
+      LBUFFER+='/..'
+    else
+      LBUFFER+='.'
+    fi
+  }
+  zle -N double-dot-expand
+  bindkey '.' double-dot-expand
+fi
+
 [[ -n ${key_info[Backspace]} ]] && bindkey ${key_info[Backspace]} backward-delete-char
 [[ -n ${key_info[Delete]} ]] && bindkey ${key_info[Delete]} delete-char
 
 [[ -n ${key_info[Left]} ]] && bindkey ${key_info[Left]} backward-char
 [[ -n ${key_info[Right]} ]] && bindkey ${key_info[Right]} forward-char
 
+# Expandpace.
+bindkey ' ' magic-space
+
 # Clear
 bindkey "${key_info[Control]}L" clear-screen
+
+# Bind Shift + Tab to go to the previous menu item.
+[[ -n ${key_info[BackTab]} ]] && bindkey ${key_info[BackTab]} reverse-menu-complete
+
+autoload -Uz is-at-least && if ! is-at-least 5.3; then
+  # Redisplay after completing, and avoid blank prompt after <Tab><Tab><Ctrl-C>
+  expand-or-complete-with-redisplay() {
+    print -Pn '...'
+    zle expand-or-complete
+    zle redisplay
+  }
+  zle -N expand-or-complete-with-redisplay
+  bindkey "${key_info[Control]}I" expand-or-complete-with-redisplay
+fi
 
 # Put into application mode and validate ${terminfo}
 zle-line-init() {

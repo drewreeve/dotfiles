@@ -7,6 +7,7 @@ foreach file (
   init.zsh
   exports.zsh
   input.zsh
+  keybinds.zsh
   settings.zsh
   prompt.zsh
   aliases.zsh
