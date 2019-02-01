@@ -25,5 +25,10 @@ alias ppath='echo $PATH | tr -s ":" "\n"'
 # Grep
 alias grep='grep --color=auto'
 
+# Bat https://github.com/sharkdp/bat
+if (($+commands[bat])); then
+  alias cat='bat'
+fi
+
 # Load machine specific aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
