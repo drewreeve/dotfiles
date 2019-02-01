@@ -3,7 +3,6 @@
 #
 
 setopt prompt_subst
-autoload -Uz colors && colors
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
 
