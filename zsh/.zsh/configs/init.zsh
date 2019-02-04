@@ -1,6 +1,8 @@
 # Remove duplicates from path arrays
 typeset -gU cdpath fpath mailpath path
 
+fpath=($fpath $HOME/.zsh/functions)
+
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
 # shell is opened each day. From: http://github.com/sorin-ionescu/prezto
@@ -25,3 +27,9 @@ autoload -Uz colors && colors
 # Use smart URL pasting and escaping.
 autoload -Uz bracketed-paste-url-magic && zle -N bracketed-paste bracketed-paste-url-magic
 autoload -Uz url-quote-magic && zle -N self-insert url-quote-magic
+
+# Initialize prompt system
+autoload -Uz promptinit; promptinit
+
+# Prompt theme
+prompt simples

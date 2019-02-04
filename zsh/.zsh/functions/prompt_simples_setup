@@ -1,0 +1,86 @@
+prompt_simples_zstyles() {
+  # vcs_info:
+  # %a => current action (rebase/merge etc)
+  # %b => current branch
+  # %c => string from `stagedstr` if there are staged changes
+  # %i => current revision number/identifier
+  # %m => A "misc" replacement, the backend decides what it expands to
+  # %u => string from `unstagedstr` if there are unstaged changes
+
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' get-revision true
+  zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f %m%u%c'
+  zstyle ':vcs_info:*' actionformats '%F{magenta}%b|%F{yellow}%a%f %m%u%c'
+  zstyle ':vcs_info:*' stagedstr '%F{green}●%f'
+  zstyle ':vcs_info:*' unstagedstr '%F{yellow}●%f'
+  zstyle ':vcs_info:git+set-message:*' hooks git-untracked git-updown
+}
+
++vi-git-untracked () {
+  # Set `misc` expando to an empty string as git puts patch info into it
+  # which we don't use
+  hook_com[misc]=''
+  if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
+    hook_com[misc]+="%F{red}●%f"
+  fi
+}
+
++vi-git-updown() {
+  git rev-parse @{upstream} >/dev/null 2>&1 || return
+  local -a x; x=( $(git rev-list --left-right --count HEAD...@{upstream} ) )
+
+  # Add a space if files are staged/unstaged so things aren't too squashed
+  #if [[ -n hook_com[staged] ]] || [[ -n hook_com[unstaged] ]]; then
+  if [[ -n $hook_com[misc] || -n $hook_com[unstaged] || -n $hook_com[staged] ]];
+  then
+      hook_com[staged]+=' '
+  fi
+
+  hook_com[staged]+="%F{white}"
+  (( x[2] )) && hook_com[staged]+="⇣$x[2]"
+  (( x[1] )) && hook_com[staged]+="⇡$x[1]"
+  hook_com[staged]+="%f"
+  return 0
+}
+
+prompt_simples_precmd() {
+  vcs_info
+}
+
+prompt_simples_setup() {
+  setopt prompt_subst
+
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  add-zsh-hook precmd prompt_simples_precmd
+
+  prompt_simples_zstyles
+
+  # prompt:
+  # %B => bold
+  # %b => unbold
+  # %F => color dict
+  # %f => reset color
+  # %m => shortname host
+  # %n => username
+  # %~ => current path
+  # %(?..) => prompt conditional - %(condition.true.false)
+
+  prompt=$prompt_newline'%B'
+
+  # If this is an ssh connection show user@hostname
+  if [[ -n $SSH_CONNECTION ]]; then
+    prompt+='%F{yellow}%n%f@%F{green}%m%f: '
+  fi
+
+  prompt+='%F{cyan}%~%f '
+  prompt+='${vcs_info_msg_0_}'        # git info
+  prompt+=$prompt_newline
+  prompt+="%(?.%f.%F{red})%#%f%b "    # red prompt if non zero exit code
+}
+
+prompt_simples_setup "$@"
+
+# vim: ft=zsh

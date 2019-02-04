@@ -9,7 +9,6 @@ foreach file (
   input.zsh
   keybinds.zsh
   settings.zsh
-  prompt.zsh
   aliases.zsh
   title.zsh
   autosuggestions.zsh
