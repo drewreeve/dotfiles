@@ -3,14 +3,34 @@
 # https://github.com/zsh-users/zsh-autosuggestions
 # ...........................................................................
 
-pkgpath="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+function() {
+  local pkgpath="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# Prefer arch package if it's available
-if [[ -r $pkgpath ]]; then
-  source $pkgpath
-  return
-fi
+  # Prefer arch package if it's available
+  if [[ -r $pkgpath ]]; then
+    source $pkgpath
+  else
+    if [ -f ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+      source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    fi
+  fi
+}
 
-if [ -f ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+
+#
+# zsh-syntax-highlighting
+# https://github.com/zsh-users/zsh-syntax-highlighting
+# ...........................................................................
+
+function() {
+  local pkgpath="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+  if [[ -r $pkgpath ]]; then
+    source $pkgpath
+  else
+    if [ -f ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ];
+    then
+      source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
+  fi
+}
