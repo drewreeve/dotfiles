@@ -49,7 +49,7 @@ prompt_simples_precmd() {
 }
 
 prompt_simples_setup() {
-  setopt prompt_subst
+  prompt_opts=(subst percent)
 
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
