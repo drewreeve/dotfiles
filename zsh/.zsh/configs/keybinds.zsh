@@ -5,4 +5,4 @@
 # Use emacs mode
 bindkey -e
 
-bindkey "^T" _fzf-file-widget
+bindkey "^T" fzf-file-widget

@@ -1,10 +1,6 @@
-# checkout git commit
-gcoc() {
-  local commits commit
-  commits=$(git log --format="%C(green)%h%C(auto)%d %C(reset)%s" --abbrev-commit --reverse) &&
-  commit=$(echo "$commits" | fzf-tmux --tac +s +m -e --ansi) &&
-  git checkout $(echo "$commit" | awk '{print $1}')
-}
+#
+# FZF
+# ...........................................................................
 
 # CTRL-T - Paste the selected file path(s) into the command line
 # taken from: https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
@@ -31,11 +27,22 @@ __fzfcmd() {
     echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
 }
 
-_fzf-file-widget() {
+fzf-file-widget() {
   LBUFFER="${LBUFFER}$(__fsel)"
   local ret=$?
-  zle redisplay
-  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  zle reset-prompt
   return $ret
 }
-zle     -N   _fzf-file-widget
+zle     -N   fzf-file-widget
+
+
+#
+# Git
+# ...........................................................................
+
+gcoc() {
+  local commits commit
+  commits=$(git log --format="%C(green)%h%C(auto)%d %C(reset)%s" --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf-tmux --tac +s +m -e --ansi) &&
+  git checkout $(echo "$commit" | awk '{print $1}')
+}
