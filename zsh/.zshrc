@@ -11,7 +11,7 @@ foreach file (
   settings.zsh
   aliases.zsh
   title.zsh
-  autosuggestions.zsh
+  plugins.zsh
   fzf.zsh
   asdf.zsh
   trusted_paths.zsh
