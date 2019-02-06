@@ -190,7 +190,13 @@ mode "$mode_power" {
 #}
 
 # Can't have titlebars with i3 gaps
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
+
+# Border tweaks
+# class                 border  bground text    indicator child_border
+client.focused          #458588 #285577 #FFFFFF #D65D0E   #458588
+
+smart_borders on
 
 # Autostart
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
