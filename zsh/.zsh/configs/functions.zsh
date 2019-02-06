@@ -42,7 +42,7 @@ zle     -N   fzf-file-widget
 
 gcoc() {
   local commits commit
-  commits=$(git log --format="%C(green)%h%C(auto)%d %C(reset)%s" --abbrev-commit --reverse) &&
-  commit=$(echo "$commits" | fzf-tmux --tac +s +m -e --ansi) &&
-  git checkout $(echo "$commit" | awk '{print $1}')
+  commits=$(git log --pretty=oneline --abbrev-commit --reverse --color=always) &&
+  commit=$(echo "$commits" | fzf --tac +s +m -e --ansi) &&
+  git checkout $(echo "$commit" | sed "s/ .*//")
 }
