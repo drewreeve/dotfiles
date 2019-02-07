@@ -127,9 +127,6 @@ nnoremap <silent> <leader>c :nohlsearch<CR>
 " insert hashrocket with <c-l>
 imap <c-l> <space>=><space>
 
-" Escape insert mode with jk
-inoremap jk <Esc>
-
 " Switch between last 2 files
 nnoremap <leader><leader> <c-^>
 
