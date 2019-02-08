@@ -17,7 +17,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
   Plug 'junegunn/fzf.vim'
-  Plug 'morhetz/gruvbox'
+  Plug 'drewreeve/gruvbox'
   Plug 'pangloss/vim-javascript'
   Plug 'pbrisbin/vim-mkdir'
   Plug 'tpope/vim-rails'
@@ -247,15 +247,6 @@ let g:gruvbox_italic='1'
 
 set background=dark
 colorscheme gruvbox
-
-" Tweak html highlighting in gruvbox
-" https://github.com/morhetz/gruvbox/pull/198
-hi! link htmlTag GruvboxAquaBold
-hi! link htmlEndTag GruvboxAquaBold
-hi! link htmlTagName GruvboxBlue
-hi! link htmlArg GruvboxOrange
-hi! link htmlSpecialTagName GruvboxBlue
-hi! link htmlSpecialChar GruvboxRed
 
 " Change fzf colors to match gruvbox theme
 let g:fzf_colors = {
