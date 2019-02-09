@@ -189,6 +189,8 @@ mode "$mode_power" {
 #    status_command i3status
 #}
 
+bindsym $mod+Shift+s sticky toggle
+
 # Can't have titlebars with i3 gaps
 for_window [class="^.*"] border pixel 3
 
