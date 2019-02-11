@@ -33,3 +33,7 @@ autoload -Uz promptinit; promptinit
 
 # Prompt theme
 prompt simples
+
+# Specify emacs keymap by default
+# NOTE: This has to be set before input.zsh is loaded
+bindkey -e
