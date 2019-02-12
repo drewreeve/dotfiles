@@ -3,4 +3,8 @@
 # Just a wrapper around mpv to open twitch streams
 # Usage: twitch USERNAME
 
-mpv --really-quiet --interpolation-threshold=0.01 "https://twitch.tv/$1" &
+for channel in "$@"
+do
+  twitch_url="https://twitch.tv/$(basename "$channel")"
+  mpv --really-quiet --interpolation-threshold=0.01 "$twitch_url" &
+done
