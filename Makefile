@@ -13,14 +13,9 @@ help: ## Self-documented Makefile
 install: stow asdf vim_plugins ## Stow everything and setup asdf and vim
 	@echo "Dotfiles installed!"
 
-stow: install_stow makedirs ## Stow everything
-	@stow $(PACKAGES)
+stow: install_stow ## Stow everything
+	@stow --no-folding $(PACKAGES)
 	@echo "All packages stowed"
-
-# Make these directories to avoid new files in them being added to the git repo
-makedirs:
-	@mkdir -p ~/.vim
-	@mkdir -p ~/.config/gtk-3.0
 
 # Installs stow using whatever package manager is available
 install_stow:
