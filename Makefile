@@ -10,7 +10,7 @@ help: ## Self-documented Makefile
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-install: stow asdf vim_plugins ## Stow everything and setup asdf and vim
+install: stow asdf ## Stow everything and setup asdf
 	@echo "Dotfiles installed!"
 
 stow: install_stow ## Stow everything
@@ -24,13 +24,6 @@ install_stow:
 		sudo apt install -y stow 2>/dev/null || \
 		sudo pacman -S --noconfirm stow >/dev/null || \
 		{ echo >&2 "Please install GNU stow"; exit 1; }
-
-vim_plugins: ## Downloads vim-plug and installs plugins
-	@test -s ~/.vim/autoload/plug.vim || \
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	@vim +PlugInstall +PlugClean! +qa
-	@echo "Vim plugins installed..."
 
 asdf: | $(ASDF_DIR) ## Install asdf: https://github.com/asdf-vm/asdf
 
