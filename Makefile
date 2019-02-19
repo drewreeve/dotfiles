@@ -2,6 +2,7 @@
 EXCLUDE:=termsupport/ xorg/
 PACKAGES=$(filter-out $(EXCLUDE),$(sort $(dir $(wildcard */))))
 ASDF_DIR=~/.asdf
+.ONESHELL:
 
 .DEFAULT_GOAL := help
 
@@ -25,15 +26,19 @@ install_stow:
 		sudo pacman -S --noconfirm stow >/dev/null || \
 		{ echo >&2 "Please install GNU stow"; exit 1; }
 
-asdf: | $(ASDF_DIR) ## Install asdf: https://github.com/asdf-vm/asdf
-
-$(ASDF_DIR):
-	@git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-	@git -C ~/.asdf checkout `git -C ~/.asdf tag | sort -V | tail -1`
-	@~/.asdf/bin/asdf plugin-add ruby
-	@~/.asdf/bin/asdf plugin-add nodejs
-	@~/.asdf/bin/asdf plugin-add erlang
-	@~/.asdf/bin/asdf plugin-add elixir
+asdf: ## Install asdf: https://github.com/asdf-vm/asdf
+	@if [ -d ~/.asdf ]; then
+		git -C ~/.asdf fetch --tags
+		git -C ~/.asdf checkout `git -C ~/.asdf tag | sort -V | tail -1`
+		~/.asdf/bin/asdf plugin-update --all
+	else
+		git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+		git -C ~/.asdf checkout `git -C ~/.asdf tag | sort -V | tail -1`
+		~/.asdf/bin/asdf plugin-add ruby
+		~/.asdf/bin/asdf plugin-add nodejs
+		~/.asdf/bin/asdf plugin-add erlang
+		~/.asdf/bin/asdf plugin-add elixir
+	fi
 
 clean: ## Unstow packages and removes asdf and vim directories
 	@stow -D $(PACKAGES)
