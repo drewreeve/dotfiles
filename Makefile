@@ -1,7 +1,6 @@
 # Things that will never be stowed
 EXCLUDE:=termsupport/ xorg/
 PACKAGES=$(filter-out $(EXCLUDE),$(sort $(dir $(wildcard */))))
-ASDF_DIR=~/.asdf
 .ONESHELL:
 
 .DEFAULT_GOAL := help
@@ -11,20 +10,74 @@ help: ## Self-documented Makefile
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-install: stow asdf ## Stow everything and setup asdf
+dependencies: ## Installs a few packages on arch/debian/ubuntu
+	@if [ -f /etc/arch-release ]; then
+		pacman -Qi curl fd git ripgrep stow vim zsh >/dev/null || \
+			sudo pacman -S --needed curl fd git ripgrep stow vim zsh
+	elif [ -x "$$(command -v dpkg)" ]; then
+		dpkg -s curl git-core ripgrep stow vim zsh &>/dev/null || \
+			sudo apt install curl git-core ripgrep stow vim zsh
+	else
+		echo "Not running arch/debian based distro, skipping dependencies..."
+	fi
+
+install: ## Install dotfiles & dependencies
+install: dependencies install-bin install-fontconfig install-git \
+	install-ignore install-mpv install-pgsql install-ruby \
+	install-terminal-settings install-tmux install-vim install-wm-settings \
+	install-X install-zsh asdf
 	@echo "Dotfiles installed!"
 
-stow: install_stow ## Stow everything
-	@stow --no-folding $(PACKAGES)
-	@echo "All packages stowed"
+install-bin: ## Install bin folder
+	@stow -Sv bin
 
-# Installs stow using whatever package manager is available
-install_stow:
-	@command -v stow >/dev/null 2>&1 || \
-		brew install stow 2>/dev/null || \
-		sudo apt install -y stow 2>/dev/null || \
-		sudo pacman -S --noconfirm stow >/dev/null || \
-		{ echo >&2 "Please install GNU stow"; exit 1; }
+install-fontconfig: ## Install font configuration
+	@stow -Sv --no-folding fontconfig
+
+install-git: ## Install git settings
+	@stow -Sv git
+
+install-ignore: ## Install ignore file used by rg and fd
+	@stow -Sv ripgrep
+
+install-mpv: ## Install mpv settings
+	@stow -Sv mpv
+
+install-pgsql: ## Install postgres settings
+	@stow -Sv postgresql
+
+install-ruby: ## Install ruby config files
+	@stow -Sv ruby
+
+install-terminal-settings: ## Install configs for terminal emulators
+	@stow -Sv alacritty kitty tilix
+
+install-tmux: ## Install tmux config
+	@stow -Sv tmux
+
+install-vim: ## Install vim settings/plugins
+	@stow -Sv --no-folding nvim vim
+	@if [ -e ~/.vim/autoload/plug.vim ]; then
+		vim +PlugUpgrade +qa
+	else
+		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	fi
+	vim +PlugUpdate +PlugClean! +qa
+	@echo "Vim plugins updated"
+
+install-wm-settings: ## Install configs for i3, dunst etc on arch linux
+	@if [ -f /etc/arch-release ]; then
+		@stow -Sv --no-folding compton dunst gtk i3 i3lock polybar rofi X
+	else
+		echo "Not running Arch linux, skipping WM settings..."
+	fi
+
+install-X: ## Install Xresources
+	@stow -Sv X
+
+install-zsh:
+	@stow -Sv zsh
 
 asdf: ## Install asdf: https://github.com/asdf-vm/asdf
 	@if [ -d ~/.asdf ]; then
@@ -40,10 +93,12 @@ asdf: ## Install asdf: https://github.com/asdf-vm/asdf
 		~/.asdf/bin/asdf plugin-add elixir
 	fi
 
-clean: ## Unstow packages and removes asdf and vim directories
+clean:
 	@stow -D $(PACKAGES)
 	@echo "Unstowed packages"
 	@rmdir --ignore-fail-on-non-empty ~/.config/gtk-3.0
+	@rm -rf ~/.zsh
+	@echo "Removed ~/.zsh directory"
 	@rm -rf ~/.vim
 	@echo "Removed ~/.vim directory"
 	@rm -rf ~/.asdf
