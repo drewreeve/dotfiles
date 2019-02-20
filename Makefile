@@ -76,7 +76,7 @@ install-wm-settings: ## Install configs for i3, dunst etc on arch linux
 install-X: ## Install Xresources
 	@stow -Sv X
 
-install-zsh:
+install-zsh: ## Install config for Z shell
 	@stow -Sv zsh
 
 asdf: ## Install asdf: https://github.com/asdf-vm/asdf
