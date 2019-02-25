@@ -6,7 +6,7 @@ PACKAGES=$(filter-out $(EXCLUDE),$(sort $(dir $(wildcard */))))
 .DEFAULT_GOAL := help
 
 help: ## Self-documented Makefile
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+	@grep -E '^[a-zA-Z_0-9-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
@@ -92,6 +92,10 @@ asdf: ## Install asdf: https://github.com/asdf-vm/asdf
 		~/.asdf/bin/asdf plugin-add erlang
 		~/.asdf/bin/asdf plugin-add elixir
 	fi
+
+arch-i3-desktop:
+	@pacman -Qi - < arch-i3-deps >/dev/null || \
+		sudo pacman -S --needed - < arch-i3-deps
 
 clean:
 	@stow -D $(PACKAGES)
