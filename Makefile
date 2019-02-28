@@ -28,6 +28,16 @@ install: dependencies install-bin install-fontconfig install-git \
 	install-X install-zsh asdf
 	@echo "Dotfiles installed!"
 
+install-aur-helper: ## Install yay https://github.com/Jguer/yay
+	@test -x /usr/bin/yay
+	@if [[ $$? != 0 ]]; then
+		@echo "Cloning yay..."
+		git clone --quiet https://aur.archlinux.org/yay.git /tmp/yay
+		@echo "Installing yay..."
+		cd /tmp/yay && makepkg -si && cd -
+		@echo "AUR Helper installation. Done."
+	@fi
+
 install-bin: ## Install bin folder
 	@stow -Sv bin
 
@@ -93,9 +103,11 @@ asdf: ## Install asdf: https://github.com/asdf-vm/asdf
 		~/.asdf/bin/asdf plugin-add elixir
 	fi
 
-arch-i3-desktop:
+arch-i3-desktop: install-aur-helper
 	@pacman -Qi - < arch-i3-deps >/dev/null || \
 		sudo pacman -S --needed - < arch-i3-deps
+	@pacman -Qi - < aur-deps >/dev/null || \
+		yay -S --needed - < aur-deps
 
 clean:
 	@stow -D $(PACKAGES)
