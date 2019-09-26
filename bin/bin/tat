@@ -13,7 +13,7 @@ not_in_tmux() {
 }
 
 session_exists() {
-  tmux has-session -t "$session_name"
+  tmux has-session -t "=$session_name"
 }
 
 create_detached_session() {
