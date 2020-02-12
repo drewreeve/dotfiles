@@ -69,6 +69,7 @@ font-1 = "PragmataPro:size=12:style=Bold;1"
 module-margin-left = 1
 module-margin-right = 3
 modules-left = i3
+modules-center = xwindow
 modules-right = alsa eth date
 
 [module/i3]
@@ -110,6 +111,11 @@ label-urgent-padding = 2
 
 ; Separator in between workspaces
 ; label-separator = |
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:45:...%
+format-foreground = ${colors.fg}
 
 [module/eth]
 type = internal/network
