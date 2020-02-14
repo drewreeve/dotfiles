@@ -9,15 +9,19 @@ font:
 
   normal:
     family: monospace
-    #style: Regular
+    style: Regular
 
   bold:
     family: monospace
-    #style: Bold
+    style: Bold
 
   italic:
     family: monospace
-    #style: Italic
+    style: Italic
+
+  bold_italic:
+    family: monospace
+    style: Bold Italic
 
 
 # Background opacity
