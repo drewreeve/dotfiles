@@ -16,6 +16,9 @@ Xft.rgba: rgb
 *.background: #282828
 ! soft contrast: *background: #32302f
 *.foreground: #ebdbb2
+
+*.cursorColor: white
+
 ! Black + DarkGrey
 *.color0:  #282828
 *.color8:  #928374
