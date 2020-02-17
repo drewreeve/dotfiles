@@ -78,7 +78,7 @@ install-vim: ## Install vim settings/plugins
 
 install-wm-settings: ## Install configs for i3, dunst etc on arch linux
 	@if [ -f /etc/arch-release ]; then
-		@stow -Sv --no-folding compton dunst gtk i3 i3lock polybar rofi X
+		@stow -Sv --no-folding picom dunst gtk i3 i3lock polybar rofi X
 	else
 		echo "Not running Arch linux, skipping WM settings..."
 	fi
