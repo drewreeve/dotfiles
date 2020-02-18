@@ -2,7 +2,7 @@ alacritty
 alsa-utils
 bat
 chromium
-compton
+picom
 curl
 dunst
 fd
