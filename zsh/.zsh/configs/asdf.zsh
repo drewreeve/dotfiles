@@ -3,13 +3,15 @@
 
 if [ -d "$HOME/.asdf" ]; then
   source $HOME/.asdf/asdf.sh
-  source $HOME/.asdf/completions/asdf.bash
 fi
 
 # Return if asdf not found
 if (( ! $+commands[asdf])); then
   return 1
 fi
+
+fpath=(${ASDF_DIR}/completions $fpath)
+compinit
 
 # Borrowed from https://github.com/junegunn/fzf/wiki/Examples#asdf
 
