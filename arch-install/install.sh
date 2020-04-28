@@ -23,12 +23,12 @@ create_partitions() {
 create_filesystems() {
   mkfs.fat -F32 -n EFI "${DEVICE}1"
 
-  cryptsetup --type luks1 luksFormat "${DEVICE}2"
-  cryptsetup open "${DEVICE}2" cryptroot
+  cryptsetup luksFormat "${DEVICE}2"
+  cryptsetup open "${DEVICE}2" luks
 
-  mkfs.btrfs -f -L system /dev/mapper/cryptroot
+  mkfs.btrfs -f -L system /dev/mapper/luks
 
-  mount --options="defaults,compress=zstd" /dev/mapper/cryptroot /mnt
+  mount --options="defaults,compress=zstd" /dev/mapper/luks /mnt
 
   btrfs subvolume create "/mnt/${_hostname}"
   btrfs subvolume create "/mnt/${_hostname}/@root"
@@ -44,16 +44,16 @@ create_filesystems() {
 mount_filesystems() {
   local mount_options="defaults,compress=zstd,relatime"
 
-  mount -o "${mount_options},subvol=${_hostname}/@root/live/snapshot" /dev/mapper/cryptroot /mnt
+  mount -o "${mount_options},subvol=${_hostname}/@root/live/snapshot" /dev/mapper/luks /mnt
   mkdir /mnt/home
-  mount -o "${mount_options},subvol=${_hostname}/@home" /dev/mapper/cryptroot /mnt/home
+  mount -o "${mount_options},subvol=${_hostname}/@home" /dev/mapper/luks /mnt/home
   mkdir -p /mnt/var/log
-  mount -o "${mount_options},subvol=${_hostname}/@log" /dev/mapper/cryptroot /mnt/var/log
+  mount -o "${mount_options},subvol=${_hostname}/@log" /dev/mapper/luks /mnt/var/log
   mkdir -p /mnt/var/cache/pacman/pkg
-  mount -o "${mount_options},subvol=${_hostname}/@pacman_cache" /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
+  mount -o "${mount_options},subvol=${_hostname}/@pacman_cache" /dev/mapper/luks /mnt/var/cache/pacman/pkg
 
-  mkdir /mnt/efi
-  mount -o defaults "${DEVICE}1" /mnt/efi
+  mkdir /mnt/boot
+  mount -o defaults "${DEVICE}1" /mnt/boot
 }
 
 install_arch_base() {

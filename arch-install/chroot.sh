@@ -5,7 +5,7 @@ DEVICE=$(cat /device_tmp)
 # Setup localization
 sed -i "s/#en_GB.UTF-8/en_GB.UTF-8/" /etc/locale.gen
 locale-gen
-localectl set-locale LANG=en_GB.UTF-8
+echo 'LANG=en_GB.UTF-8' >> /etc/locale.conf
 
 # Time
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
@@ -27,24 +27,26 @@ while true; do
   fi
 done
 
-dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
-chmod 600 /crypto_keyfile.bin
-chmod 600 /boot/initramfs-linux*
-cryptsetup luksAddKey "${DEVICE}2" /crypto_keyfile.bin
-
 sed -i 's/BINARIES=()/BINARIES=(\/usr\/bin\/btrfs)/' /etc/mkinitcpio.conf
-sed -i 's/FILES=()/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
 sed -i '/\(^HOOKS\)/s/filesystems/encrypt filesystems/' /etc/mkinitcpio.conf
 
 mkinitcpio -p linux
 
-pacman -S --noconfirm grub efibootmgr amd-ucode intel-ucode
-sed -i 's/^#GRUB_ENABLE_CRYPTODISK=y/GRUB_ENABLE_CRYPTODISK=y/' /etc/default/grub
-sed -i 's/GRUB_CMDLINE_LINUX=""//' /etc/default/grub
-echo GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$(blkid "${DEVICE}2" -s UUID -o value)":cryptroot\" >> /etc/default/grub
+pacman -S --noconfirm efibootmgr amd-ucode intel-ucode
 
-grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
+bootctl --path=/boot install
+
+echo "title Arch Linux" >> /boot/loader/entries/arch.conf
+echo "linux /vmlinuz-linux" >> /boot/loader/entries/arch.conf
+echo "initrd /intel-ucode.img" >> /boot/loader/entries/arch.conf
+echo "initrd /initramfs-linux.img" >> /boot/loader/entries/arch.conf
+echo "options cryptdevice=UUID=$(blkid "${DEVICE}2" -s UUID -o value):luks:allow-discards root=/dev/mapper/luks rootflags=subvol=@ rd.luks.options=discard rw" >> /boot/loader/entries/arch.conf
+
+rm /boot/loader/loader.conf
+
+echo "timeout=3" >> /boot/loader/loader.conf
+echo "console-mode=keep" >> /boot/loader/loader.conf
+echo "default arch" >> /boot/loader/loader.conf
 
 mkdir /etc/systemd/system/dhcpcd@.service.d
 cat >> /etc/systemd/system/dhcpcd@.service.d/no-wait.conf <<EOL
@@ -55,3 +57,4 @@ EOL
 systemctl enable dhcpcd
 
 rm /device_tmp
+rm /chroot.sh
