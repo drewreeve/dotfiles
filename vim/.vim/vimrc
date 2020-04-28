@@ -252,7 +252,9 @@ endif
 let g:gruvbox_italic='1'
 
 set background=dark
-colorscheme gruvbox
+if globpath(&runtimepath, 'colors/gruvbox.vim', 1) !=# ''
+  colorscheme gruvbox
+endif
 
 " Change fzf colors to match gruvbox theme
 let g:fzf_colors = {
