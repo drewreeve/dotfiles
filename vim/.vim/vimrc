@@ -202,6 +202,11 @@ nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <leader>gt :TestVisit<CR>
 
 let g:test#strategy = 'dispatch'
+
+" vim-ruby
+" --------
+let g:ruby_indent_block_style = 'do'
+let g:ruby_indent_assignment_style = 'variable'
 " }}}
 
 " ============================================================================
