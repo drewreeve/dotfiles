@@ -27,7 +27,6 @@ while true; do
   fi
 done
 
-sed -i 's/BINARIES=()/BINARIES=(\/usr\/bin\/btrfs)/' /etc/mkinitcpio.conf
 sed -i '/\(^HOOKS\)/s/filesystems/encrypt filesystems/' /etc/mkinitcpio.conf
 
 mkinitcpio -p linux
@@ -40,7 +39,7 @@ echo "title Arch Linux" >> /boot/loader/entries/arch.conf
 echo "linux /vmlinuz-linux" >> /boot/loader/entries/arch.conf
 echo "initrd /intel-ucode.img" >> /boot/loader/entries/arch.conf
 echo "initrd /initramfs-linux.img" >> /boot/loader/entries/arch.conf
-echo "options cryptdevice=UUID=$(blkid "${DEVICE}2" -s UUID -o value):luks:allow-discards root=/dev/mapper/luks rootflags=subvol=@ rd.luks.options=discard rw" >> /boot/loader/entries/arch.conf
+echo "options cryptdevice=UUID=$(blkid "${DEVICE}2" -s UUID -o value):luks:allow-discards root=/dev/mapper/luks rd.luks.options=discard rw" >> /boot/loader/entries/arch.conf
 
 rm /boot/loader/loader.conf
 

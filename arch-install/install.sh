@@ -26,38 +26,20 @@ create_filesystems() {
   cryptsetup luksFormat "${DEVICE}2"
   cryptsetup open "${DEVICE}2" luks
 
-  mkfs.btrfs -f -L system /dev/mapper/luks
-
-  mount --options="defaults,compress=zstd" /dev/mapper/luks /mnt
-
-  btrfs subvolume create "/mnt/${_hostname}"
-  btrfs subvolume create "/mnt/${_hostname}/@root"
-  mkdir "/mnt/${_hostname}/@root/live"
-  btrfs subvolume create "/mnt/${_hostname}/@root/live/snapshot"
-  btrfs subvolume create "/mnt/${_hostname}/@home"
-  btrfs subvolume create "/mnt/${_hostname}/@pacman_cache"
-  btrfs subvolume create "/mnt/${_hostname}/@log"
-
-  umount -R /mnt
+  mkfs.ext4 -f -L system /dev/mapper/luks
 }
 
 mount_filesystems() {
-  local mount_options="defaults,compress=zstd,relatime"
+  local mount_options="defaults"
 
-  mount -o "${mount_options},subvol=${_hostname}/@root/live/snapshot" /dev/mapper/luks /mnt
-  mkdir /mnt/home
-  mount -o "${mount_options},subvol=${_hostname}/@home" /dev/mapper/luks /mnt/home
-  mkdir -p /mnt/var/log
-  mount -o "${mount_options},subvol=${_hostname}/@log" /dev/mapper/luks /mnt/var/log
-  mkdir -p /mnt/var/cache/pacman/pkg
-  mount -o "${mount_options},subvol=${_hostname}/@pacman_cache" /dev/mapper/luks /mnt/var/cache/pacman/pkg
+  mount -o "${mount_options}" /dev/mapper/luks /mnt
 
   mkdir /mnt/boot
   mount -o defaults "${DEVICE}1" /mnt/boot
 }
 
 install_arch_base() {
-  pacstrap /mnt base base-devel linux linux-firmware dhcpcd git zsh vim btrfs-progs
+  pacstrap /mnt base base-devel linux linux-firmware dhcpcd git zsh vim
 
   genfstab -U /mnt >> /mnt/etc/fstab
 
