@@ -26,7 +26,7 @@ create_filesystems() {
   cryptsetup luksFormat "${DEVICE}2"
   cryptsetup open "${DEVICE}2" luks
 
-  mkfs.ext4 -f -L system /dev/mapper/luks
+  mkfs.ext4 -L system /dev/mapper/luks
 }
 
 mount_filesystems() {
