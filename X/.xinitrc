@@ -33,15 +33,16 @@ fi
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-# Makes caps lock an additional ctrl key
-setxkbmap -option 'caps:ctrl_modifier'
+# Tweak some key mappings
+# Tab -> Super_L
+# Caps lock acts as ctrl
+# Both shift keys toggle caps lock
+setxkbmap -print | sed -e '/xkb_symbols/s/"\(.*\)"/"\1+capslock(ctrl_modifier)+shift(both_capslock)+drew(tab_super)"/' | xkbcomp -I"$HOME/.xkb" - "$DISPLAY" 2>/dev/null
 
-# Map tab to Hyper_L and any keycode to tab so that xcape still works
-xmodmap -e 'keycode 23 = Hyper_L'
-xmodmap -e 'keycode any = Tab'
+killall xcape -q
 
-# Tapping caps lock key acts like Escape key, holding acts like ctrl
-# Tapping tab acts like tab, holding acts like Hyper_L (mod4)
-xcape -t 1000 -e 'Caps_Lock=Escape;Hyper_L=Tab'
+# Tapping capslock acts like Escape, holding with other key acts like ctrl
+# Tapping tab acts like tab, pressing with other key acts like Super_L
+xcape -t 1000 -e 'Caps_Lock=Escape;Super_L=Tab'
 
 exec i3

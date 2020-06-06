@@ -1,0 +1,8 @@
+// Make Tab act as a Super key
+partial modifier_keys
+xkb_symbols "tab_super" {
+    // press tab, get super
+    key  <TAB> { [ Super_L, Super_L ] };
+    // maps real tab behaviour to some random keycode so it's still available to xcape
+    key <I252> { [ Tab, ISO_Left_Tab ] };
+};

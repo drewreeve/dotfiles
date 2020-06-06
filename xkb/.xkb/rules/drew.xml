@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xkbConfigRegistry SYSTEM "xkb.dtd">
+<xkbConfigRegistry version="1.1">
+  <optionList>
+    <group allowMultipleSelection="false">
+      <option>
+        <configItem>
+          <name>drew:tab_super</name>
+          <description>Make Tab an additional Super</description>
+        </configItem>
+      </option>
+    </group>
+  </optionList>
+</xkbConfigRegistry>

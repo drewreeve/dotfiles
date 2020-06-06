@@ -1,0 +1,22 @@
+These files get loaded by this command in my xinit file:
+
+% setxkbmap -print | sed -e '/xkb_symbols/s/"\(.*\)"/"\1+capslock(ctrl_modifier)+shift(both_capslock)+drew(tab_super)"/' | xkbcomp -I"$HOME/.xkb" - "$DISPLAY" 2>/dev/null
+
+These files exist to let me map Tab as a Super key (xcape lets it function as
+tab too) and the above command also pulls in some additional options that are
+already a part of xkb:
+
+- Capslock becomes a ctrl key (and also an escape key via xcape)
+- Pressing both shift keys activates caps lock
+
+Previously this was done with xmodmap but that caused problems with alacritty
+after 0.4.1 was released and several other applications occasionally registered
+double tab key presses too.
+
+Turns out after a bit of research that xmodmap is generally only useful for the
+most basic of tasks so I started digging into xkb and ended up with this which
+for the moment at least seems to work without a problem.
+
+Natefoo's xkb readme in his dotfiles repo was very helpful in figuring out how
+to load these files in without editing a complete keymap dump so I'll link
+this here: https://github.com/natefoo/dotfiles/tree/master/.xkb
