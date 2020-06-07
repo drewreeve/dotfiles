@@ -70,7 +70,7 @@ module-margin-left = 1
 module-margin-right = 3
 modules-left = i3
 modules-center = xwindow
-modules-right = alsa eth date
+modules-right = pulseaudio eth date
 
 [module/i3]
 type = internal/i3
@@ -133,8 +133,8 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-[module/alsa]
-type = internal/alsa
+[module/pulseaudio]
+type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
 label-volume = ""
