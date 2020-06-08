@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if ! hash stow 2>/dev/null; then
+  echo "stow required but not installed. Aborting."
+  exit 1
+fi
+
+# Symlink packages
+# ---------------------------
+
+if [ -f "/etc/arch-release" ]; then
+  packages=$(find . -maxdepth 1 -type d ! -name '.*' -printf '%f\n')
+else
+  # Exclude packages I don't want on non-archlinux systems
+  packages=$(find . -maxdepth 1 -type d \
+    ! -name '.*' \
+    ! -name 'dunst' \
+    ! -name 'fontconfig' \
+    ! -name 'gtk' \
+    ! -name 'i3' \
+    ! -name 'i3lock' \
+    ! -name 'picom' \
+    ! -name 'polybar' \
+    ! -name 'rofi' \
+    ! -name 'X' \
+    ! -name 'xkb' \
+    -printf '%f\n')
+fi
+
+for pkg in $packages; do
+  stow -Rv --no-folding "$pkg" -t ~/
+done
+
+# ---------------------------
+# Install asdf: https://github.com/asdf-vm/asdf
+# ---------------------------
+
+if [ -d ~/.asdf ]; then
+  git -C ~/.asdf fetch --tags
+  git -C ~/.asdf checkout "$(git -C ~/.asdf tag | sort -V | tail -1)"
+  ~/.asdf/bin/asdf plugin-update --all
+else
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+  git -C ~/.asdf checkout "$(git -C ~/.asdf tag | sort -V | tail -1)"
+  ~/.asdf/bin/asdf plugin-add ruby
+  ~/.asdf/bin/asdf plugin-add nodejs
+  ~/.asdf/bin/asdf plugin-add erlang
+  ~/.asdf/bin/asdf plugin-add elixir
+fi

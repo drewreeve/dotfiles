@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if ! hash stow 2>/dev/null; then
+  echo "stow required but not installed. Aborting."
+  exit 1
+fi
+
+packages=$(find . -maxdepth 1 -type d ! -name '.*' -printf '%f\n')
+
+for pkg in $packages; do
+  stow -Dv "$pkg" -t ~/
+done
+
+rm -rf ~/.vim
+echo "Removed ~/.vim"
+rm -rf ~/.zsh
+echo "Removed ~/.zsh"
+rm -rf ~/.asdf
+echo "Removed asdf"
