@@ -59,6 +59,7 @@ set backspace=indent,eol,start " Proper backspace behavior
 set hidden                     " Allow unsaved background buffers
 set incsearch                  " Incremental search
 set hlsearch                   " Highlight matches from previous search
+set cursorline                 " Highlight current line
 set ruler                      " Always show cursor position
 set number relativenumber      " Show line numbers relative to cursor
 set laststatus=2               " Always show statusline
