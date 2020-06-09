@@ -3,6 +3,7 @@
 if has('multi_byte')
   set encoding=utf-8
 endif
+scriptencoding utf8
 
 " ============================================================================
 " Plugin Block  {{{
@@ -11,7 +12,7 @@ endif
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    autocmd! vplug VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/bundle')
@@ -118,13 +119,18 @@ endif
 " inserts tabs at the beginning of lines, otherwise does completion
 function! InsertTabWrapper()
   let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
+  if !col
     return "\<tab>"
-  else
+  endif
+
+  let char = getline('.')[col - 1]
+  if char =~# '\k'
+    " There's an identifier before the cursor, so complete the identifier.
     return "\<c-p>"
+  else
+    return "\<tab>"
   endif
 endfunction
-
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
 
