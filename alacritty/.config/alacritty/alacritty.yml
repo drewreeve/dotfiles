@@ -3,6 +3,9 @@ env:
 
 window:
   dynamic_padding: true
+  padding:
+    x: 4
+    y: 4
 
 draw_bold_text_with_bright_colors: false
 
@@ -31,7 +34,7 @@ font:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.90
+background_opacity: 0.95
 
 # Colors (Gruvbox dark)
 colors:
@@ -65,4 +68,4 @@ colors:
     white:   '0xebdbb2'
 
 scrolling:
-  history: 2000
+  history: 10000
