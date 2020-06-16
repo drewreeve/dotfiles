@@ -1,6 +1,6 @@
 # Path
 path=(
-  $HOME/bin
+  $HOME/.local/bin
   /usr/local/{bin,sbin}
   $path
 )
