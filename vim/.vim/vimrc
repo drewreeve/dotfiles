@@ -94,8 +94,7 @@ set shiftround
 set expandtab
 
 " Highlight where 80 characters is
-set textwidth=80
-set colorcolumn=+1
+set colorcolumn=81
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
