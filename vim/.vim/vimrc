@@ -169,9 +169,6 @@ if has('autocmd')
       \ |   exe "normal! g`\""
       \ | endif
 
-    " Set syntax for certain file types
-    autocmd BufRead,BufNewFile zprofile set filetype=zsh
-
     " Unset paste on InsertLeave
     autocmd InsertLeave * silent! set nopaste
   augroup END
@@ -268,9 +265,7 @@ endif
 let g:gruvbox_italic='1'
 
 set background=dark
-if globpath(&runtimepath, 'colors/gruvbox.vim', 1) !=# ''
-  colorscheme gruvbox
-endif
+silent! colorscheme gruvbox
 
 " Change fzf colors to match gruvbox theme
 let g:fzf_colors = {
