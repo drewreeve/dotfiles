@@ -20,6 +20,7 @@ endif
 
 call plug#begin('~/.vim/bundle')
   Plug 'w0rp/ale'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-dispatch'
   Plug 'elixir-lang/vim-elixir'
   Plug 'tpope/vim-endwise'
@@ -119,25 +120,6 @@ endif
 " Mappings {{{
 " ============================================================================
 
-" Smart tab key (borrowed from gary bernhardt)
-" inserts tabs at the beginning of lines, otherwise does completion
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col
-    return "\<tab>"
-  endif
-
-  let char = getline('.')[col - 1]
-  if char =~# '\k'
-    " There's an identifier before the cursor, so complete the identifier.
-    return "\<c-p>"
-  else
-    return "\<tab>"
-  endif
-endfunction
-inoremap <expr> <tab> InsertTabWrapper()
-inoremap <s-tab> <c-n>
-
 " Clear highlighted searches
 nnoremap <silent> <leader>c :nohlsearch<CR>
 
@@ -158,26 +140,90 @@ nnoremap <c-l> <c-w>l
 " Augroups {{{
 " ============================================================================
 
-if has('autocmd')
-  augroup vimrcEx
-    autocmd!
+augroup vimrcEx
+  autocmd!
 
-    " Jump to last cursor position unless it's invalid, in an event handler
-    " or for commit messages (taken from $VIMRUNTIME/defaults.vim)
-    autocmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-      \ |   exe "normal! g`\""
-      \ | endif
+  " Jump to last cursor position unless it's invalid, in an event handler
+  " or for commit messages (taken from $VIMRUNTIME/defaults.vim)
+  autocmd BufReadPost *
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    \ |   exe "normal! g`\""
+    \ | endif
 
-    " Unset paste on InsertLeave
-    autocmd InsertLeave * silent! set nopaste
-  augroup END
-endif
+  " Unset paste on InsertLeave
+  autocmd InsertLeave * silent! set nopaste
+augroup END
 " }}}
 
 " ============================================================================
 " Plugin Settings/Mappings {{{
 " ============================================================================
+
+" coc
+" --------
+
+let g:coc_global_extensions = [
+      \ 'coc-css',
+      \ 'coc-diagnostic',
+      \ 'coc-elixir',
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-solargraph',
+      \ 'coc-sql',
+      \ 'coc-tsserver'
+      \]
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has('patch-8.1.1564')
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#util#has_float() == 0)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+
+function! s:show_hover_doc()
+  call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
+
+augroup cocgroup
+  autocmd!
+
+  autocmd CursorHoldI * :call <SID>show_hover_doc()
+  autocmd CursorHold * :call <SID>show_hover_doc()
+augroup END
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " dispatch
 " --------
@@ -263,6 +309,7 @@ if !has('nvim')
 endif
 
 let g:gruvbox_italic='1'
+let g:gruvbox_sign_column='bg0'
 
 set background=dark
 silent! colorscheme gruvbox

@@ -1,0 +1,8 @@
+{
+  // Diagnostics
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.refreshOnInsertMode": true,
+
+  // Formatting
+  "html.format.enable": true
+}
