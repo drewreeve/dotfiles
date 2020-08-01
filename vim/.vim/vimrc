@@ -197,11 +197,6 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 function! ShowDocIfNoDiagnostic(timer_id)
   if (coc#util#has_float() == 0)
     silent call CocActionAsync('doHover')
@@ -246,6 +241,8 @@ endif
 nnoremap <silent> <c-p> :Files<cr>
 " fuzzy search buffers
 nnoremap <silent> <Leader>b :Buffers<CR>
+
+let $FZF_DEFAULT_OPTS .= ' --inline-info'
 
 " vim-test
 " --------
@@ -338,8 +335,6 @@ let g:fzf_colors = {
 if has('nvim')
   " Show effects of commands incrementally
   set inccommand=nosplit
-
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
 " }}}
 
