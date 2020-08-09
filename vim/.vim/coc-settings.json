@@ -4,5 +4,8 @@
   "diagnostic.refreshOnInsertMode": true,
 
   // Formatting
-  "html.format.enable": true
+  "html.format.enable": true,
+
+  //python
+  "python.jediEnabled": false
 }

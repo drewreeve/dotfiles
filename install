@@ -48,4 +48,5 @@ else
   ~/.asdf/bin/asdf plugin-add nodejs
   ~/.asdf/bin/asdf plugin-add erlang
   ~/.asdf/bin/asdf plugin-add elixir
+  ~/.asdf/bin/asdf plugin-add python
 fi
