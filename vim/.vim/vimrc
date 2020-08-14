@@ -37,6 +37,8 @@ call plug#begin('~/.vim/bundle')
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-surround'
   Plug 'janko-m/vim-test'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  let g:go_def_mapping_enabled = 0
 
   " Local config
   if filereadable(expand('~/.vim.plugins.local'))
