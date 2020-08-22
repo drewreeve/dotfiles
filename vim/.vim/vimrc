@@ -19,7 +19,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
-  Plug 'w0rp/ale'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-dispatch'
   Plug 'elixir-lang/vim-elixir'
@@ -40,6 +39,9 @@ call plug#begin('~/.vim/bundle')
   let g:go_def_mapping_enabled = 0
   " format with goimports instead of gofmt
   let g:go_fmt_command = 'goimports'
+
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
   " Local config
   if filereadable(expand('~/.vim.plugins.local'))
@@ -282,32 +284,9 @@ let g:ruby_indent_assignment_style = 'variable'
 " Appearance {{{
 " ============================================================================
 
-" Status line
-" -----------
-" Function: display errors from Ale in statusline
-function! LinterStatus() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-
-  return l:counts.total == 0 ? '  OK' : printf(
-  \   '  W:%d E:%d',
-  \   all_non_errors,
-  \   all_errors
-  \)
-endfunction
-
-set statusline=
-set statusline+=%<                    " truncate point
-set statusline+=\ %f                  " relative path to file
-set statusline+=\ %m                  " modified flag [+], [-] etc.
-set statusline+=%r                    " readonly flag [RO]
-set statusline+=\ %y                  " filetype
-set statusline+=%=                    " switch sides
-set statusline+=%(%l:%c%V%)           " current line:column/virtual column
-set statusline+=\ \ %3(%P%)           " percentage through file
-set statusline+=%{LinterStatus()}\    " Errors/warnings from Ale
+if has_key(g:plugs, 'vim-airline')
+  set noshowmode " Don't need this if we have airline loaded
+endif
 
 " Colors
 " -----------
