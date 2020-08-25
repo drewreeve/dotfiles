@@ -112,6 +112,10 @@ set noswapfile
 set nobackup
 set nowritebackup
 
+" coc.nvim recommends this be lowered from the default (4000ms) to improve
+" responsiveness and user experience
+set updatetime=300
+
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
 
