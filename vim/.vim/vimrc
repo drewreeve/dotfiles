@@ -26,7 +26,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
   Plug 'junegunn/fzf.vim'
-  Plug 'drewreeve/gruvbox'
+  Plug 'gruvbox-community/gruvbox'
   Plug 'pangloss/vim-javascript'
   Plug 'leafgarland/typescript-vim'
   Plug 'MaxMEllon/vim-jsx-pretty'
