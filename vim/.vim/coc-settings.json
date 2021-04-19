@@ -38,5 +38,6 @@
       "cmd": "shfmt",
       "args": ["-i", "2", "-bn", "-ci", "-sr"]
     }
-  }
+  },
+  "Lua.diagnostics.globals": ["vim"]
 }
