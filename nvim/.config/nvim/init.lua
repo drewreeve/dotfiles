@@ -62,6 +62,9 @@ vim.g.colors_name = 'gruvbox'
 vim.g.gruvbox_italic = 1
 vim.g.gruvbox_sign_column = 'bg0'
 
+-- Use system clipboard
+vim.o.clipboard = 'unnamedplus'
+
 -- ===========================================================================
 -- Mappings
 -- ===========================================================================
