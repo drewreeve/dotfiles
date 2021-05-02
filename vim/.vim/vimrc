@@ -54,7 +54,7 @@ call plug#end()
 " General vim settings {{{
 " ============================================================================
 
-let mapleader=','
+let mapleader=' '
 
 if has('autocmd')
   filetype plugin indent on
