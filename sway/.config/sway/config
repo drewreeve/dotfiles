@@ -20,6 +20,9 @@ set $term alacritty
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
+set $screenshot grim $(xdg-user-dir PICTURES)/Screenshot_$(date +"%Y-%m-%d-%H-%M-%S").png
+bindsym Print exec $screenshot
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
