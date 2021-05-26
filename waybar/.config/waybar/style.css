@@ -1,0 +1,65 @@
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#waybar {
+  background: rgba(50,50,50,.9);
+  color: white;
+  font-family: PragmataPro, Cantarell, sans-serif;
+  font-size: 13px;
+}
+
+#clock,#mode,#idle_inhibitor,#network,#memory,#pulseaudio,#tray {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* -----------------------------------------------------------------------
+ * Module Styles
+ * -------------------------------------------------------------------- */
+
+#window {
+  /* font-weight: bold; */
+}
+
+#clock {
+  /* font-weight: bold; */
+}
+
+#mode {
+  background: #4c7899;
+  border-top: 2px solid white;
+  /* To compensate for the top border and still have vertical centering */
+  padding-bottom: 2px;
+}
+
+#workspaces button {
+  border-top: 2px solid transparent;
+  /* To compensate for the top border and still have vertical centering */
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #888888;
+}
+
+#workspaces button:hover {
+  color: white;
+  background: rgba(0,0,0,0.2);
+  border-color: #4c7899;
+}
+
+#workspaces button.focused {
+  border-color: #4c7899;
+  color: white;
+  font-weight: bold;
+  background-color: #285577;
+}
+
+#workspaces button.urgent {
+  border-color: #c9545d;
+  color: #c9545d;
+}
