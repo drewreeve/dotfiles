@@ -65,7 +65,7 @@
       "spacing": 10
     },
     "clock": {
-      "format": " {:%a %e %b  %R}",
+      "format": " {:%a %d %b  %R}",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
