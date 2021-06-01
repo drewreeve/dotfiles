@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env sh
+
 lock() {
   pkill -SIGUSR1 swayidle
 }
