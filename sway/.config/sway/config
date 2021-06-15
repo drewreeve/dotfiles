@@ -233,9 +233,6 @@ bar {
   swaybar_command waybar
 }
 
-# Don't get blinded at night!
-exec sleep 10 && wlsunset -t 3400 -S 06:00 -s 22:00
-
 exec mako
 
 bindsym $mod+Slash exec wofi --show=drun --width=400 --lines=10

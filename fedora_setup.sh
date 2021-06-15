@@ -9,13 +9,13 @@ install_dependencies() {
     ripgrep \
     stow \
     mako \
+    gammastep \
     grim \
     vim \
     sway \
     swaylock \
     swayidle \
     waybar \
-    wlsunset \
     wofi \
     zsh \
     zsh-autosuggestions \
