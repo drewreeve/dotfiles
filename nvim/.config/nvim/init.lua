@@ -1,69 +1,68 @@
 require('plugins')
 
+local opt = vim.opt
+
 -- ===========================================================================
 -- General settings
 -- ===========================================================================
 
-vim.o.hidden = true           -- Allow unsaved background buffers
-vim.wo.cursorline = true      -- Highlight current line
-vim.wo.number = true          -- Show line numbers
-vim.wo.relativenumber = true  -- Show relative line numbers
-vim.o.joinspaces = false      -- Use one space afer punctuation
-vim.o.scrolloff = 3           -- More context when scrolling off end of buffer
+opt.hidden = true          -- Allow unsaved background buffers
+opt.cursorline = true      -- Highlight current line
+opt.number = true          -- Show line numbers
+opt.relativenumber = true  -- Show relative line numbers
+opt.joinspaces = false     -- Use one space afer punctuation
+opt.scrolloff = 3          -- More context when scrolling off end of buffer
 
 -- Open new split panes to right and bottom
-vim.o.splitbelow = true
-vim.o.splitright = true
+opt.splitbelow = true
+opt.splitright = true
 
 -- Enhanced tab completion
-vim.o.wildmode = 'list:longest,list:full'
+opt.wildmode = { 'list:longest', 'list:full' }
 
 -- Make searches case-sensitive only if they contain upper-case characters
-vim.o.ignorecase = true
-vim.o.smartcase = true
+opt.ignorecase = true
+opt.smartcase = true
 
 -- Softtabs, 2 spaces
-vim.bo.tabstop = 2
-vim.o.tabstop = 2
-vim.bo.shiftwidth = 2
-vim.o.shiftwidth = 2
-vim.o.shiftround = true
-vim.bo.expandtab = true
-vim.o.expandtab = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.shiftround = true
+opt.expandtab = true
 
 -- coc.nvim recommends this be lowered from the default (4000ms) to improve
 -- responsiveness and user experience
-vim.o.updatetime = 300
+opt.updatetime = 300
 
 
 -- Don't pass messages to |ins-completion-menu|.
-vim.o.shortmess = vim.o.shortmess .. 'c'
+opt.shortmess:append("c")
 
 -- Highlight where 80 characters is
-vim.wo.colorcolumn = '81'
+opt.colorcolumn = '81'
 
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appear/become resolved.
-vim.wo.signcolumn = 'number'
+opt.signcolumn = 'number'
 
 
 -- Show effects of commands incrementally
-vim.o.inccommand= 'nosplit'
+opt.inccommand = 'nosplit'
 
 -- Disable swapfiles
-vim.o.swapfile = false
-vim.bo.swapfile = false
-vim.o.backup = false
-vim.o.writebackup = false
+opt.swapfile = false
+opt.backup = false
+opt.writebackup = false
 
 -- Colours
-vim.o.termguicolors = true
+opt.termguicolors = true
 vim.g.colors_name = 'gruvbox'
 vim.g.gruvbox_italic = 1
 vim.g.gruvbox_sign_column = 'bg0'
 
 -- Use system clipboard
-vim.o.clipboard = 'unnamedplus'
+opt.clipboard = 'unnamedplus'
 
 -- ===========================================================================
 -- Mappings
