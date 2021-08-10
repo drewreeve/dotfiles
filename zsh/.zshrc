@@ -19,3 +19,5 @@ foreach file (
 if [[ -s ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+alias luamake=/home/drew/build/lua-language-server/3rd/luamake/luamake

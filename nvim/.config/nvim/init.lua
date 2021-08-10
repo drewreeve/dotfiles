@@ -1,4 +1,17 @@
+-- Set leader early
+vim.g.mapleader = ' '
+
 require('plugins')
+require('drew/lsp')
+
+for _, mod in ipairs(vim.api.nvim_get_runtime_file('lua/plugin/**/*.lua', true)) do
+  local ok, msg = pcall(loadfile(mod))
+
+  if not ok then
+    print("Failed to load: ", mod)
+    print("\t", msg)
+  end
+end
 
 local opt = vim.opt
 
@@ -31,10 +44,7 @@ opt.softtabstop = 2
 opt.shiftround = true
 opt.expandtab = true
 
--- coc.nvim recommends this be lowered from the default (4000ms) to improve
--- responsiveness and user experience
-opt.updatetime = 300
-
+opt.updatetime = 1000
 
 -- Don't pass messages to |ins-completion-menu|.
 opt.shortmess:append("c")
@@ -64,6 +74,7 @@ vim.g.gruvbox_sign_column = 'bg0'
 -- Use system clipboard
 opt.clipboard = 'unnamedplus'
 
+
 -- ===========================================================================
 -- Mappings
 -- ===========================================================================
@@ -73,8 +84,6 @@ local function map(mode, lhs, rhs, opts)
   if opts then options = vim.tbl_extend('force', options, opts) end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
-
-vim.g.mapleader = ' '
 
 -- Clear highlighted searches
 map('n', '<leader>c', ':nohlsearch<CR>', {silent = true})

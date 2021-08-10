@@ -9,13 +9,16 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 -- Auto compile when there are changes in plugins.lua
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
+vim.api.nvim_exec([[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost init.lua PackerCompile
+  augroup end
+]], false)
 
 require('packer').startup(function(use)
   -- Packer can manage itself as an optional plugin
   use 'wbthomason/packer.nvim'
-
-  use {'neoclide/coc.nvim', branch='release'}
 
   use 'pbrisbin/vim-mkdir'
 
@@ -46,4 +49,8 @@ require('packer').startup(function(use)
 
   use 'gruvbox-community/gruvbox'
   use {'hoob3rt/lualine.nvim', config = 'vim.cmd[[set noshowmode]]'}
+
+  -- Lsp
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-compe'
 end)

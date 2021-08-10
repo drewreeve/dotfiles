@@ -1,2 +1,6 @@
 bash-language-server
 yarn
+vscode-langservers-extracted
+typescript
+typescript-language-server
+pyright
