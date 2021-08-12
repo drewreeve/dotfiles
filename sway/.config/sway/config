@@ -237,4 +237,8 @@ exec mako
 
 bindsym $mod+Slash exec wofi --show=drun --width=400 --lines=10
 
+exec_always {
+  gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+}
+
 include /etc/sway/config.d/*
