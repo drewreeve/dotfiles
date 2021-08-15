@@ -38,4 +38,4 @@ setup_keyring_autostart() {
 }
 
 install_dependencies
-setup_keyring_autostart
+#setup_keyring_autostart
