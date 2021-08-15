@@ -225,6 +225,8 @@ mode "$mode_system" {
 bindsym $mod+Shift+p mode "$mode_system"
 
 gaps inner 12
+
+font pango:PragmataPro 10
 #
 # Status Bar:
 #
