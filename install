@@ -16,14 +16,17 @@ else
   # Exclude packages I don't want on non-archlinux systems
   packages=$(find . -maxdepth 1 -type d \
     ! -name '.*' \
-    ! -name 'dunst' \
     ! -name 'fontconfig' \
+    ! -name 'gammastep' \
     ! -name 'gtk' \
     ! -name 'i3' \
     ! -name 'i3lock' \
+    ! -name 'mako' \
     ! -name 'picom' \
     ! -name 'polybar' \
     ! -name 'rofi' \
+    ! -name 'sway' \
+    ! -name 'waybar' \
     ! -name 'X' \
     ! -name 'xkb' \
     -printf '%f\n')
@@ -37,11 +40,7 @@ done
 # Install asdf: https://github.com/asdf-vm/asdf
 # ---------------------------
 
-if [ -d ~/.asdf ]; then
-  git -C ~/.asdf fetch --tags
-  git -C ~/.asdf checkout "$(git -C ~/.asdf tag | sort -V | tail -1)"
-  ~/.asdf/bin/asdf plugin-update --all
-else
+if [ ! -d ~/.asdf ]; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf
   git -C ~/.asdf checkout "$(git -C ~/.asdf tag | sort -V | tail -1)"
   ~/.asdf/bin/asdf plugin-add ruby
@@ -50,7 +49,4 @@ else
   ~/.asdf/bin/asdf plugin-add elixir
   ~/.asdf/bin/asdf plugin-add python
   ~/.asdf/bin/asdf plugin-add golang
-
-  # Import Node.js release team's OpenPGP keys
-  bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
 fi
