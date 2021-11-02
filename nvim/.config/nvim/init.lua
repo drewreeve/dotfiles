@@ -67,9 +67,9 @@ opt.writebackup = false
 
 -- Colours
 opt.termguicolors = true
-vim.g.colors_name = 'gruvbox'
 vim.g.gruvbox_italic = 1
 vim.g.gruvbox_sign_column = 'bg0'
+vim.cmd [[colorscheme gruvbox ]]
 
 -- Use system clipboard
 opt.clipboard = 'unnamedplus'
