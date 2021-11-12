@@ -18,6 +18,7 @@ else
     ! -name '.*' \
     ! -name 'fontconfig' \
     ! -name 'gammastep' \
+    ! -name 'gnome-terminal' \
     ! -name 'gtk' \
     ! -name 'i3' \
     ! -name 'i3lock' \
@@ -49,4 +50,30 @@ if [ ! -d ~/.asdf ]; then
   ~/.asdf/bin/asdf plugin-add elixir
   ~/.asdf/bin/asdf plugin-add python
   ~/.asdf/bin/asdf plugin-add golang
+fi
+
+# ---------------------------
+# Gnome terminal profile
+# ---------------------------
+
+install_gnome_profile() {
+  local uuid list
+
+  uuid="4c59ca21-4140-42d8-a054-53bbcb1bf226"
+  list=$(gsettings get org.gnome.Terminal.ProfilesList list)
+
+  if ! [[ $list == *"$uuid"* ]]; then
+    # Install profile
+    dconf load /org/gnome/terminal/legacy/profiles:/:4c59ca21-4140-42d8-a054-53bbcb1bf226/ < ./gnome-terminal/gruvbox-theme-profile.dconf
+
+    # Add uuid to list array so it profile shows
+    gsettings set org.gnome.Terminal.ProfilesList list "${list%]*}, '$uuid']"
+
+    # Set default profile
+    #gsettings set org.gnome.Terminal.ProfilesList default $uuid
+  fi
+}
+
+if hash gnome-terminal 2>/dev/null; then
+  install_gnome_profile
 fi
