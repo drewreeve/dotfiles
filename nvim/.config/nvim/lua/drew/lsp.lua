@@ -11,6 +11,10 @@ local on_attach = function(_client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 end
 
+-- nvim-cmp supports additional completion capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 local servers = {
   'ansiblels',
   'bashls',
@@ -23,7 +27,10 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
 end
 
  -- Change to your sumneko root installation
@@ -34,6 +41,7 @@ local sumneko_binary_path = "/bin/Linux/lua-language-server"
 nvim_lsp.sumneko_lua.setup {
   cmd = {sumneko_root_path .. sumneko_binary_path, "-E", sumneko_root_path.."/main.lua" };
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
@@ -54,6 +62,7 @@ nvim_lsp.sumneko_lua.setup {
 }
 
 nvim_lsp.efm.setup {
+  capabilities = capabilities,
   init_options = {documentFormatting = true},
   filetypes = {"sh"},
   settings = {
