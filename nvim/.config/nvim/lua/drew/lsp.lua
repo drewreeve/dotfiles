@@ -33,6 +33,10 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+require'lspconfig'.elixirls.setup{
+  cmd = { vim.fn.getenv("HOME") .. "/build/elixir-ls/release/language_server.sh" };
+}
+
 local sumneko_root_path = vim.fn.getenv("HOME") .. "/build/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
 
