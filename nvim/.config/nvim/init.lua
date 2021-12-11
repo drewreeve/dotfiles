@@ -165,7 +165,7 @@ require('lualine').setup{
   },
   sections = {
     lualine_x = {
-      {'diagnostics',  sources = {'nvim_lsp', 'coc'},
+      {'diagnostics',  sources = {'nvim_diagnostic', 'coc'},
         icons_enabled = false, color_error = '#cc241d',
         color_warn = '#d65d0e', color_info = '#458588'},
       'encoding',
