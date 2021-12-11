@@ -35,6 +35,8 @@ end
 
 require'lspconfig'.elixirls.setup{
   cmd = { vim.fn.getenv("HOME") .. "/build/elixir-ls/release/language_server.sh" };
+  on_attach = on_attach,
+  capabilities = capabilities
 }
 
 local sumneko_root_path = vim.fn.getenv("HOME") .. "/build/lua-language-server"
