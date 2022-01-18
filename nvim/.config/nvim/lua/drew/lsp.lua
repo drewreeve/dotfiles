@@ -40,7 +40,7 @@ require'lspconfig'.elixirls.setup{
 }
 
 local sumneko_root_path = vim.fn.getenv("HOME") .. "/build/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
+local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 
 -- Make runtime files discoverable to the server
 local runtime_path = vim.split(package.path, ';')
