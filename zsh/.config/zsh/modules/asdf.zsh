@@ -10,8 +10,7 @@ if (( ! $+commands[asdf])); then
   return 1
 fi
 
-fpath=(${ASDF_DIR}/completions $fpath)
-compinit
+fpath+=${ASDF_DIR}/completions
 
 # Borrowed from https://github.com/junegunn/fzf/wiki/Examples#asdf
 
