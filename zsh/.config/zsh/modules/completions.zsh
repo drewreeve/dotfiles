@@ -14,22 +14,25 @@ unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
 
 #
 # Initialization
+# Borrowed from https://github.com/sorin-ionescu/prezto
 #
 
+# Load and initialize the completion system ignoring insecure directories with a
+# cache time of 20 hours, so it should almost always regenerate the first time a
+# shell is opened each day.
 autoload -Uz compinit
-_zdumpfile=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump
-
-# Create folder for dumpfile if it doesn't exist
-if [[ ! -a $_zdumpfile ]]; then
-  mkdir -p "$_zdumpfile:h"
+_comp_path="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+# #q expands globs in conditional expressions
+if [[ $_comp_path(#qNmh-20) ]]; then
+  # -C (skip function check) implies -i (skip security check).
+  compinit -C -d "$_comp_path"
+else
+  mkdir -p "$_comp_path:h"
+  compinit -i -d "$_comp_path"
+  # Keep $_comp_path younger than cache time even if it isn't regenerated.
+  touch "$_comp_path"
 fi
-compinit -C -d $_zdumpfile
-
-# Compile dumpfile for speedup
-if [[ ! ${_zdumpfile}.zwc -nt ${_zdumpfile} ]]; then
-  zcompile ${_zdumpfile}
-fi
-unset _zdumpfile
+unset _comp_path
 
 #
 # Styles
