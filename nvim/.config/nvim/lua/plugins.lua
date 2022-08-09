@@ -23,6 +23,7 @@ require('packer').startup(function(use)
   use 'pbrisbin/vim-mkdir'
 
   use 'vim-ruby/vim-ruby'
+  use 'pearofducks/ansible-vim'
 
   -- Telescope
   use {
