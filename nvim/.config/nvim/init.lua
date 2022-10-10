@@ -164,6 +164,9 @@ require('lualine').setup{
     theme = 'gruvbox'
   },
   sections = {
+    lualine_c = {
+      {'filename', path=1}
+    },
     lualine_x = {
       {'diagnostics',  sources = {'nvim_diagnostic', 'coc'},
         icons_enabled = false, color_error = '#cc241d',
@@ -174,3 +177,5 @@ require('lualine').setup{
     }
   }
 }
+
+require('lualine').get_config()

@@ -49,7 +49,11 @@ require('packer').startup(function(use)
   }
 
   use 'gruvbox-community/gruvbox'
-  use {'hoob3rt/lualine.nvim', config = 'vim.cmd[[set noshowmode]]'}
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
 
   -- Lsp
   use 'neovim/nvim-lspconfig'
