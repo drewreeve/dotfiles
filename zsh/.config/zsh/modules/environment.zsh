@@ -12,6 +12,7 @@ setopt EXTENDED_GLOB
 
 path=(
   $HOME/.local/bin
+  $HOME/.cargo/bin
   /usr/local/{bin,sbin}
   $path
 )
