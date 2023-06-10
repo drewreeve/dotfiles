@@ -47,7 +47,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.lua_ls.setup {
   cmd = { sumneko_binary, "-E", sumneko_root_path.."/main.lua" };
   on_attach = on_attach,
   capabilities = capabilities,
