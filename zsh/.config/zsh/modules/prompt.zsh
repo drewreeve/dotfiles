@@ -8,5 +8,10 @@ autoload -Uz colors && colors
 # Initialize prompt system
 autoload -Uz promptinit; promptinit
 
-# Set prompt theme
-prompt simples
+# If starship is installed just use that, otherwise use a fallback
+if (($+commands[starship])); then
+  eval "$(starship init zsh)"
+else
+  # Set prompt theme
+  prompt simples
+fi
