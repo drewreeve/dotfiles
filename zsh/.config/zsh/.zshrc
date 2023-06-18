@@ -3,6 +3,7 @@ foreach file (
   input.zsh
   history.zsh
   title.zsh
+  homebrew.zsh
   prompt.zsh
   asdf.zsh
   fzf.zsh
