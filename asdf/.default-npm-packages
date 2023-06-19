@@ -1,7 +1,2 @@
-ansible-language-server
-bash-language-server
 yarn
-vscode-langservers-extracted
 typescript
-typescript-language-server
-pyright
