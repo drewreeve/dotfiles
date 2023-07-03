@@ -2,23 +2,17 @@
 -- Global Mappings
 -- ===========================================================================
 
-local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true}
-  if opts then options = vim.tbl_extend('force', options, opts) end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
 -- Clear highlighted searches
-map('n', '<leader>c', ':nohlsearch<CR>', {silent = true})
+vim.keymap.set('n', '<leader>c', ':nohlsearch<CR>', {silent = true})
 
 -- Switch between last 2 files
-map('n', '<leader><leader>', '<C-^>')
+vim.keymap.set('n', '<leader><leader>', '<C-^>')
 
 -- Move around splits with <c-hjkl>
-map('n', '<C-h>', '<C-w>h', {silent = true})
-map('n', '<C-j>', '<C-w>j', {silent = true})
-map('n', '<C-k>', '<C-w>k', {silent = true})
-map('n', '<C-l>', '<C-w>l', {silent = true})
+vim.keymap.set('n', '<C-h>', '<C-w>h', {silent = true})
+vim.keymap.set('n', '<C-j>', '<C-w>j', {silent = true})
+vim.keymap.set('n', '<C-k>', '<C-w>k', {silent = true})
+vim.keymap.set('n', '<C-l>', '<C-w>l', {silent = true})
 
 -- ===========================================================================
 -- LSP Mappings
@@ -39,7 +33,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
     vim.keymap.set('n', '<space>wl', function()
