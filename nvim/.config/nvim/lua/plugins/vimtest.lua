@@ -1,23 +1,28 @@
 return {
   {
     "janko-m/vim-test",
-    dependencies = { 'tpope/vim-dispatch' },
+    dependencies = { "tpope/vim-dispatch" },
     keys = {
       {
-        '<leader>t', ':TestFile<CR>'
+        "<leader>t",
+        ":TestFile<CR>",
       },
       {
-        '<leader>s', ':TestNearest<CR>'
+        "<leader>s",
+        ":TestNearest<CR>",
       },
       {
-        '<leader>l', ':TestLast<CR>'
+        "<leader>l",
+        ":TestLast<CR>",
       },
       {
-        '<leader>a', ':TestSuite<CR>'
+        "<leader>a",
+        ":TestSuite<CR>",
       },
       {
-        '<leader>gt', ':TestVisit<CR>'
-      }
-    }
-  }
+        "<leader>gt",
+        ":TestVisit<CR>",
+      },
+    },
+  },
 }

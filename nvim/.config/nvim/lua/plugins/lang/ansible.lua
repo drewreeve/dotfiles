@@ -1,3 +1,3 @@
 return {
-  { 'pearofducks/ansible-vim' }
+  { "pearofducks/ansible-vim" },
 }

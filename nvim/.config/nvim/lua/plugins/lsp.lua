@@ -12,10 +12,10 @@ return {
         lua_ls = {
           Lua = {
             runtime = {
-              version = 'LuaJIT'
+              version = "LuaJIT",
             },
             diagnostics = {
-              globals = {'vim'},
+              globals = { "vim" },
             },
             workspace = {
               checkThirdParty = false,
@@ -24,38 +24,38 @@ return {
             telemetry = { enable = false },
           },
         },
-      }
+      },
     },
     config = function(_, opts)
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+      capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-      local mason_lspconfig = require 'mason-lspconfig'
+      local mason_lspconfig = require("mason-lspconfig")
 
-      mason_lspconfig.setup {
-        ensure_installed = vim.tbl_keys(opts.servers)
-      }
-      mason_lspconfig.setup_handlers {
+      mason_lspconfig.setup({
+        ensure_installed = vim.tbl_keys(opts.servers),
+      })
+      mason_lspconfig.setup_handlers({
         function(server_name)
-          require('lspconfig')[server_name].setup {
+          require("lspconfig")[server_name].setup({
             capabilities = capabilities,
             settings = opts.servers[server_name],
-          }
+          })
         end,
-      }
-    end
+      })
+    end,
   },
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
     config = function()
       require("mason").setup()
-      vim.api.nvim_create_autocmd('VimEnter', {
-        pattern = '*',
+      vim.api.nvim_create_autocmd("VimEnter", {
+        pattern = "*",
         callback = function()
           local registry = require("mason-registry")
 
-          for _, pkg_name in ipairs { "stylua", "shfmt", "shellcheck" } do
+          for _, pkg_name in ipairs({ "stylua", "shfmt", "shellcheck" }) do
             local ok, pkg = pcall(registry.get_package, pkg_name)
             if ok then
               if not pkg:is_installed() then
@@ -63,8 +63,8 @@ return {
               end
             end
           end
-        end
+        end,
       })
-    end
+    end,
   },
 }
