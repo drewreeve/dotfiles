@@ -6,8 +6,10 @@
 for channel in "$@"
 do
   twitch_url="https://twitch.tv/$(basename "$channel")"
+  if [ "$(uname)" = "Darwin" ]; then
+    open -a IINA "$twitch_url"
   # Use celluloid if available as pop-shell can't resize mpv windows properly
-  if command -v celluloid > /dev/null; then
+  elif command -v celluloid > /dev/null; then
     celluloid --new-window "$twitch_url" &
   else
     mpv --really-quiet --interpolation-threshold=0.01 "$twitch_url" &
