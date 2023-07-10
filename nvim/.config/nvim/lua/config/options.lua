@@ -4,12 +4,12 @@ local opt = vim.opt
 -- General settings
 -- ===========================================================================
 
-opt.hidden = true -- Allow unsaved background buffers
-opt.cursorline = true -- Highlight current line
-opt.number = true -- Show line numbers
+opt.hidden = true         -- Allow unsaved background buffers
+opt.cursorline = true     -- Highlight current line
+opt.number = true         -- Show line numbers
 opt.relativenumber = true -- Show relative line numbers
-opt.joinspaces = false -- Use one space afer punctuation
-opt.scrolloff = 3 -- More context when scrolling off end of buffer
+opt.joinspaces = false    -- Use one space afer punctuation
+opt.scrolloff = 3         -- More context when scrolling off end of buffer
 
 -- Open new split panes to right and bottom
 opt.splitbelow = true
@@ -39,7 +39,7 @@ opt.colorcolumn = "81"
 
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appear/become resolved.
-opt.signcolumn = "number"
+opt.signcolumn = "yes"
 
 -- Show effects of commands incrementally
 opt.inccommand = "nosplit"
