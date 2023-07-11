@@ -2,28 +2,34 @@ return {
   {
     -- Autocompletion
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
+      {
+        -- Adds a number of user-friendly snippets
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+          opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+          config = function(_, opts)
+            require("luasnip.loaders.from_vscode").lazy_load(opts)
+          end,
+        },
+      },
 
-      -- Snippet Engine & its associated nvim-cmp source
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-
-      -- Adds LSP completion capabilities
-      "hrsh7th/cmp-nvim-lsp",
-
-      -- Adds a number of user-friendly snippets
-      "rafamadriz/friendly-snippets",
+      -- cmp source plugins
+      {
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+      },
     },
     opts = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      require("luasnip.loaders.from_vscode").lazy_load()
-      luasnip.config.setup({})
 
-      cmp.setup({
+      return {
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -68,10 +74,11 @@ return {
         sources = {
           { name = "nvim_lsp" },
           { name = "luasnip" },
-          { name = "path" },
           { name = "buffer" },
+          { name = "nvim_lua" },
+          { name = "path" },
         },
-      })
+      }
     end,
   },
 }
