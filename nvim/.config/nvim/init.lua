@@ -1,5 +1,9 @@
 -- Set leader early
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
+
+-- Set options before loading lazy.nvim to avoid settings being overwritten
+require("config.options")
+require("config.keymaps")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -14,12 +18,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-  spec = {
-    { import = 'plugins' },
-    { import = 'plugins.lang' },
-  }
-})
-
-require('config.options')
-require('config.keymaps')
+require("lazy").setup(
+  { spec = { { import = "plugins" }, { import = "plugins.lang" } } },
+  { defaults = { lazy = true } }
+)
