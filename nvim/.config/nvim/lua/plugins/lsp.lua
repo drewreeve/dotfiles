@@ -24,6 +24,7 @@ return {
             telemetry = { enable = false },
           },
         },
+        ruby_lsp = {},
       },
     },
     config = function(_, opts)
