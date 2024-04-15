@@ -1,16 +1,29 @@
 # ASDF version manager
 # https://github.com/asdf-vm/asdf
 
-if [ -d "$HOME/.asdf" ]; then
-  source $HOME/.asdf/asdf.sh
+if (( ! ${+ASDF_DIR} )); then
+  for ASDF_DIR in \
+      {/usr/local,/opt/homebrew,/home/linuxbrew/.linuxbrew}/opt/asdf/libexec \
+      /opt/asdf-vm \
+      ${HOME}/.asdf
+  do
+    if [[ -e ${ASDF_DIR} ]] break
+  done
+fi
+export ASDF_DIR
+
+if [ -d "$ASDF_DIR" ]; then
+  source "$ASDF_DIR/asdf.sh"
+
+  if [[ "$ASDF_DIR" == "$HOME/.asdf" ]]; then
+    fpath+=("$ASDF_DIR/completions"(FN))
+  fi
 fi
 
 # Return if asdf not found
 if (( ! $+commands[asdf])); then
   return 1
 fi
-
-fpath=(${ASDF_DIR}/completions $fpath)
 
 # Borrowed from https://github.com/junegunn/fzf/wiki/Examples#asdf
 
