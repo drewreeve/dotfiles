@@ -4,6 +4,10 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
+      -- Disable string italics
+      italic = {
+        strings = false,
+      },
       -- Fix signcolumn
       overrides = {
         SignColumn = { link = "Normal" },
