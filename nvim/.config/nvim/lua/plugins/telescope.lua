@@ -1,6 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    event = "VimEnter",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -9,36 +10,64 @@ return {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
-        config = function()
-          require("telescope").load_extension("fzf")
-        end,
       },
+      { "nvim-telescope/telescope-ui-select.nvim" },
     },
     config = function()
-      local tele_actions = require("telescope.actions")
       require("telescope").setup({
         defaults = {
-          set_env = { ["COLORTERM"] = "truecolor" },
           mappings = {
             i = {
-              ["<C-j>"] = tele_actions.move_selection_next,
-              ["<C-k>"] = tele_actions.move_selection_previous,
-              ["<esc>"] = tele_actions.close,
+              ["<C-j>"] = require("telescope.actions").move_selection_next,
+              ["<C-k>"] = require("telescope.actions").move_selection_previous,
+              ["<esc>"] = require("telescope.actions").close,
             },
             n = {
-              ["<C-j>"] = tele_actions.move_selection_next,
-              ["<C-k>"] = tele_actions.move_selection_previous,
+              ["<C-j>"] = require("telescope.actions").move_selection_next,
+              ["<C-k>"] = require("telescope.actions").move_selection_previous,
             },
           },
         },
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown(),
+          },
+        },
+        pickers = {
+          live_grep = {
+            additional_args = function(_)
+              return { "--hidden" }
+            end,
+          },
+        },
       })
+
+      -- Enable Telescope extensions if they are installed
+      pcall(require("telescope").load_extension, "fzf")
+      pcall(require("telescope").load_extension, "ui-select")
+
+      -- Mappings
+      local map = function(keys, func, desc)
+        vim.keymap.set("n", keys, func, { desc = "Telescope: " .. desc })
+      end
+      local builtin = require("telescope.builtin")
+
+      -- Two keymaps for find files (for now) because I can't shake my muscle memory
+      for _, key in ipairs({ "<leader>ff", "<C-p>" }) do
+        map(key, function()
+          builtin.find_files({ hidden = true })
+        end, "[F]ind [F]iles")
+      end
+      map("<leader>ft", builtin.git_files, "[F]ind files [t]racked in git")
+      map("<leader>fg", builtin.live_grep, "[F]ind with [g]rep")
+      map("<leader>fw", builtin.grep_string, "[F]ind current [W]ord")
+      map("<leader>fd", builtin.diagnostics, "[F]ind in [Diagnostics]")
+      map("<leader>fr", builtin.resume, "[F]ind [R]esume")
+      map("<leader>fh", builtin.help_tags, "[F]ind [H]elp")
+      map("<leader>/", builtin.current_buffer_fuzzy_find, "Find in current buffer")
+      map("<leader>fb", function()
+        builtin.buffers({ sort_mru = true, sort_lastused = true })
+      end, "[F]ind in open [b]uffers")
     end,
-    keys = {
-      {
-        "<C-p>",
-        "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>",
-        desc = "Find files",
-      },
-    },
   },
 }
