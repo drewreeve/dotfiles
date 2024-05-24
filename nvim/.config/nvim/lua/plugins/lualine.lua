@@ -5,7 +5,7 @@ return {
     config = function()
       require("lualine").setup({
         options = {
-          theme = "gruvbox",
+          theme = "catppuccin",
         },
         sections = {
           lualine_c = {
@@ -20,8 +20,8 @@ return {
               color_warn = "#d65d0e",
               color_info = "#458588",
             },
-            "encoding",
-            { "fileformat", icons_enabled = false },
+            -- "encoding",
+            -- { "fileformat", icons_enabled = false },
             "filetype",
           },
         },
