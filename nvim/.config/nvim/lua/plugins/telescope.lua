@@ -13,6 +13,7 @@ return {
         build = "make",
       },
       { "nvim-telescope/telescope-ui-select.nvim" },
+      { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
     },
     config = function()
       require("telescope").setup({
@@ -35,6 +36,7 @@ return {
               ["<C-k>"] = require("telescope.actions").move_selection_previous,
             },
           },
+          prompt_prefix = "    ",
         },
         extensions = {
           ["ui-select"] = {

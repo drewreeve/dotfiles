@@ -54,3 +54,5 @@ opt.termguicolors = true
 
 -- Use system clipboard
 opt.clipboard = "unnamedplus"
+
+vim.g.have_nerd_font = true
