@@ -1,6 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     event = "VimEnter",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
@@ -22,6 +23,7 @@ return {
               flip_columns = 120,
             },
           },
+          file_previewer = require("telescope.previewers").vim_buffer_cat.new,
           mappings = {
             i = {
               ["<C-j>"] = require("telescope.actions").move_selection_next,
