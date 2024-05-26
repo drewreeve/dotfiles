@@ -12,6 +12,9 @@ return {
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { "folke/neodev.nvim", opts = {} },
+
+      -- Schema information
+      "b0o/SchemaStore.nvim",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -81,6 +84,14 @@ return {
       local servers = {
         ansiblels = {},
         bashls = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -99,6 +110,17 @@ return {
           },
         },
         ruby_lsp = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = false,
+                url = "",
+              },
+              schemas = require("schemastore").yaml.schemas(),
+            },
+          },
+        },
       }
 
       require("mason").setup()
