@@ -5,7 +5,7 @@
 local set = vim.keymap.set
 
 -- Clear highlighted searches
-set("n", "<leader>c", ":nohlsearch<CR>", { silent = true })
+set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Switch between last 2 files
 set("n", "<leader><leader>", "<C-^>")
