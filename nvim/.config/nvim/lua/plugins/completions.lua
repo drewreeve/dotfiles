@@ -26,61 +26,57 @@ return {
       },
 
       -- cmp source plugins
-      {
-        "onsails/lspkind.nvim",
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-      },
+      "onsails/lspkind.nvim",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
     },
-    opts = function()
+    config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
+      lspkind.init({})
 
-      return {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
+      cmp.setup({
+        completion = { completeopt = "menu,menuone,noselect" },
+
         mapping = cmp.mapping.preset.insert({
-          ["<C-n>"] = cmp.mapping.select_next_item(),
-          ["<C-p>"] = cmp.mapping.select_prev_item(),
-          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+          -- Select [n]ext item
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<Tab>"] = cmp.mapping.select_next_item(),
+          -- Select [p]revious item
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+
+          -- Scroll documentation [b]ack and [f]orward
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete({}),
-          ["<CR>"] = cmp.mapping({
-            i = function(fallback)
-              if cmp.visible() and cmp.get_active_entry() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-              else
-                fallback()
-              end
-            end,
-            s = cmp.mapping.confirm({ select = true }),
-            c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+
+          -- Accept ([y]es) the completion
+          ["<C-y>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
           }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+
+          -- Move through snippets
+          ["<C-j>"] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
-            else
-              fallback()
             end
           end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.locally_jumpable(-1) then
+          ["<C-k>"] = cmp.mapping(function()
+            if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
-            else
-              fallback()
             end
           end, { "i", "s" }),
         }),
+
         sources = {
           { name = "nvim_lsp" },
           { name = "luasnip" },
@@ -88,7 +84,28 @@ return {
           { name = "nvim_lua" },
           { name = "path" },
         },
-      }
+
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+
+        window = {
+          side_padding = 1,
+          -- completion = {
+          --   border = "rounded",
+          -- },
+        },
+        formatting = {
+          format = lspkind.cmp_format({
+            mode = "symbol_text",
+            preset = "codicons",
+            maxwidth = 50,
+            ellipsis_char = "...",
+          }),
+        },
+      })
     end,
   },
 }
