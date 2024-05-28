@@ -78,6 +78,7 @@ return {
       map("<leader>fb", function()
         builtin.buffers({ sort_mru = true, sort_lastused = true })
       end, "[F]ind in open [b]uffers")
+      map("<leader>fk", builtin.keymaps, "[F]ind [K]eymaps")
     end,
   },
 }
