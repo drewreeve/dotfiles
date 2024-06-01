@@ -7,6 +7,7 @@ foreach file (
   prompt.zsh
   asdf.zsh
   fzf.zsh
+  extract.zsh
   aliases.zsh
   keybinds.zsh
   completions.zsh
