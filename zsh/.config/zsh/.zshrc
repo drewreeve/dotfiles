@@ -11,6 +11,7 @@ foreach file (
   aliases.zsh
   keybinds.zsh
   completions.zsh
+  zoxide.zsh
   zsh-syntax-highlighting.zsh
   zsh-autosuggestions.zsh
 ) {
