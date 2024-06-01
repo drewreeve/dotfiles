@@ -15,7 +15,7 @@ foreach file (
   zsh-syntax-highlighting.zsh
   zsh-autosuggestions.zsh
 ) {
-  source $ZDOTDIR/modules/$file
+  source "$ZDOTDIR/modules/$file"
 }
 unset file
 

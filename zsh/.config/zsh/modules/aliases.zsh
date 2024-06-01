@@ -2,7 +2,7 @@
 # Aliases
 #
 
-alias e=$EDITOR
+alias e="$EDITOR"
 
 # ls
 if (($+commands[dircolors])); then
