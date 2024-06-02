@@ -9,10 +9,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-      -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-      -- used for completion, annotations and signatures of Neovim apis
-      { "folke/neodev.nvim", opts = {} },
-
       -- Schema information
       "b0o/SchemaStore.nvim",
     },
@@ -103,7 +99,10 @@ return {
               },
               workspace = {
                 checkThirdParty = false,
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = {
+                  vim.env.VIMRUNTIME,
+                  "${3rd}/luv/library",
+                },
               },
               telemetry = { enable = false },
             },
