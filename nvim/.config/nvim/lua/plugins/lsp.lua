@@ -8,11 +8,35 @@ return {
       { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-
-      -- Schema information
-      "b0o/SchemaStore.nvim",
     },
-    config = function()
+    opts = {
+      settings = {
+        servers = {
+          lua_ls = {
+            settings = {
+              Lua = {
+                runtime = {
+                  version = "LuaJIT",
+                },
+                diagnostics = {
+                  globals = { "vim" },
+                },
+                workspace = {
+                  checkThirdParty = false,
+                  library = {
+                    vim.env.VIMRUNTIME,
+                    "${3rd}/luv/library",
+                  },
+                },
+                telemetry = { enable = false },
+              },
+            },
+          },
+          stylua = {}, -- lua formatting
+        },
+      },
+    },
+    config = function(_, opts)
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
@@ -70,73 +94,15 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-      -- Enable the following language servers
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      local servers = {
-        ansiblels = {},
-        bashls = {},
-        jsonls = {
-          settings = {
-            json = {
-              schemas = require("schemastore").json.schemas(),
-              validate = { enable = true },
-            },
-          },
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              runtime = {
-                version = "LuaJIT",
-              },
-              diagnostics = {
-                globals = { "vim" },
-              },
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                  "${3rd}/luv/library",
-                },
-              },
-              telemetry = { enable = false },
-            },
-          },
-        },
-        ruby_lsp = {},
-        yamlls = {
-          settings = {
-            yaml = {
-              schemaStore = {
-                enable = false,
-                url = "",
-              },
-              schemas = require("schemastore").yaml.schemas(),
-            },
-          },
-        },
-      }
-
       require("mason").setup()
 
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        "ansible-lint",
-        "stylua",
-        "shfmt",
-        "shellcheck",
-      })
+      local ensure_installed = vim.tbl_keys(opts.settings.servers or {})
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
       require("mason-lspconfig").setup({
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
+            local server = opts.settings.servers[server_name] or {}
             server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
             require("lspconfig")[server_name].setup(server)
           end,
