@@ -109,6 +109,8 @@ return {
           --   border = "rounded",
           -- },
         },
+        --- Fix warning about missing required fields
+        ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
