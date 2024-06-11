@@ -1,56 +1,20 @@
 return {
-  {
-    -- Autocompletion
+  { -- Autocompletion
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      {
-        -- Adds a number of user-friendly snippets
-        "L3MON4D3/LuaSnip",
-        build = (function()
-          -- Build Step is needed for regex support in snippets.
-          -- This step is not supported in many windows environments.
-          -- Remove the below condition to re-enable on windows.
-          if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-            return
-          end
-          return "make install_jsregexp"
-        end)(),
-        dependencies = {
-          "rafamadriz/friendly-snippets",
-          opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-          config = function(_, opts)
-            require("luasnip.loaders.from_vscode").lazy_load(opts)
-          end,
-        },
-        {
-          "folke/lazydev.nvim",
-          ft = "lua", -- only load on lua files
-          opts = {
-            library = {
-              -- Load luvit types when the `vim.uv` word is found
-              { path = "luvit-meta/library", words = { "vim%.uv" } },
-            },
-          },
-        },
-        { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-      },
+      "onsails/lspkind.nvim",
 
       -- cmp source plugins
-      "onsails/lspkind.nvim",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
     },
-    config = function()
+    opts = function()
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
       local lspkind = require("lspkind")
-      lspkind.init({})
 
-      cmp.setup({
+      return {
         completion = { completeopt = "menu,menuone,noselect" },
 
         mapping = cmp.mapping.preset.insert({
@@ -74,33 +38,12 @@ return {
 
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-
-          -- Move through snippets
-          ["<C-j>"] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { "i", "s" }),
-          ["<C-k>"] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { "i", "s" }),
         }),
 
         sources = {
           { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "buffer" },
-          { name = "nvim_lua" },
           { name = "path" },
-          { name = "lazydev", group_index = 0 },
-        },
-
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
         },
 
         window = {
@@ -119,7 +62,85 @@ return {
             ellipsis_char = "...",
           }),
         },
-      })
+      }
+    end,
+  },
+  { -- Adds a number of user-friendly snippets
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    build = (function()
+      -- Build Step is needed for regex support in snippets.
+      -- This step is not supported in many windows environments.
+      -- Remove the below condition to re-enable on windows.
+      if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+        return
+      end
+      return "make install_jsregexp"
+    end)(),
+    opts = {
+      delete_check_events = "TextChanged",
+    },
+    dependencies = {
+      {
+        "rafamadriz/friendly-snippets",
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("luasnip.loaders.from_vscode").lazy_load(opts)
+        end,
+      },
+      { -- Append luasnip specific config to nvim-cmp
+        "hrsh7th/nvim-cmp",
+        dependencies = { "saadparwaiz1/cmp_luasnip" },
+        keys = {
+          {
+            "<C-j>",
+            function()
+              local luasnip = require("luasnip")
+              if luasnip.expand_or_locally_jumpable() then
+                luasnip.expand_or_jump()
+              end
+            end,
+            mode = { "i", "s" },
+          },
+          {
+            "<C-k>",
+            function()
+              local luasnip = require("luasnip")
+              if luasnip.locally_jumpable(-1) then
+                luasnip.jump(-1)
+              end
+            end,
+            mode = { "i", "s" },
+          },
+        },
+        opts = function(_, opts)
+          opts.snippet = {
+            expand = function(args)
+              require("luasnip").lsp_expand(args.body)
+            end,
+          }
+          table.insert(opts.sources, { name = "luasnip" })
+        end,
+      },
+    },
+  },
+
+  { -- Configures luals for editing neovim config
+    "folke/lazydev.nvim",
+    cmd = "LazyDev",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  { -- Add completion source for require statements and module annotations
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      table.insert(opts.sources, { name = "lazydev", group_index = 0 })
     end,
   },
 }
