@@ -1,0 +1,11 @@
+# Fonts
+
+font-family = Berkeley Mono
+font-size = 14
+
+# Theme
+theme = catppuccin-mocha
+selection-invert-fg-bg = true
+
+# Other things
+#copy-on-select = true
