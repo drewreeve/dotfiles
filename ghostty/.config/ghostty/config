@@ -2,10 +2,15 @@
 
 font-family = Berkeley Mono
 font-size = 14
+font-thicken = true
+
+# Mouse
+mouse-hide-while-typing = true
 
 # Theme
 theme = catppuccin-mocha
-selection-invert-fg-bg = true
+#selection-invert-fg-bg = true
+cursor-invert-fg-bg = true
 
 # Other things
 #copy-on-select = true
