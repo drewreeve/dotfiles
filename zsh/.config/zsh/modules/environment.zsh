@@ -13,12 +13,9 @@ setopt EXTENDED_GLOB
 path=(
   $HOME/.local/bin
   /opt/{homebrew,local}/{,s}bin(N)
-  $HOME/.cargo/bin
-  /usr/local/{bin,sbin}
+  $HOME/.cargo/bin(N)
   $path
 )
-# Remove any paths that don't exist
-path=($^path(N))
 
 # Add homebrew managed zsh/site-functions if available
 fpath+=(/opt/homebrew/share/zsh/site-functions(N))
