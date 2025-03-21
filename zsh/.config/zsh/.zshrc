@@ -5,7 +5,7 @@ foreach file (
   title.zsh
   homebrew.zsh
   prompt.zsh
-  asdf.zsh
+  mise.zsh
   fzf.zsh
   extract.zsh
   aliases.zsh
