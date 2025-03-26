@@ -1,6 +1,7 @@
 # Fonts
 
 font-family = Berkeley Mono
+font-style = Condensed
 font-size = 14
 font-thicken = true
 
