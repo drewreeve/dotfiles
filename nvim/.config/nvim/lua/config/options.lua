@@ -53,6 +53,10 @@ opt.writebackup = false
 opt.termguicolors = true
 
 -- Use system clipboard
-opt.clipboard = "unnamedplus"
+vim.schedule(function()
+  opt.clipboard = "unnamedplus"
+end)
 
 vim.g.have_nerd_font = true
+
+opt.confirm = true
