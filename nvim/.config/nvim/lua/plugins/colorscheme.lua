@@ -38,9 +38,8 @@ return {
     priority = 1000,
     opts = {
       integrations = {
-        telescope = {
+        snacks = {
           enabled = true,
-          style = "nvchad",
         },
       },
     },
