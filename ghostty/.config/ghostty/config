@@ -12,7 +12,7 @@ font-thicken = true
 mouse-hide-while-typing = true
 
 # Theme
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 #selection-invert-fg-bg = true
 cursor-invert-fg-bg = true
 
