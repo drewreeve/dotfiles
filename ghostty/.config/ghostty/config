@@ -3,8 +3,7 @@ config-file = ?local/config
 
 # Fonts
 
-font-family = Berkeley Mono
-font-style = Condensed
+font-family = PragmataPro Mono
 font-size = 14
 font-thicken = true
 
@@ -13,9 +12,6 @@ mouse-hide-while-typing = true
 
 # Theme
 theme = Catppuccin Mocha
-#selection-invert-fg-bg = true
 cursor-invert-fg-bg = true
 
-# Other things
-#copy-on-select = true
-
+shell-integration-features = ssh-terminfo, ssh-env
