@@ -7,6 +7,7 @@ return {
       lua = { "stylua" },
       python = { "ruff_format" },
       sh = { "shfmt" },
+      json = { "prettier" },
     },
     formatters = {
       shfmt = {
