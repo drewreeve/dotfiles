@@ -2,41 +2,41 @@ vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
 })
 
+-- stylua: ignore
 local ensure_installed = {
-  "bash",
-  "css",
-  "diff",
-  "dockerfile",
-  "gitcommit",
-  "go",
-  "graphql",
-  "html",
-  "javascript",
-  "json",
-  "json5",
-  "lua",
-  "markdown",
-  "markdown_inline",
-  "python",
-  "query",
-  "regex",
-  "toml",
-  "typescript",
-  "vim",
+  "bash",   "css",      "diff",      "dockerfile",       "gitcommit",
+  "go",     "graphql",  "html",      "javascript",       "json",
+  "json5",  "lua",      "markdown",  "markdown_inline",  "python",
+  "query",  "regex",    "toml",      "typescript",       "vim",
   "yaml",
 }
 
-require("nvim-treesitter").install(ensure_installed)
+-- Install parsers
+local ts = require("nvim-treesitter")
+ts.install(ensure_installed):wait(300000)
 
--- register and start parsers for filetypes
-for _, parser in ipairs(ensure_installed) do
-  local filetypes = parser -- In this case, parser is the filetype/language name
-  vim.treesitter.language.register(parser, filetypes)
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "<filetype>" },
+  callback = function(args)
+    local buf = args.buf
 
-  vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = filetypes,
-    callback = function(event)
-      vim.treesitter.start(event.buf, parser)
-    end,
-  })
-end
+    -- highlighting
+    vim.treesitter.start()
+    -- indentation
+    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
+-- Run :TSUpdate if treesitter is updated
+vim.api.nvim_create_autocmd({ "PackChanged" }, {
+  group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
+  callback = function(args)
+    local spec = args.data.spec
+    if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
+      vim.notify("nvim-treesitter was updated, running :TSUpdate", vim.log.levels.INFO)
+      vim.schedule(function()
+        vim.cmd("TSUpdate")
+      end)
+    end
+  end,
+})
