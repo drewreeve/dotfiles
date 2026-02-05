@@ -15,9 +15,11 @@ require("mason-tool-installer").setup({
     "bashls",
     "jsonls",
     "lua_ls",
+    "ruff",
     "shellcheck",
     "shfmt",
     "stylua",
+    "ty",
     "yamlls",
   },
 })

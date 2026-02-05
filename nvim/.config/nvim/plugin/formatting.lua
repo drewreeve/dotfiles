@@ -15,4 +15,9 @@ require("conform").setup({
     json = { "prettier" },
     javascript = { "prettierd", "prettier", stop_after_first = true },
   },
+  formatters = {
+    shfmt = {
+      prepend_args = { "-i", "2" },
+    },
+  },
 })
