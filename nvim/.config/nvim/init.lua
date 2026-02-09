@@ -1,6 +1,8 @@
 --
--- Neovim settings/keymaps
+-- Neovim settings
 --
+
+vim.g.mapleader = " "
 
 local opt = vim.opt
 
@@ -92,26 +94,3 @@ vim.diagnostic.config({
     end,
   },
 })
-
---
--- Keymaps
---
-
-vim.g.mapleader = " "
-
-local set = vim.keymap.set
-
--- Clear highlighted searches
-set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
--- Switch between last 2 files
-set("n", "<leader><leader>", "<C-^>")
-
--- Move around splits with <c-hjkl>
-set("n", "<C-h>", "<C-w>h", { silent = true })
-set("n", "<C-j>", "<C-w>j", { silent = true })
-set("n", "<C-k>", "<C-w>k", { silent = true })
-set("n", "<C-l>", "<C-w>l", { silent = true })
-
--- Diagnostics
-set("n", "<leader>sd", vim.diagnostic.open_float, { desc = "[S]how [D]iagnostics" })
