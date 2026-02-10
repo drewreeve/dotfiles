@@ -1,4 +1,5 @@
 tap "homebrew/cask-fonts"
+brew "1password-cli"
 brew "asdf"
 brew "bat"
 brew "fd"
