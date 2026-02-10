@@ -3,6 +3,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Auto jump to last position",
   group = vim.api.nvim_create_augroup("auto-last-position", { clear = true }),
   callback = function(args)
+    -- Exclude commit messages
+    if vim.bo[args.buf].filetype == "gitcommit" then
+      return
+    end
+
     local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
     local line_count = vim.api.nvim_buf_line_count(args.buf)
     if mark[1] > 0 and mark[1] <= line_count then
