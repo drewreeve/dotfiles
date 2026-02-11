@@ -24,3 +24,7 @@ tags
 node_modules
 bower_components
 .npm
+
+# claude
+CLAUDE.local.md
+.claude/*.local.*
