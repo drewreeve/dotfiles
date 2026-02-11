@@ -96,10 +96,6 @@
     "vim-eunuch": {
       "rev": "e86bb794a1c10a2edac130feb0ea590a00d03f1e",
       "src": "https://github.com/tpope/vim-eunuch"
-    },
-    "vim-mkdir": {
-      "rev": "039f735268ed0d616e3f3dc5a1db12c929d6c7ab",
-      "src": "https://github.com/pbrisbin/vim-mkdir"
     }
   }
 }
