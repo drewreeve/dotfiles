@@ -1,7 +1,14 @@
 vim.pack.add({
-  "https://github.com/nvim-mini/mini.nvim",
+  "https://github.com/stevearc/oil.nvim",
   "https://github.com/tpope/vim-eunuch",
 })
 
-require("mini.ai").setup()
-require("mini.surround").setup()
+require("oil").setup({
+  keymaps = {
+    ["<C-h>"] = false,
+    ["<C-s>"] = false,
+  },
+  view_options = {
+    show_hidden = true,
+  },
+})

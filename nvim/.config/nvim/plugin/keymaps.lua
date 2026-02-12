@@ -100,3 +100,6 @@ map("n", "<leader>tO", function() require("neotest").output_panel.toggle() end, 
 map("n", "<leader>tS", function() require("neotest").run.stop() end, "Stop (Neotest)")
 map("n", "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, "Toggle Watch (Neotest)")
 -- stylua: ignore end
+
+-- Oil
+map("n", "-", "<CMD>Oil<CR>", "Open parent directory")
