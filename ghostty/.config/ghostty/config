@@ -2,10 +2,17 @@
 config-file = ?local/config
 
 # Fonts
+font-family = PragmataPro Mono Liga
 
-font-family = PragmataPro Mono
+font-feature = -calt
+font-feature = ss13
+font-feature = ss15
+font-feature = ss18
+
 font-size = 14
+
 font-thicken = true
+font-synthetic-style = false
 
 # Mouse
 mouse-hide-while-typing = true
