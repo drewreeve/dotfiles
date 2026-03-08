@@ -10,11 +10,22 @@
   trust = "!mkdir -p .git/safe"
   st = status -sb
   lg = log --graph --oneline --decorate
-  newbranch = "!f(){ git co -B ${1} && git push -u origin ${1}; };f"
-  rmbranch = "!f(){ git branch -d ${1} && git push origin --delete ${1}; };f"
+[branch]
+  sort = -committerdate
+[column]
+  ui = auto
+[commit]
+  verbose = true
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 [core]
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.config/git/ignore
   autocrlf = input
+[init]
+  defaultBranch = main
 [include]
   path = ~/.gitconfig.local
 [color]
@@ -25,5 +36,11 @@
   autocorrect = 0
 [rebase]
   autosquash = true
-[diff]
-  colorMoved = zebra
+[push]
+	autoSetupRemote = true
+	followTags = true
+[rerere]
+  enabled = true
+  autoupdate = true
+[merge]
+	conflictstyle = zdiff3
