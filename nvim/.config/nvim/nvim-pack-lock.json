@@ -74,11 +74,11 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
-      "rev": "45a07f869b0cffba342276f2c77ba7c116d35db8",
+      "rev": "5cb05e1b0fa3c469958a2b26f36b3fe930af221c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "a0e182ae21fda68c59d1f36c9ed45600aef50311",
+      "rev": "4e91b5d0394329a229725b021a8ea217099826ef",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "oil.nvim": {
