@@ -34,7 +34,7 @@ map("n", "<leader>h", function()
 end, "Toggle Inlay [H]ints")
 
 -- Packages
-map("n", "<leader>vpu", "<Cmd>lua vim.pack.update()", "Update Plugins")
+map("n", "<leader>vpu", "<Cmd>lua vim.pack.update()<CR>", "Update Plugins")
 map("n", "<leader>vpd", function()
   local packages = vim
     .iter(vim.pack.get())
