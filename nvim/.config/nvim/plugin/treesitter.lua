@@ -17,12 +17,21 @@ local ts = require("nvim-treesitter")
 ts.install(ensure_installed):wait(300000)
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "<filetype>" },
+  pattern = "*",
   callback = function(args)
     local buf = args.buf
 
     -- highlighting
-    vim.treesitter.start()
+    if not pcall(vim.treesitter.start) then
+      local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
+      if lang and require("nvim-treesitter.parsers")[lang] then
+        vim.schedule(function()
+          ts.install({ lang }):wait(300000)
+          pcall(vim.treesitter.start, buf)
+        end)
+      end
+    end
+
     -- indentation
     vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
