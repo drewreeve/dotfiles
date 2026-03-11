@@ -1,13 +1,18 @@
 vim.pack.add({
-  "https://github.com/L3MON4D3/LuaSnip",
+  "https://github.com/nvim-mini/mini.nvim",
   "https://github.com/rafamadriz/friendly-snippets",
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
 })
 
-require("luasnip.loaders.from_vscode").lazy_load()
+require("mini.snippets").setup({
+  snippets = {
+    require("mini.snippets").gen_loader.from_lang(),
+  },
+})
 
 require("blink.cmp").setup({
   cmdline = { enabled = false },
+  snippets = { preset = "mini_snippets" },
 
   completion = {
     list = { selection = { preselect = false, auto_insert = true } },
