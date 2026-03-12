@@ -26,3 +26,8 @@ shell-integration-features = ssh-terminfo, ssh-env
 window-padding-x = 6
 window-padding-y = 4
 window-padding-balance = true
+
+# Notifications
+notify-on-command-finish = unfocused
+notify-on-command-finish-action = no-bell,notify
+notify-on-command-finish-after = 30s
