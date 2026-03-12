@@ -12,11 +12,15 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- Clear highlighted searches
-map("n", "<Esc>", "<cmd>nohlsearch<CR>")
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", "Clear Search Highlights")
 
--- Switch between last 2 files
-map("n", "<leader><leader>", "<C-^>")
+-- Buffers
+map("n", "<leader>bd", "<Cmd>lua MiniBufremove.delete()<CR>", "[B]uffer [D]elete")
+map("n", "<leader>bdw", "<Cmd>:bd<CR>", "[B]uffer [D]elete [W]indow")
+map("n", "<leader>bD", "<Cmd>:bd<CR>", "[B]uffer [D]elete Window")
+map("n", "<leader><leader>", "<Cmd>b#<CR>", "Toggle Previous File")
+map("n", "<leader>bw", "<Cmd>lua MiniBufremove.wipeout()<CR>", "[B]uffer [W]ipeout")
+map("n", "<leader>bW", "<Cmd>lua MiniBufremove.wipeout(0, true)<CR>", "[B]uffer [W]ipeout!")
 
 -- Move around splits with <c-hjkl>
 map("n", "<C-h>", "<C-w>h", { silent = true })
