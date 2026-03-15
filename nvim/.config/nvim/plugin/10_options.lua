@@ -2,45 +2,53 @@ vim.g.mapleader = " "
 
 local opt = vim.opt
 
+-- Editing
+opt.ignorecase = true
+opt.smartcase = true
+opt.infercase = true
+opt.tabstop = 2 -- Tab = 2 spaces
+opt.shiftwidth = 2 -- No. of spaces for indentation
+opt.expandtab = true -- Convert tabs to spaces
+opt.smartindent = true
+opt.spelloptions = "camel"
+opt.virtualedit = "block"
+opt.iskeyword = "@,48-57,_,192-255,-" -- Treat dash as `word` textobject part
+opt.formatoptions = "rqnl1j" -- Improve comment editing (taken from MiniMax)
+local f = function()
+  vim.cmd("setlocal formatoptions-=c formatoptions-=o")
+end
+Config.new_autocmd("FileType", nil, f, "Proper 'formatoptions'")
+
+-- Built-in completion
+vim.o.complete = ".,w,b,kspell" -- Use less sources
+vim.o.completeopt = "menuone,noselect,fuzzy,nosort"
+vim.o.completetimeout = 100 -- Limit sources delay
+
+-- UI
+opt.breakindent = true -- Indent wrapped lines to match line start
+opt.breakindentopt = "list:-1" -- Add padding for lists (if 'wrap' is set)
+opt.colorcolumn = "+1"
 opt.hidden = true -- Allow unsaved background buffers
 opt.cursorline = true -- Highlight current line
+opt.cursorlineopt = "screenline,number"
 opt.number = true -- Show line numbers
 opt.relativenumber = true -- Show relative line numbers
 opt.joinspaces = false -- Use one space afer punctuation
 opt.scrolloff = 3 -- More context when scrolling off end of buffer
-
--- Open new split panes to right and bottom
 opt.splitbelow = true
 opt.splitright = true
+opt.pumborder = "single" -- Use border in popup menu
+opt.pumheight = 12 -- Make popup menu smaller
+opt.pummaxwidth = 100 -- Make popup menu not too wide
+opt.winborder = "single"
+opt.signcolumn = "yes" -- Always show signcolumn
+opt.showmode = false
+opt.shortmess:append("c")
 
 -- Enhanced tab completion
 opt.wildmode = { "list:longest", "list:full" }
 
--- Make searches case-sensitive only if they contain upper-case characters
-opt.ignorecase = true
-opt.smartcase = true
-
--- Softtabs, 2 spaces
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
-opt.shiftround = true
-opt.expandtab = true
-
 opt.updatetime = 1000
-
--- Don't pass messages to |ins-completion-menu|.
-opt.shortmess:append("c")
-
--- Highlight where 80 characters is
-opt.colorcolumn = "81"
-
--- Always show the signcolumn, otherwise it would shift the text each time
--- diagnostics appear/become resolved.
-opt.signcolumn = "yes"
-
--- Show effects of commands incrementally
-opt.inccommand = "nosplit"
 
 -- Disable swapfiles
 opt.swapfile = false
@@ -55,26 +63,23 @@ vim.schedule(function()
   opt.clipboard = "unnamedplus"
 end)
 
-vim.g.have_nerd_font = true
-
 opt.confirm = true
-
 --
 -- Diagnostic Config
--- See :help vim.diagnostic.Opts
 --
+
 local diagnostic_opts = {
   severity_sort = true,
   float = { border = "rounded", source = "if_many" },
   underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = vim.g.have_nerd_font and {
+  signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "󰅚 ",
       [vim.diagnostic.severity.WARN] = "󰀪 ",
       [vim.diagnostic.severity.INFO] = "󰋽 ",
       [vim.diagnostic.severity.HINT] = "󰌶 ",
     },
-  } or {},
+  },
   virtual_text = {
     current_line = false,
   },
