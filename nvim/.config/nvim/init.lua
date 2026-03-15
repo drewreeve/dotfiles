@@ -1,91 +1,34 @@
---
--- Neovim settings
---
+-- Borrowed from: https://github.com/nvim-mini/MiniMax
 
-vim.g.mapleader = " "
+_G.Config = {}
 
-local opt = vim.opt
+vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
 
-opt.hidden = true -- Allow unsaved background buffers
-opt.cursorline = true -- Highlight current line
-opt.number = true -- Show line numbers
-opt.relativenumber = true -- Show relative line numbers
-opt.joinspaces = false -- Use one space afer punctuation
-opt.scrolloff = 3 -- More context when scrolling off end of buffer
+local misc = require("mini.misc")
+Config.now = function(f)
+  misc.safely("now", f)
+end
+Config.later = function(f)
+  misc.safely("later", f)
+end
+Config.now_if_args = vim.fn.argc(-1) > 0 and Config.now or Config.later
 
--- Open new split panes to right and bottom
-opt.splitbelow = true
-opt.splitright = true
+local gr = vim.api.nvim_create_augroup("custom-config", {})
+Config.new_autocmd = function(event, pattern, callback, desc)
+  local opts = { group = gr, pattern = pattern, callback = callback, desc = desc }
+  vim.api.nvim_create_autocmd(event, opts)
+end
 
--- Enhanced tab completion
-opt.wildmode = { "list:longest", "list:full" }
-
--- Make searches case-sensitive only if they contain upper-case characters
-opt.ignorecase = true
-opt.smartcase = true
-
--- Softtabs, 2 spaces
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
-opt.shiftround = true
-opt.expandtab = true
-
-opt.updatetime = 1000
-
--- Don't pass messages to |ins-completion-menu|.
-opt.shortmess:append("c")
-
--- Highlight where 80 characters is
-opt.colorcolumn = "81"
-
--- Always show the signcolumn, otherwise it would shift the text each time
--- diagnostics appear/become resolved.
-opt.signcolumn = "yes"
-
--- Show effects of commands incrementally
-opt.inccommand = "nosplit"
-
--- Disable swapfiles
-opt.swapfile = false
-opt.backup = false
-opt.writebackup = false
-
--- Colours
-opt.termguicolors = true
-
--- Use system clipboard
-vim.schedule(function()
-  opt.clipboard = "unnamedplus"
-end)
-
-vim.g.have_nerd_font = true
-
-opt.confirm = true
-
---
--- Diagnostic Config
--- See :help vim.diagnostic.Opts
---
-vim.diagnostic.config({
-  severity_sort = true,
-  float = { border = "rounded", source = "if_many" },
-  underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = vim.g.have_nerd_font and {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "󰅚 ",
-      [vim.diagnostic.severity.WARN] = "󰀪 ",
-      [vim.diagnostic.severity.INFO] = "󰋽 ",
-      [vim.diagnostic.severity.HINT] = "󰌶 ",
-    },
-  } or {},
-  virtual_text = {
-    current_line = false,
-  },
-  virtual_lines = {
-    current_line = true,
-  },
-
-  -- Don't update diagnostics when typing
-  update_in_insert = false,
-})
+Config.on_packchanged = function(plugin_name, kinds, callback, desc)
+  local f = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if not (name == plugin_name and vim.tbl_contains(kinds, kind)) then
+      return
+    end
+    if not ev.data.active then
+      vim.cmd.packadd(plugin_name)
+    end
+    callback()
+  end
+  Config.new_autocmd("PackChanged", "*", f, desc)
+end
