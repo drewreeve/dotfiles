@@ -63,11 +63,12 @@ now_if_args(function()
       "bashls",
       "jsonls",
       "lua_ls",
+      "pyright",
       "ruff",
       "shellcheck",
       "shfmt",
       "stylua",
-      "ty",
+      -- "ty",
       "yamlls",
     },
   })
