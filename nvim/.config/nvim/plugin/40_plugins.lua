@@ -127,6 +127,7 @@ later(function()
       lsp_format = "fallback",
     },
     formatters_by_ft = {
+      go = { "goimports", "gofmt" },
       lua = { "stylua" },
       python = { "ruff_format" },
       sh = { "shfmt" },
