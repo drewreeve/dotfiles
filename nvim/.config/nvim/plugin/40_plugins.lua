@@ -155,12 +155,16 @@ later(function()
     "https://github.com/nvim-neotest/neotest",
     "https://github.com/nvim-neotest/neotest-python",
     "https://github.com/fredrikaverpil/neotest-golang",
+    "https://github.com/olimorris/neotest-rspec",
+    "https://github.com/zidhuss/neotest-minitest",
   })
 
   require("neotest").setup({
     adapters = {
       require("neotest-python"),
       require("neotest-golang"),
+      require("neotest-rspec"),
+      require("neotest-minitest"),
     },
   })
 end)
