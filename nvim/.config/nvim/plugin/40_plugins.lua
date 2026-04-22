@@ -154,11 +154,13 @@ later(function()
     "https://github.com/nvim-neotest/nvim-nio",
     "https://github.com/nvim-neotest/neotest",
     "https://github.com/nvim-neotest/neotest-python",
+    "https://github.com/fredrikaverpil/neotest-golang",
   })
 
   require("neotest").setup({
     adapters = {
       require("neotest-python"),
+      require("neotest-golang"),
     },
   })
 end)
