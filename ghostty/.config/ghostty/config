@@ -24,11 +24,13 @@ mouse-hide-while-typing = true
 theme = Catppuccin Mocha
 cursor-invert-fg-bg = true
 
-shell-integration-features = ssh-terminfo, ssh-env
+shell-integration-features = ssh-terminfo,ssh-env
 
 window-padding-x = 6
 window-padding-y = 4
 window-padding-balance = true
+
+scrollback-limit = 100_000
 
 # Notifications
 notify-on-command-finish = unfocused
