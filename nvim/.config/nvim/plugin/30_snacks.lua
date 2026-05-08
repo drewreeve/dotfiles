@@ -8,6 +8,7 @@ require("snacks").setup({
       input = {
         keys = {
           ["<Esc>"] = { "close", mode = { "n", "i" } },
+          ["<a-h>"] = { "toggle_hidden", mode = { "n", "i" } },
         },
       },
     },
