@@ -1,0 +1,27 @@
+[tools]
+# Runtimes
+go = "latest"
+node = "lts"
+uv = "latest"
+
+# Go tools
+"go:golang.org/x/tools/cmd/goimports" = "latest"
+
+# LSP servers
+lua-language-server = "latest"
+"npm:@ansible/ansible-language-server" = "latest"
+"npm:bash-language-server" = "latest"
+"npm:pyright" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+"npm:yaml-language-server" = "latest"
+
+# Formatters
+ruff = "latest"
+shfmt = "latest"
+stylua = "latest"
+"npm:prettier" = "latest"
+"npm:@fsouza/prettierd" = "latest"
+
+# Linters
+shellcheck = "latest"
+"pipx:yamllint" = "latest"
