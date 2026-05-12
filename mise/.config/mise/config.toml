@@ -2,6 +2,9 @@
 # Runtimes
 go = "latest"
 node = "lts"
+
+# Package managers
+aube = "latest"
 uv = "latest"
 
 # Go tools
