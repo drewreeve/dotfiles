@@ -28,3 +28,6 @@ stylua = "latest"
 # Linters
 shellcheck = "latest"
 "pipx:yamllint" = "latest"
+
+[settings]
+minimum_release_age = "7d"
