@@ -33,4 +33,5 @@ if OS.mac?
   cask "keepassxc"
   cask "orbstack"
   cask "raycast"
+  cask "rectangle-pro"
 end
