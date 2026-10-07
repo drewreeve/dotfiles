@@ -202,6 +202,10 @@ fi
 (( $+commands[mise] )) && eval "$(mise activate zsh)"
 # Must come after compinit
 (( $+commands[zoxide] )) && eval "$(zoxide init --cmd cd zsh)"
+# Keep zsh's own up-arrow history; atuin still owns ctrl-r. atuin also prepends
+# itself to ZSH_AUTOSUGGEST_STRATEGY, falling back to zsh history.
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+(( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
 
 #
 # Aliases
