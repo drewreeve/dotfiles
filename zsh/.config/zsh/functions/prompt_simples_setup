@@ -1,84 +1,126 @@
-prompt_simples_zstyles() {
-  # vcs_info:
-  # %a => current action (rebase/merge etc)
-  # %b => current branch
-  # %c => string from `stagedstr` if there are staged changes
-  # %i => current revision number/identifier
-  # %m => A "misc" replacement, the backend decides what it expands to
-  # %u => string from `unstagedstr` if there are unstaged changes
+# Simple prompt similar to pure
+#
+#   user@host in ~/path   branch*+?⇣⇡ rebase-interactive ≡ 42s
+#   ❯
+#
+# user@host only shows over SSH, or as root
 
-  zstyle ':vcs_info:*' enable git
-  zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' get-revision true
-  zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f %m%u%c'
-  zstyle ':vcs_info:*' actionformats '%F{magenta}%b|%F{yellow}%a%f %m%u%c'
-  zstyle ':vcs_info:*' stagedstr '%F{green}●%f'
-  zstyle ':vcs_info:*' unstagedstr '%F{yellow}●%f'
-  zstyle ':vcs_info:git+set-message:*' hooks git-untracked git-updown
-}
-
-+vi-git-untracked () {
-  # Set `misc` expando to an empty string as git puts patch info into it
-  # which we don't use
-  hook_com[misc]=''
-  if [[ -n $(git ls-files --exclude-standard --others 2>/dev/null) ]]; then
-    hook_com[misc]+="%F{red}●%f"
-  fi
-}
-
-+vi-git-updown() {
-  git rev-parse @{upstream} >/dev/null 2>&1 || return
-  local -a x; x=( $(git rev-list --left-right --count HEAD...@{upstream} ) )
-
-  # Add a space if files are staged/unstaged so things aren't too squashed
-  #if [[ -n hook_com[staged] ]] || [[ -n hook_com[unstaged] ]]; then
-  if [[ -n $hook_com[misc] || -n $hook_com[unstaged] || -n $hook_com[staged] ]];
-  then
-      hook_com[staged]+=' '
-  fi
-
-  hook_com[staged]+="%F{white}"
-  (( x[2] )) && hook_com[staged]+="⇣$x[2]"
-  (( x[1] )) && hook_com[staged]+="⇡$x[1]"
-  hook_com[staged]+="%f"
-  return 0
+prompt_simples_preexec() {
+  typeset -g prompt_simples_start=$EPOCHREALTIME
 }
 
 prompt_simples_precmd() {
-  vcs_info
+  emulate -L zsh
+
+  local p=$prompt_newline$prompt_simples_user
+
+  # Full path with $HOME abbreviated to ~
+  p+='%B%F{cyan}%~%f%b'
+
+  prompt_simples_git
+
+  # Duration of the last command, if it took long enough to be interesting.
+  # Unset so pressing enter on an empty line doesn't show it again
+  if (( $+prompt_simples_start )); then
+    local -i secs=$(( EPOCHREALTIME - prompt_simples_start ))
+    unset prompt_simples_start
+    if (( secs >= 2 )); then
+      local duration=$(( secs % 60 ))s
+      (( secs >= 60 )) && duration=$(( secs % 3600 / 60 ))m$duration
+      (( secs >= 3600 )) && duration=$(( secs / 3600 ))h$duration
+      p+="%B%F{yellow} $duration%f%b"
+    fi
+  fi
+
+  # %(?..) picks the colour from the last command's exit status. The first
+  # prompt gets the status of whatever ran last in .zshrc, so ignore it there
+  local colour='%(?.%F{magenta}.%F{red})'
+  if (( $+prompt_simples_first )); then
+    colour='%F{magenta}'
+    unset prompt_simples_first
+  fi
+  p+=$prompt_newline$colour'❯%f '
+
+  PROMPT=$p
+}
+
+# Git info: branch, * for unstaged changes, + for staged changes,
+# ? for untracked files, an in-progress action such as a rebase,
+# ⇣⇡ when behind/ahead of upstream and ≡ when stashed.
+# Appends to $p from prompt_simples_precmd, saving a subshell
+prompt_simples_git() {
+  # For (#b) and <-> below
+  setopt localoptions extendedglob
+
+  # Empty outside a repo, and inside .git where --show-toplevel is an error
+  local git_dir=${${(f)"$(command git rev-parse --show-toplevel --absolute-git-dir 2>/dev/null)"}[2]}
+  [[ -n $git_dir ]] || return
+
+  # (r) gives the first element matching a pattern.
+  # Patterns use ? for a space, seems to avoid a quirk in tree-sitter
+  local -a lines=(${(f)"$(command git --no-optional-locks status --porcelain=v2 --branch --show-stash 2>/dev/null)"})
+
+  local branch=${${lines[(r)\#?branch.head?*]}##* }
+  # Detached HEAD, so use the short commit hash
+  [[ $branch == '(detached)' ]] && branch=${${${lines[(r)\#?branch.oid?*]}##* }[1,7]}
+
+  # Changed files are "1 XY ..." or "2 XY ..." where X is the staged status,
+  # Y the unstaged one, and . means unchanged. Conflicted files are "u XY ...",
+  # and only count as unstaged
+  local markers
+  [[ -n ${lines[(r)[12]??[^.]*]}${lines[(r)u?*]} ]] && markers+='*'
+  [[ -n ${lines[(r)[12]?[^.]*]} ]] && markers+=+
+  [[ -n ${lines[(r)\??*]} ]] && markers+='?'
+
+  # Line is "# branch.ab +<ahead> -<behind>", and (#b) captures into $match
+  if [[ ${lines[(r)\#?branch.ab?*]} == (#b)*+(<->)' -'(<->) ]]; then
+    (( match[2] )) && markers+=⇣
+    (( match[1] )) && markers+=⇡
+  fi
+
+  # The same labels as fish's fish_print_git_action, where the first match wins
+  local file label action
+  for file label in \
+      rebase-apply/rebasing rebase \
+      rebase-apply/applying apply \
+      rebase-apply rebase/apply \
+      rebase-merge/interactive rebase-interactive \
+      rebase-merge rebase-merge \
+      MERGE_HEAD merge \
+      CHERRY_PICK_HEAD cherry-pick \
+      REVERT_HEAD revert \
+      BISECT_LOG bisect
+  do
+    [[ -e $git_dir/$file ]] && { action=$label; break }
+  done
+  [[ $action == (cherry-pick|revert) && -d $git_dir/sequencer ]] && action+=-sequence
+
+  # Escape % so a branch name can't inject prompt sequences
+  p+="%B%F{magenta}  "$'\uf418'" ${branch//\%/%%}%F{red}$markers"
+  [[ -n $action ]] && p+="%F{yellow} $action"
+  [[ -n ${lines[(r)\#?stash?*]} ]] && p+="%F{cyan} ≡"
+  p+='%f%b'
 }
 
 prompt_simples_setup() {
-  prompt_opts=(subst percent)
+  # No subst, so nothing from git (like a branch name) is ever expanded
+  prompt_opts=(cr percent sp)
 
-  autoload -Uz add-zsh-hook
-  autoload -Uz vcs_info
-
-  add-zsh-hook precmd prompt_simples_precmd
-
-  prompt_simples_zstyles
-
-  # prompt:
-  # %B => bold
-  # %b => unbold
-  # %F => color dict
-  # %f => reset color
-  # %m => shortname host
-  # %n => username
-  # %~ => current path
-  # %(?..) => prompt conditional - %(condition.true.false)
-
-  prompt=$prompt_newline'%B'
-
-  # If this is an ssh connection show user@hostname
-  if [[ -n $SSH_CONNECTION ]]; then
-    prompt+='%F{yellow}%n%f@%F{green}%m%f: '
+  # Neither changes during a session, so build user@host once.
+  # %(!..) makes the username red as root
+  typeset -g prompt_simples_user=
+  if [[ -n $SSH_CONNECTION ]] || (( EUID == 0 )); then
+    prompt_simples_user='%B%F{yellow}%(!.%F{red}.)%n%F{yellow}'
+    [[ -n $SSH_CONNECTION ]] && prompt_simples_user+='@%m'
+    prompt_simples_user+='%f%b in '
   fi
 
-  prompt+='%F{cyan}%~%f '
-  prompt+='${vcs_info_msg_0_}'        # git info
-  prompt+=$prompt_newline
-  prompt+="%(?.%f.%F{red})%#%f%b "    # red prompt if non zero exit code
+  typeset -g prompt_simples_first=1
+
+  zmodload zsh/datetime
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd prompt_simples_precmd
+  add-zsh-hook preexec prompt_simples_preexec
 }
 
 prompt_simples_setup "$@"

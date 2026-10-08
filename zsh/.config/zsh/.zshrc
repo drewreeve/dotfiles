@@ -188,12 +188,8 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 # Prompt
 #
 
-if (( $+commands[starship] )); then
-  eval "$(starship init zsh)"
-else
-  autoload -Uz promptinit && promptinit
-  prompt simples
-fi
+autoload -Uz promptinit && promptinit
+prompt simples
 
 #
 # Tools
