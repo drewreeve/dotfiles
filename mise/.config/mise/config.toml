@@ -15,6 +15,7 @@ lua-language-server = "latest"
 "npm:@ansible/ansible-language-server" = "latest"
 "npm:bash-language-server" = "latest"
 "npm:pyright" = "latest"
+"gem:ruby-lsp" = "latest"
 "npm:vscode-langservers-extracted" = "latest"
 "npm:yaml-language-server" = "latest"
 
