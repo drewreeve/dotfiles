@@ -16,17 +16,15 @@ from scratch yourself and include things which provide value for you.
 
 Each top-level directory is a mise dotfile group, declared in
 `mise/.config/mise/config.toml`. On a new machine, install git (on macOS,
-`xcode-select --install`), then install mise and point it at that config until
-it links itself into place:
+`xcode-select --install`), then run:
 
 ```sh
-curl -fsSL https://mise.run | sh
-export PATH="$HOME/.local/bin:$PATH"
-git clone https://github.com/drewreeve/dotfiles.git ~/.dotfiles
-MISE_GLOBAL_CONFIG_FILE=~/.dotfiles/mise/.config/mise/config.toml mise bootstrap
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/drewreeve/dotfiles/main/install.sh)"
 ```
 
-The `export` only lasts for the current shell; open a new one once bootstrap
-has finished.
+`install.sh` installs mise, clones this repo to `~/.dotfiles`, and runs
+`mise bootstrap` against the config until it links itself into place. Any
+arguments are passed to `mise bootstrap`, so `./install.sh --dry-run` previews
+the changes. Open a new shell once it has finished.
 
 After that, `mise dot apply` relinks and `mise dot status` shows what's deployed.
