@@ -10,4 +10,17 @@ from scratch yourself and include things which provide value for you.
 
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [fd](https://github.com/sharkdp/fd)
-* [stow](https://www.gnu.org/software/stow/)
+* [mise](https://mise.jdx.dev)
+
+## Install
+
+Each top-level directory is a mise dotfile group, declared in
+`mise/.config/mise/config.toml`. On a new machine, point mise at that config
+until it links itself into place:
+
+```sh
+git clone <this repo> ~/.dotfiles
+MISE_GLOBAL_CONFIG_FILE=~/.dotfiles/mise/.config/mise/config.toml mise bootstrap
+```
+
+After that, `mise dot apply` relinks and `mise dot status` shows what's deployed.

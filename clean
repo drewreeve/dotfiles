@@ -2,16 +2,12 @@
 
 set -euo pipefail
 
-if ! hash stow 2>/dev/null; then
-  echo "stow required but not installed. Aborting."
+if ! hash mise 2>/dev/null; then
+  echo "mise required but not installed. Aborting."
   exit 1
 fi
 
-packages=$(find . -maxdepth 1 -type d ! -name '.*' -printf '%f\n')
-
-for pkg in $packages; do
-  stow -Dv "$pkg" -t ~/
-done
+mise dot unapply -y
 
 rm -rf ~/.vim
 echo "Removed ~/.vim"

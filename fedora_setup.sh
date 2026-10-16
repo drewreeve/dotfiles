@@ -7,7 +7,6 @@ install_dependencies() {
     alacritty \
     bat \
     ripgrep \
-    stow \
     mako \
     gammastep \
     grim \

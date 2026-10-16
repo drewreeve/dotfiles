@@ -32,3 +32,25 @@ shellcheck = "latest"
 
 # Utils
 "npm:cf" = "latest"
+
+[settings.dotfiles]
+# Match the relative links stow created
+relative_symlinks = true
+
+# One group per directory in ~/.dotfiles, deployed file by file into ~
+[dotfile_groups]
+aube = { root = "aube", exclude = [".DS_Store"] }
+bat = { root = "bat", exclude = [".DS_Store"] }
+bin = { root = "bin", exclude = [".DS_Store"] }
+fish = { root = "fish", exclude = [".DS_Store"] }
+ghostty = { root = "ghostty", exclude = [".DS_Store"] }
+git = { root = "git", exclude = [".DS_Store"] }
+jj = { root = "jj", exclude = [".DS_Store"] }
+kitty = { root = "kitty", exclude = [".DS_Store"] }
+mise = { root = "mise", exclude = [".DS_Store"] }
+mpv = { root = "mpv", exclude = [".DS_Store"] }
+nvim = { root = "nvim", exclude = [".DS_Store"] }
+ripgrep = { root = "ripgrep", exclude = [".DS_Store"] }
+ruby = { root = "ruby", exclude = [".DS_Store"] }
+tmux = { root = "tmux", exclude = [".DS_Store"] }
+zsh = { root = "zsh", exclude = [".DS_Store"] }
