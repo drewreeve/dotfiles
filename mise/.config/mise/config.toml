@@ -36,6 +36,7 @@ shellcheck = "latest"
 
 # System packages; entries for a manager the machine lacks are skipped
 [bootstrap.packages]
+"brew:bat" = { os = "macos" }
 "brew:fd" = { os = "macos" }
 "brew:ripgrep" = { os = "macos" }
 "brew:gh" = { os = "macos" }
@@ -45,11 +46,13 @@ shellcheck = "latest"
 "brew:zsh-syntax-highlighting" = { os = "macos" }
 # Use brew as Ubuntu's apt version is often old
 "brew:neovim" = "latest"
+"brew:zoxide" = "latest"
 # nvim-treesitter builds parsers with it
 "brew:tree-sitter-cli" = "latest"
 # Ubuntu and Fedora don't package it
 "brew:zsh-completions" = "latest"
 # Ubuntu
+"apt:bat" = "latest"
 "apt:build-essential" = "latest"
 "apt:fd-find" = "latest"
 "apt:gh" = "latest"
@@ -61,6 +64,7 @@ shellcheck = "latest"
 "apt:zsh-syntax-highlighting" = "latest"
 # Fedora
 "dnf:@development-tools" = "latest"
+"dnf:bat" = "latest"
 "dnf:fd-find" = "latest"
 "dnf:gh" = "latest"
 "dnf:1password-cli" = "latest"
@@ -83,7 +87,10 @@ pre-packages = [
   'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/gh-repo.sh"',
   'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/1password-repo.sh"',
 ]
-post-packages = 'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/fd-link.sh"'
+post-packages = [
+  'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/fd-link.sh"',
+  'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/bat-link.sh"',
+]
 
 [settings.dotfiles]
 # Match the relative links stow created
