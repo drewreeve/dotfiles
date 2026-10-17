@@ -16,6 +16,7 @@ path=(
 fpath+=(
   /opt/homebrew/share/zsh/site-functions(N)
   /opt/homebrew/share/zsh-completions(N)
+  /home/linuxbrew/.linuxbrew/share/zsh-completions(N)
   $ZDOTDIR/functions
 )
 

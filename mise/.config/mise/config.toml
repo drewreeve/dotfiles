@@ -40,22 +40,32 @@ shellcheck = "latest"
 "brew:ripgrep" = { os = "macos" }
 "brew:gh" = { os = "macos" }
 "brew-cask:1password-cli" = { os = "macos" }
+"brew:zsh-autosuggestions" = { os = "macos" }
+"brew:zsh-syntax-highlighting" = { os = "macos" }
 # Use brew as Ubuntu's apt version is often old
 "brew:neovim" = "latest"
 # nvim-treesitter builds parsers with it
 "brew:tree-sitter-cli" = "latest"
+# Ubuntu and Fedora don't package it
+"brew:zsh-completions" = "latest"
 # Ubuntu
 "apt:build-essential" = "latest"
 "apt:fd-find" = "latest"
 "apt:gh" = "latest"
 "apt:1password-cli" = "latest"
 "apt:ripgrep" = "latest"
+"apt:zsh" = "latest"
+"apt:zsh-autosuggestions" = "latest"
+"apt:zsh-syntax-highlighting" = "latest"
 # Fedora
 "dnf:@development-tools" = "latest"
 "dnf:fd-find" = "latest"
 "dnf:gh" = "latest"
 "dnf:1password-cli" = "latest"
 "dnf:ripgrep" = "latest"
+"dnf:zsh" = "latest"
+"dnf:zsh-autosuggestions" = "latest"
+"dnf:zsh-syntax-highlighting" = "latest"
 
 # GitHub's own gh repos, per https://github.com/cli/cli/blob/trunk/docs/install_linux.md
 [bootstrap.apt.sources.github-cli]
