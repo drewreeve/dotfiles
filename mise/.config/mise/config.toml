@@ -2,6 +2,7 @@
 # Runtimes
 go = "latest"
 node = "lts"
+ruby = "4.0"
 
 # Package managers
 aube = "latest"
