@@ -42,12 +42,16 @@ shellcheck = "latest"
 "brew-cask:1password-cli" = { os = "macos" }
 # Use brew as Ubuntu's apt version is often old
 "brew:neovim" = "latest"
+# nvim-treesitter builds parsers with it
+"brew:tree-sitter-cli" = "latest"
 # Ubuntu
+"apt:build-essential" = "latest"
 "apt:fd-find" = "latest"
 "apt:gh" = "latest"
 "apt:1password-cli" = "latest"
 "apt:ripgrep" = "latest"
 # Fedora
+"dnf:@development-tools" = "latest"
 "dnf:fd-find" = "latest"
 "dnf:gh" = "latest"
 "dnf:1password-cli" = "latest"
