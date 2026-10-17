@@ -81,6 +81,10 @@ suites = "stable"
 key = "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
 fingerprint = "7F38 BBB5 9D06 4DBC B3D8 4D72 5612 B364 6231 3325"
 
+# /bin/zsh is the macOS default and valid on Ubuntu and Fedora
+[bootstrap.user]
+login_shell = "/bin/zsh"
+
 # Scripts live outside the dotfile groups: pre-packages runs before linking
 [bootstrap.hooks]
 pre-packages = [
