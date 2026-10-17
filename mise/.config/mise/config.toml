@@ -33,24 +33,44 @@ shellcheck = "latest"
 # Utils
 "npm:cf" = "latest"
 
+# System packages; entries for a manager the machine lacks are skipped
+[bootstrap.packages]
+"brew:fd" = { os = "macos" }
+"brew:ripgrep" = { os = "macos" }
+# Ubuntu
+"apt:fd-find" = "latest"
+"apt:ripgrep" = "latest"
+# Fedora
+"dnf:fd-find" = "latest"
+"dnf:ripgrep" = "latest"
+
+# Debian and Ubuntu install fd as fdfind
+[bootstrap.hooks.post-packages]
+run = '''
+if command -v fdfind >/dev/null && [ ! -e "$HOME/.local/bin/fd" ]; then
+  mkdir -p "$HOME/.local/bin"
+  ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
+fi
+'''
+
 [settings.dotfiles]
 # Match the relative links stow created
 relative_symlinks = true
 
 # One group per directory in ~/.dotfiles, deployed file by file into ~
 [dotfile_groups]
-aube = { root = "aube", exclude = [".DS_Store"] }
-bat = { root = "bat", exclude = [".DS_Store"] }
-bin = { root = "bin", exclude = [".DS_Store"] }
-fish = { root = "fish", exclude = [".DS_Store"] }
+aube    = { root = "aube"   , exclude = [".DS_Store"] }
+bat     = { root = "bat"    , exclude = [".DS_Store"] }
+bin     = { root = "bin"    , exclude = [".DS_Store"] }
+fish    = { root = "fish"   , exclude = [".DS_Store"] }
 ghostty = { root = "ghostty", exclude = [".DS_Store"] }
-git = { root = "git", exclude = [".DS_Store"] }
-jj = { root = "jj", exclude = [".DS_Store"] }
-kitty = { root = "kitty", exclude = [".DS_Store"] }
-mise = { root = "mise", exclude = [".DS_Store"] }
-mpv = { root = "mpv", exclude = [".DS_Store"] }
-nvim = { root = "nvim", exclude = [".DS_Store"] }
+git     = { root = "git"    , exclude = [".DS_Store"] }
+jj      = { root = "jj"     , exclude = [".DS_Store"] }
+kitty   = { root = "kitty"  , exclude = [".DS_Store"] }
+mise    = { root = "mise"   , exclude = [".DS_Store"] }
+mpv     = { root = "mpv"    , exclude = [".DS_Store"] }
+nvim    = { root = "nvim"   , exclude = [".DS_Store"] }
 ripgrep = { root = "ripgrep", exclude = [".DS_Store"] }
-ruby = { root = "ruby", exclude = [".DS_Store"] }
-tmux = { root = "tmux", exclude = [".DS_Store"] }
-zsh = { root = "zsh", exclude = [".DS_Store"] }
+ruby    = { root = "ruby"   , exclude = [".DS_Store"] }
+tmux    = { root = "tmux"   , exclude = [".DS_Store"] }
+zsh     = { root = "zsh"    , exclude = [".DS_Store"] }
