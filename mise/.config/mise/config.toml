@@ -37,6 +37,8 @@ shellcheck = "latest"
 [bootstrap.packages]
 "brew:fd" = { os = "macos" }
 "brew:ripgrep" = { os = "macos" }
+# Use brew as Ubuntu's apt version is often old
+"brew:neovim" = "latest"
 # Ubuntu
 "apt:fd-find" = "latest"
 "apt:ripgrep" = "latest"

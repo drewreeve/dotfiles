@@ -8,6 +8,7 @@ typeset -gU path fpath
 path=(
   $HOME/.local/bin
   /opt/{homebrew,local}/{,s}bin(N)
+  /home/linuxbrew/.linuxbrew/{,s}bin(N)
   $HOME/.cargo/bin(N)
   $path
 )

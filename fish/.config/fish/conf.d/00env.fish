@@ -16,7 +16,8 @@ end
 fish_add_path --global \
   $HOME/.local/bin \
   $HOME/.cargo/bin \
-  $HOME/go/bin
+  $HOME/go/bin \
+  /home/linuxbrew/.linuxbrew/bin
 
 
 if type -q nvim
