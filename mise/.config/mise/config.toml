@@ -40,6 +40,7 @@ shellcheck = "latest"
 "brew:ripgrep" = { os = "macos" }
 "brew:gh" = { os = "macos" }
 "brew-cask:1password-cli" = { os = "macos" }
+"brew:tmux" = { os = "macos" }
 "brew:zsh-autosuggestions" = { os = "macos" }
 "brew:zsh-syntax-highlighting" = { os = "macos" }
 # Use brew as Ubuntu's apt version is often old
@@ -54,6 +55,7 @@ shellcheck = "latest"
 "apt:gh" = "latest"
 "apt:1password-cli" = "latest"
 "apt:ripgrep" = "latest"
+"apt:tmux" = "latest"
 "apt:zsh" = "latest"
 "apt:zsh-autosuggestions" = "latest"
 "apt:zsh-syntax-highlighting" = "latest"
@@ -63,6 +65,7 @@ shellcheck = "latest"
 "dnf:gh" = "latest"
 "dnf:1password-cli" = "latest"
 "dnf:ripgrep" = "latest"
+"dnf:tmux" = "latest"
 "dnf:zsh" = "latest"
 "dnf:zsh-autosuggestions" = "latest"
 "dnf:zsh-syntax-highlighting" = "latest"
