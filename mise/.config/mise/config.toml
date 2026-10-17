@@ -47,9 +47,11 @@ shellcheck = "latest"
 # Use brew as Ubuntu's apt version is often old
 "brew:neovim" = "latest"
 "brew:zoxide" = "latest"
+"brew:fish" = "latest"
 # nvim-treesitter builds parsers with it
 "brew:tree-sitter-cli" = "latest"
 # Ubuntu and Fedora don't package it
+"brew:jj" = "latest"
 "brew:zsh-completions" = "latest"
 # Ubuntu
 "apt:bat" = "latest"
