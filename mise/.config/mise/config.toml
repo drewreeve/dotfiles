@@ -38,15 +38,18 @@ shellcheck = "latest"
 "brew:fd" = { os = "macos" }
 "brew:ripgrep" = { os = "macos" }
 "brew:gh" = { os = "macos" }
+"brew-cask:1password-cli" = { os = "macos" }
 # Use brew as Ubuntu's apt version is often old
 "brew:neovim" = "latest"
 # Ubuntu
 "apt:fd-find" = "latest"
 "apt:gh" = "latest"
+"apt:1password-cli" = "latest"
 "apt:ripgrep" = "latest"
 # Fedora
 "dnf:fd-find" = "latest"
 "dnf:gh" = "latest"
+"dnf:1password-cli" = "latest"
 "dnf:ripgrep" = "latest"
 
 # GitHub's own gh repos, per https://github.com/cli/cli/blob/trunk/docs/install_linux.md
@@ -56,21 +59,13 @@ suites = "stable"
 key = "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
 fingerprint = "7F38 BBB5 9D06 4DBC B3D8 4D72 5612 B364 6231 3325"
 
-[bootstrap.hooks.pre-packages]
-run = '''
-if command -v dnf >/dev/null && [ ! -e /etc/yum.repos.d/gh-cli.repo ]; then
-  sudo curl -fsSL -o /etc/yum.repos.d/gh-cli.repo https://cli.github.com/packages/rpm/gh-cli.repo
-fi
-'''
-
-# Debian and Ubuntu install fd as fdfind
-[bootstrap.hooks.post-packages]
-run = '''
-if command -v fdfind >/dev/null && [ ! -e "$HOME/.local/bin/fd" ]; then
-  mkdir -p "$HOME/.local/bin"
-  ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
-fi
-'''
+# Scripts live outside the dotfile groups: pre-packages runs before linking
+[bootstrap.hooks]
+pre-packages = [
+  'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/gh-repo.sh"',
+  'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/1password-repo.sh"',
+]
+post-packages = 'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/fd-link.sh"'
 
 [settings.dotfiles]
 # Match the relative links stow created

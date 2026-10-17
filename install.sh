@@ -4,7 +4,7 @@
 
 set -eu
 
-DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+export DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
 REPO="https://github.com/drewreeve/dotfiles.git"
 
 if ! command -v git >/dev/null 2>&1; then
