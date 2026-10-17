@@ -37,14 +37,31 @@ shellcheck = "latest"
 [bootstrap.packages]
 "brew:fd" = { os = "macos" }
 "brew:ripgrep" = { os = "macos" }
+"brew:gh" = { os = "macos" }
 # Use brew as Ubuntu's apt version is often old
 "brew:neovim" = "latest"
 # Ubuntu
 "apt:fd-find" = "latest"
+"apt:gh" = "latest"
 "apt:ripgrep" = "latest"
 # Fedora
 "dnf:fd-find" = "latest"
+"dnf:gh" = "latest"
 "dnf:ripgrep" = "latest"
+
+# GitHub's own gh repos, per https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+[bootstrap.apt.sources.github-cli]
+uris = "https://cli.github.com/packages"
+suites = "stable"
+key = "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
+fingerprint = "7F38 BBB5 9D06 4DBC B3D8 4D72 5612 B364 6231 3325"
+
+[bootstrap.hooks.pre-packages]
+run = '''
+if command -v dnf >/dev/null && [ ! -e /etc/yum.repos.d/gh-cli.repo ]; then
+  sudo curl -fsSL -o /etc/yum.repos.d/gh-cli.repo https://cli.github.com/packages/rpm/gh-cli.repo
+fi
+'''
 
 # Debian and Ubuntu install fd as fdfind
 [bootstrap.hooks.post-packages]
