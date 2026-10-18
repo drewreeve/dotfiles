@@ -41,6 +41,7 @@ shellcheck = "latest"
 "brew:ripgrep" = { os = "macos" }
 "brew:gh" = { os = "macos" }
 "brew-cask:1password-cli" = { os = "macos" }
+"brew-cask:claude-code@latest" = { os = "macos" }
 "brew:tmux" = { os = "macos" }
 "brew:zsh-autosuggestions" = { os = "macos" }
 "brew:zsh-syntax-highlighting" = { os = "macos" }
@@ -96,6 +97,7 @@ pre-packages = [
 post-packages = [
   'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/fd-link.sh"',
   'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/bat-link.sh"',
+  'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/claude-code.sh"',
 ]
 
 [settings.dotfiles]
