@@ -40,6 +40,7 @@ shellcheck = "latest"
 "brew:bat"                     = { os = "macos" }
 "brew:fd"                      = { os = "macos" }
 "brew:gh"                      = { os = "macos" }
+"brew:gnupg"                   = { os = "macos" }
 "brew:ripgrep"                 = { os = "macos" }
 "brew:tmux"                    = { os = "macos" }
 "brew:zsh-autosuggestions"     = { os = "macos" }
@@ -71,6 +72,7 @@ shellcheck = "latest"
 "apt:build-essential"          = "latest"
 "apt:fd-find"                  = "latest"
 "apt:gh"                       = "latest"
+"apt:gnupg"                    = "latest"
 "apt:ripgrep"                  = "latest"
 "apt:tmux"                     = "latest"
 "apt:zsh"                      = "latest"
@@ -83,6 +85,7 @@ shellcheck = "latest"
 "dnf:bat"                      = "latest"
 "dnf:fd-find"                  = "latest"
 "dnf:gh"                       = "latest"
+"dnf:gnupg2"                   = "latest"
 "dnf:ripgrep"                  = "latest"
 "dnf:tmux"                     = "latest"
 "dnf:zsh"                      = "latest"
