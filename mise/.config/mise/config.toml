@@ -53,13 +53,16 @@ shellcheck = "latest"
 "brew-cask:rectangle-pro"      = { os = "macos" }
 
 # Brew on every OS: Ubuntu's apt versions are often old
+"brew:atuin"                   = "latest"
 "brew:fish"                    = "latest"
+"brew:fzf"                     = "latest"
 "brew:neovim"                  = "latest"
 "brew:zoxide"                  = "latest"
 # nvim-treesitter builds parsers with it
 "brew:tree-sitter-cli"         = "latest"
 # Ubuntu and Fedora don't package these
 "brew:jj"                      = "latest"
+"brew:lazygit"                 = "latest"
 "brew:zsh-completions"         = "latest"
 
 # Ubuntu
