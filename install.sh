@@ -22,6 +22,7 @@ if [ ! -d "$DOTFILES/.git" ]; then
   git clone "$REPO" "$DOTFILES"
 fi
 
-MISE_GLOBAL_CONFIG_FILE="$DOTFILES/mise/.config/mise/config.toml" mise bootstrap "$@"
+# The whole config dir, so miserc.toml and the per-OS config files load too
+MISE_CONFIG_DIR="$DOTFILES/mise/.config/mise" mise bootstrap "$@"
 
 echo "Done. Open a new shell to pick up the new config."

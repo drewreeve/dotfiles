@@ -1,0 +1,34 @@
+# Entries for a manager the machine lacks are skipped
+[bootstrap.packages]
+# Ubuntu
+"apt:1password-cli"            = "latest"
+"apt:bat"                      = "latest"
+"apt:build-essential"          = "latest"
+"apt:fd-find"                  = "latest"
+"apt:gh"                       = "latest"
+"apt:gnupg"                    = "latest"
+"apt:ripgrep"                  = "latest"
+"apt:tmux"                     = "latest"
+"apt:zsh"                      = "latest"
+"apt:zsh-autosuggestions"      = "latest"
+"apt:zsh-syntax-highlighting"  = "latest"
+
+# Fedora
+"dnf:@development-tools"       = "latest"
+"dnf:1password-cli"            = "latest"
+"dnf:bat"                      = "latest"
+"dnf:fd-find"                  = "latest"
+"dnf:gh"                       = "latest"
+"dnf:gnupg2"                   = "latest"
+"dnf:ripgrep"                  = "latest"
+"dnf:tmux"                     = "latest"
+"dnf:zsh"                      = "latest"
+"dnf:zsh-autosuggestions"      = "latest"
+"dnf:zsh-syntax-highlighting"  = "latest"
+
+# GitHub's own gh repos, per https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+[bootstrap.apt.sources.github-cli]
+uris = "https://cli.github.com/packages"
+suites = "stable"
+key = "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
+fingerprint = "7F38 BBB5 9D06 4DBC B3D8 4D72 5612 B364 6231 3325"

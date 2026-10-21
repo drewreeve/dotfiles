@@ -34,25 +34,9 @@ shellcheck = "latest"
 # Utils
 "npm:cf" = "latest"
 
-# System packages; entries for a manager the machine lacks are skipped
+# System packages for every OS; per-OS lists live in config.macos.toml and
+# config.linux.toml, loaded by auto_env (see miserc.toml)
 [bootstrap.packages]
-# macOS
-"brew:bat"                     = { os = "macos" }
-"brew:fd"                      = { os = "macos" }
-"brew:gh"                      = { os = "macos" }
-"brew:gnupg"                   = { os = "macos" }
-"brew:ripgrep"                 = { os = "macos" }
-"brew:tmux"                    = { os = "macos" }
-"brew:zsh-autosuggestions"     = { os = "macos" }
-"brew:zsh-syntax-highlighting" = { os = "macos" }
-"brew-cask:1password-cli"      = { os = "macos" }
-"brew-cask:appcleaner"         = { os = "macos" }
-"brew-cask:claude-code@latest" = { os = "macos" }
-"brew-cask:codex"              = { os = "macos" }
-"brew-cask:keepassxc"          = { os = "macos" }
-"brew-cask:orbstack"           = { os = "macos" }
-"brew-cask:rectangle-pro"      = { os = "macos" }
-
 # Brew on every OS: Ubuntu's apt versions are often old
 "brew:atuin"                   = "latest"
 "brew:fish"                    = "latest"
@@ -65,39 +49,6 @@ shellcheck = "latest"
 "brew:jj"                      = "latest"
 "brew:lazygit"                 = "latest"
 "brew:zsh-completions"         = "latest"
-
-# Ubuntu
-"apt:1password-cli"            = "latest"
-"apt:bat"                      = "latest"
-"apt:build-essential"          = "latest"
-"apt:fd-find"                  = "latest"
-"apt:gh"                       = "latest"
-"apt:gnupg"                    = "latest"
-"apt:ripgrep"                  = "latest"
-"apt:tmux"                     = "latest"
-"apt:zsh"                      = "latest"
-"apt:zsh-autosuggestions"      = "latest"
-"apt:zsh-syntax-highlighting"  = "latest"
-
-# Fedora
-"dnf:@development-tools"       = "latest"
-"dnf:1password-cli"            = "latest"
-"dnf:bat"                      = "latest"
-"dnf:fd-find"                  = "latest"
-"dnf:gh"                       = "latest"
-"dnf:gnupg2"                   = "latest"
-"dnf:ripgrep"                  = "latest"
-"dnf:tmux"                     = "latest"
-"dnf:zsh"                      = "latest"
-"dnf:zsh-autosuggestions"      = "latest"
-"dnf:zsh-syntax-highlighting"  = "latest"
-
-# GitHub's own gh repos, per https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-[bootstrap.apt.sources.github-cli]
-uris = "https://cli.github.com/packages"
-suites = "stable"
-key = "https://cli.github.com/packages/githubcli-archive-keyring.gpg"
-fingerprint = "7F38 BBB5 9D06 4DBC B3D8 4D72 5612 B364 6231 3325"
 
 # /bin/zsh is the macOS default and valid on Ubuntu and Fedora
 [bootstrap.user]

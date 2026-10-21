@@ -1,0 +1,2 @@
+# Load config.<os>.toml alongside config.toml; read before any config file
+auto_env = true
