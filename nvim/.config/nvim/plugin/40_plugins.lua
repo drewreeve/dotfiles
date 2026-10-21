@@ -56,6 +56,7 @@ now_if_args(function()
     "bashls",
     "jsonls",
     "lua_ls",
+    "nushell",
     "pyright",
     "ruff",
     "yamlls",
