@@ -52,7 +52,7 @@ shellcheck = "latest"
 
 # /bin/zsh is the macOS default and valid on Ubuntu and Fedora
 [bootstrap.user]
-login_shell = "/bin/zsh"
+login_shell = "fish"
 
 # Scripts live outside the dotfile groups: pre-packages runs before linking
 [bootstrap.hooks]
