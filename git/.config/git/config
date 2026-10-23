@@ -2,14 +2,14 @@
   name = Drew Reeve
   email = dru.reeve@gmail.com
 [alias]
-  ci = commit --verbose
+  ci = commit
   co = checkout
   aa = add --all
   ap = add --patch
   ca = commit --amend
   trust = "!mkdir -p .git/safe"
   st = status -sb
-  lg = log --graph --oneline --decorate
+  lg = log --graph --oneline
 [branch]
   sort = -committerdate
 [column]
@@ -20,20 +20,12 @@
   algorithm = histogram
   colorMoved = plain
   mnemonicPrefix = true
-  renames = true
 [core]
-  excludesfile = ~/.config/git/ignore
   autocrlf = input
 [init]
   defaultBranch = main
 [include]
   path = ~/.gitconfig.local
-[color]
-  status = auto
-  branch = auto
-  ui = auto
-[help]
-  autocorrect = 0
 [rebase]
   autosquash = true
 [push]
