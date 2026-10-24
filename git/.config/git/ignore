@@ -1,29 +1,32 @@
-# osx specific
+# macos
 .DS_Store
 
-# vim swap files
-[._]*.s[a-w][a-z]
-[._]s[a-w][a-z]
-
-# session
+# vim
+[._]*.sw[a-p]
+[._]sw[a-p]
 Session.vim
-
-# vim temp files
 .netrwhist
 *~
 
-.bundle
-vendor/bundle
+# mise
+mise.local.toml
+.mise.local.toml
+mise.*.local.toml
+.mise.*.local.toml
+**/mise/config.local.toml
+**/mise/config.*.local.toml
+mise.local.lock
+mise.*.local.lock
+
+# direnv
+.direnv/
+
+# nix
+result
+result-*
+
 .env
-rerun.txt
-*.log
-tmp/**/*
-!tmp/cache/.keep
-tags
-!tags/
 node_modules
-bower_components
-.npm
 
 # claude
 CLAUDE.local.md
