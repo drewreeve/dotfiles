@@ -13,6 +13,8 @@ elif grep -qi microsoft /proc/version 2>/dev/null; then
   # 1Password runs on the Windows side, so use its signer
   user="$(cmd.exe /c 'echo %USERNAME%' 2>/dev/null | tr -d '\r')"
   signer="/mnt/c/Users/$user/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+elif [ -x /opt/1Password/op-ssh-sign ]; then
+  signer="/opt/1Password/op-ssh-sign"
 fi
 
 # Only sign where 1Password's signer exists, so pushes still work elsewhere

@@ -14,6 +14,8 @@ elif grep -qi microsoft /proc/version 2>/dev/null; then
   user="$(cmd.exe /c 'echo %USERNAME%' 2>/dev/null | tr -d '\r')"
   signer="/mnt/c/Users/$user/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
   git config --file "$LOCAL" core.sshCommand ssh.exe
+elif [ -x /opt/1Password/op-ssh-sign ]; then
+  signer="/opt/1Password/op-ssh-sign"
 fi
 
 # Only sign where 1Password's signer exists, so commits still work elsewhere
