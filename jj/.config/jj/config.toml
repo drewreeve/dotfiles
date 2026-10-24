@@ -1,6 +1,10 @@
 user.email = "dru.reeve@gmail.com"
 user.name = "Drew Reeve"
 
+[revset-aliases]
+# Nearest bookmarked ancestors, including the commit itself
+"closest_bookmark(to)" = "heads(::to & bookmarks())"
+
 [aliases]
 # Move the closest bookmark to the current commit
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
