@@ -1,6 +1,9 @@
 [user]
   name = Drew Reeve
   email = dru.reeve@gmail.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKzCvDYbBhQReFUW60WX8abSOWbQav72LVV9Llm+AJJ2
+[gpg]
+  format = ssh
 [alias]
   ci = commit
   co = checkout

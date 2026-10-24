@@ -64,6 +64,7 @@ post-packages = [
   'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/fd-link.sh"',
   'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/bat-link.sh"',
   'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/claude-code.sh"',
+  'sh "${DOTFILES:-$HOME/.dotfiles}/bootstrap/git-local.sh"',
 ]
 
 [settings.dotfiles]
