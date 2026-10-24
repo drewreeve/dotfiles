@@ -1,0 +1,75 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Simple prompt similar to pure, shared by fish and zsh
+#
+#   user@host in ~/path   branch*+?⇣⇡ REBASING ≡ 42s
+#   ❯
+#
+# user@host only shows over SSH, or as root
+
+format = """
+($username$hostname in )$directory$vcs$cmd_duration
+$character"""
+
+[username]
+format = "[$user]($style)"
+
+[hostname]
+format = "[@$hostname]($style)"
+ssh_symbol = ""
+style = "yellow"
+
+[directory]
+format = "[$path]($style)"
+truncation_length = 0
+truncate_to_repo = false
+
+# Show only the first VCS found, so a colocated jj repo hides the git info
+[vcs]
+order = ["jj", "git"]
+git_modules = "$git_branch$git_commit$git_status$git_state"
+jj_modules = "$jj_bookmark$jj_change$jj_status"
+
+[git_branch]
+format = "  [$symbol$branch]($style)"
+symbol = "\uf418 "
+only_attached = true
+
+# Stands in for the branch when HEAD is detached
+[git_commit]
+format = "  [\uf418 $hash]($style)"
+style = "bold purple"
+
+[git_status]
+format = "([$conflicted$modified$staged$untracked$ahead_behind]($style))( [$stashed](cyan))"
+style = "red"
+conflicted = "*"
+modified = "*"
+diverged = "⇣⇡"
+stashed = "≡"
+
+[git_state]
+format = " [$state]($style)"
+style = "yellow"
+
+# Shows the closest bookmark, like the git branch
+[jj_bookmark]
+format = "  [$symbol$bookmark]($style)"
+symbol = "\uf461 "
+
+[jj_change]
+format = " $change"
+prefix_style = "bold purple"
+suffix_style = "purple dimmed"
+
+[jj_status]
+format = "( [$all]($style))"
+style = "red"
+
+[cmd_duration]
+format = " [$duration]($style)"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
