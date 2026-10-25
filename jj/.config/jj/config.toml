@@ -14,3 +14,6 @@ tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 behavior = "drop"
 backend = "ssh"
 key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKzCvDYbBhQReFUW60WX8abSOWbQav72LVV9Llm+AJJ2"
+
+[ui]
+default-command = "log"
