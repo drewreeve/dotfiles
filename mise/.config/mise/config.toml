@@ -86,6 +86,7 @@ kitty    = { root = "kitty"   , exclude = [".DS_Store"] }
 mise     = { root = "mise"    , exclude = [".DS_Store"] }
 mpv      = { root = "mpv"     , exclude = [".DS_Store"] }
 nvim     = { root = "nvim"    , exclude = [".DS_Store"] }
+rex      = { root = "rex"     , exclude = [".DS_Store"] }
 ripgrep  = { root = "ripgrep" , exclude = [".DS_Store"] }
 ruby     = { root = "ruby"    , exclude = [".DS_Store"] }
 starship = { root = "starship", exclude = [".DS_Store"] }
