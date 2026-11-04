@@ -33,8 +33,13 @@ bind("h", "pane.focus.left")
 bind("j", "pane.focus.down")
 bind("k", "pane.focus.up")
 bind("l", "pane.focus.right")
+bind("o", "pane.focus_next")
 bind("z", "pane.zoom")
 bind("f", "pane.float")
+
+-- Floating panes
+bind("m", "pane.minimize_floating")
+bind("shift+m", "pane.minimize_all_floating") -- M
 
 -- Like tmux's kill-pane: closes the pane, then the tab, then the session
 bind("x", "client.close")
@@ -48,10 +53,12 @@ rex.bind("alt+shift+l", "pane.resize", { direction = "right" })
 
 -- Sessions
 bind("s", "session.switch")
+bind("shift+c", "session.new") -- C
 bind("shift+4", "session.rename") -- $
 bind("shift+9", "session.previous") -- (
 bind("shift+0", "session.next") -- )
 bind("shift+x", "session.close") -- X, like tmux's kill-session
 
+bind("shift+;", "client.palette.toggle") -- :, like tmux's command prompt
 bind("[", "client.find.open")
 bind("shift+r", "client.config.reload")
