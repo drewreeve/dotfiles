@@ -3,6 +3,9 @@
 -- Docs: https://www.superlogical.com/rex/docs/customize/config
 -- Apply changes with `rex config reload`.
 
+-- Custom actions
+require("actions")
+
 -- Keybindings ported from tmux, with ctrl+a as the prefix
 local prefix = "ctrl+a>"
 
@@ -62,3 +65,6 @@ bind("shift+x", "session.close") -- X, like tmux's kill-session
 bind("shift+;", "client.palette.toggle") -- :, like tmux's command prompt
 bind("[", "client.find.open")
 bind("shift+r", "client.config.reload")
+
+-- Actions
+rex.bind("cmd+o", "project_picker")
