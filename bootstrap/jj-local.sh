@@ -22,6 +22,6 @@ if [ -n "${signer:-}" ] && [ -x "$signer" ]; then
   mkdir -p "$(dirname "$LOCAL")"
   cat >"$LOCAL" <<EOF
 signing.backends.ssh.program = "$signer"
-git.sign-on-push = true
+revsets.git-sign-on-push = "~signed() & mine()"
 EOF
 fi
